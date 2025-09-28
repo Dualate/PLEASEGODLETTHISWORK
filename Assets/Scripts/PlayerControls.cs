@@ -28,45 +28,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""a61aaa0c-08dc-4f72-a727-e531baf82f5f"",
             ""actions"": [
                 {
-                    ""name"": ""Grow"",
-                    ""type"": ""Button"",
-                    ""id"": ""2f63e0a7-23fd-46d2-a5e3-05b652516362"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""4bb72ec2-e2f1-434e-8c59-5bcfdde8b0ee"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Rotate"",
-                    ""type"": ""Value"",
-                    ""id"": ""4563e810-1526-4c11-bfa1-6b4b04ec3ca9"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""4b9aa6bb-d84a-4211-90b2-eab9abf4e7cc"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Grow"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""971144d1-a15d-4bc8-be27-f5badc566f9b"",
@@ -77,17 +48,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e4d12319-91fd-44ee-87b2-dbf1000c4eb3"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -96,9 +56,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
 }");
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_Grow = m_Gameplay.FindAction("Grow", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
-        m_Gameplay_Rotate = m_Gameplay.FindAction("Rotate", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -165,16 +123,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
-    private readonly InputAction m_Gameplay_Grow;
     private readonly InputAction m_Gameplay_Move;
-    private readonly InputAction m_Gameplay_Rotate;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Grow => m_Wrapper.m_Gameplay_Grow;
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
-        public InputAction @Rotate => m_Wrapper.m_Gameplay_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -184,28 +138,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
-            @Grow.started += instance.OnGrow;
-            @Grow.performed += instance.OnGrow;
-            @Grow.canceled += instance.OnGrow;
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Rotate.started += instance.OnRotate;
-            @Rotate.performed += instance.OnRotate;
-            @Rotate.canceled += instance.OnRotate;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
         {
-            @Grow.started -= instance.OnGrow;
-            @Grow.performed -= instance.OnGrow;
-            @Grow.canceled -= instance.OnGrow;
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Rotate.started -= instance.OnRotate;
-            @Rotate.performed -= instance.OnRotate;
-            @Rotate.canceled -= instance.OnRotate;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -225,8 +167,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public GameplayActions @Gameplay => new GameplayActions(this);
     public interface IGameplayActions
     {
-        void OnGrow(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
-        void OnRotate(InputAction.CallbackContext context);
     }
 }

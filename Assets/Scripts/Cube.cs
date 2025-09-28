@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 public class Cube : MonoBehaviour
 {
     PlayerControls controls;
 
-    private void Awake()
+
+    public void PLEASEGOTLETTHISWORK(CallbackContext context)
     {
-        controls = new PlayerControls();
+        Debug.Log(context.ReadValue<Vector2>());
     }
 }
