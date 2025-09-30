@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
@@ -12,6 +13,12 @@ public class Cube : MonoBehaviour
     float xSpeed;
     float ySpeed;
     Vector2 moveVector;
+
+    void Start()
+    {
+        GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
+    }
+
     public void PLEASEGOTLETTHISWORK(CallbackContext context)
     {
 

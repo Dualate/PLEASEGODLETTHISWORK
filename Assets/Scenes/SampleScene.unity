@@ -249,7 +249,7 @@ Transform:
   m_GameObject: {fileID: 479902679}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.28, z: 0}
+  m_LocalPosition: {x: 0, y: 0.83, z: 0}
   m_LocalScale: {x: 10.12, y: 1, z: 2.6858}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -290,14 +290,26 @@ MonoBehaviour:
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1861031886}
+        m_TargetAssemblyTypeName: CameraBehavior, Assembly-CSharp
+        m_MethodName: Join
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1012078670}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_PlayerLeftEvent:
     m_PersistentCalls:
       m_Calls: []
   m_JoinAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Join
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: fb7d13e7-1f08-4635-bd21-c43b7ebd23c7
@@ -325,7 +337,7 @@ Transform:
   m_GameObject: {fileID: 1012078670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.46569452, y: 0.96717334, z: -0.21133292}
+  m_LocalPosition: {x: -0.46569452, y: 17.57, z: -0.21133292}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -436,6 +448,7 @@ GameObject:
   - component: {fileID: 1861031885}
   - component: {fileID: 1861031884}
   - component: {fileID: 1861031883}
+  - component: {fileID: 1861031886}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -511,12 +524,26 @@ Transform:
   m_GameObject: {fileID: 1861031882}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 3.14, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1861031886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861031882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02bae4db3fe95944973723bf1b7bb3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: []
+  offset: {x: 0, y: 1.5, z: -10}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
