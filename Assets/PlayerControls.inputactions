@@ -7,21 +7,21 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "4bb72ec2-e2f1-434e-8c59-5bcfdde8b0ee",
-                    "expectedControlType": "",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
                     "name": "Jump",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "fc81039b-0235-4e75-8244-bfd01bdec849",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -29,6 +29,17 @@
                     "name": "",
                     "id": "971144d1-a15d-4bc8-be27-f5badc566f9b",
                     "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2355cda2-574c-494a-ab7f-b70ca91d3548",
+                    "path": "",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -8,7 +8,7 @@ public class CameraBehavior : MonoBehaviour
 
     public Vector3 offset;
     Transform highest;
-    void Start()
+    void Awake()
     {
         players = new List<Transform>();
         highest = transform;
