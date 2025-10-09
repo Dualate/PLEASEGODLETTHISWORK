@@ -14,9 +14,18 @@ public class Cube : MonoBehaviour
     float ySpeed;
     Vector2 moveVector;
 
+    private GameObject attackBox;
+    private float atkTimer = 0f;
+    private bool atkTimerActive = false;
+    public float knockback;
+    public float damagePercent;
+    private float atkDelayTime = .5f;
+
     void Start()
     {
         GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
+        attackBox = GameObject.Find("attackBox"); //find attackBox
+        attackBox.SetActive(false); //deactivate attackbox
     }
 
     public void PLEASEGOTLETTHISWORK(CallbackContext context)
@@ -30,6 +39,18 @@ public class Cube : MonoBehaviour
     {
         xSpeed = moveVector.x * moveSpeed * Time.deltaTime;
         transform.Translate(xSpeed, ySpeed, 0);
+
+        if (atkTimerActive == true) //This section deactivates the attackbox after a timer
+        {
+            atkTimer += Time.deltaTime;
+            //Debug.Log(atkTimer);
+            if (atkTimer >= atkDelayTime)
+            {
+                attackBox.SetActive(false);
+                atkTimerActive = false;
+                atkTimer = 0f;
+            }
+        }
     }
 
     public void Jump()
@@ -48,5 +69,25 @@ public class Cube : MonoBehaviour
         {
             grounded = true;
         }   
+    }
+
+    public void Attack()
+    {
+        if (atkTimerActive)
+        {
+            return;
+        }
+        attackBox.SetActive(true);
+        atkTimerActive = true;
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.CompareTag("attack"))
+        {
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            gameObject.GetComponent<Rigidbody>().AddForce(damagePercent * knockback * Vector3.right, ForceMode.Impulse);
+        }
     }
 }

@@ -12,7 +12,7 @@ public class Cube_Keyboard : MonoBehaviour
     public float hInput;
     private GameObject attackBox;
     private float atkTimer = 0f;
-    private float atkDelayTime = .1f;
+    private float atkDelayTime = .5f;
     private bool atkTimerActive = false;
     public float knockback;
     public float damagePercent;
