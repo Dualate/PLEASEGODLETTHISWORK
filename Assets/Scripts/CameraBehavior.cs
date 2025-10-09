@@ -8,6 +8,7 @@ public class CameraBehavior : MonoBehaviour
 
     public Vector3 offset;
     Transform highest;
+    public float smoothing;
     void Awake()
     {
         players = new List<Transform>();
@@ -20,7 +21,7 @@ public class CameraBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
 
         if (players.Count > 0) 
@@ -32,7 +33,7 @@ public class CameraBehavior : MonoBehaviour
                     highest = t;
                 }
             }
-            transform.position = highest.TransformPoint(offset);
+            transform.position = Vector3.Lerp(transform.position, highest.position + offset, smoothing * Time.deltaTime);
         }
         
     }
