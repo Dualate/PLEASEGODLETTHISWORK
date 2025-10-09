@@ -17,7 +17,7 @@ public class Cube_Keyboard : MonoBehaviour
     public float knockback;
     public float damagePercent;
     public Vector3[] positions;
-
+    public Vector3 resetPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +28,12 @@ public class Cube_Keyboard : MonoBehaviour
 
     void Update()
     {
+        if (transform.position.y < -15)
+        {
+            transform.position = resetPosition;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            damagePercent = 0f;
+        }
         if (hInput > 0)
         {
             attackBox.transform.localPosition = positions[0];
@@ -82,9 +88,18 @@ public class Cube_Keyboard : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("attack"))
         {
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
             damagePercent += .1f;
             Debug.Log("Hit");
-            gameObject.GetComponent<Rigidbody>().AddForce(damagePercent* knockback * Vector3.right, ForceMode.Impulse);
+            gameObject.GetComponent<Rigidbody>().AddForce(damagePercent* knockback * scalar, ForceMode.Impulse);
         }
     }
     public void Attack()

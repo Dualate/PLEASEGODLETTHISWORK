@@ -21,6 +21,9 @@ public class Cube : MonoBehaviour
     public float damagePercent;
     private float atkDelayTime = .5f;
     public Vector3[] positions;
+    public Vector3 resetPosition;
+    public bool secondJump = false;
+    int jumpDelay = 3;
     void Start()
     {
         GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
@@ -37,6 +40,12 @@ public class Cube : MonoBehaviour
 
     void Update()
     {
+        if (transform.position.y < -15)
+        {
+            transform.position = resetPosition;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            damagePercent = 0f;
+        }
         if (moveVector.x > 0)
         {
             attackBox.transform.localPosition = positions[0];
@@ -63,10 +72,26 @@ public class Cube : MonoBehaviour
 
     public void Jump()
     {
+        Debug.Log("Jump");
         if (grounded)
         {
             gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
             grounded = false;
+            return;
+        }
+        else if (secondJump && !grounded)
+        {
+            if (jumpDelay > 0)
+            {
+                jumpDelay--;
+            }
+            if (jumpDelay == 0)
+            {
+                gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
+                secondJump = false;
+                jumpDelay = 3;
+            }
+
         }
 
     }
@@ -76,6 +101,7 @@ public class Cube : MonoBehaviour
         if (collider.gameObject.CompareTag("Ground"))
         {
             grounded = true;
+            secondJump = true;
         }   
     }
 

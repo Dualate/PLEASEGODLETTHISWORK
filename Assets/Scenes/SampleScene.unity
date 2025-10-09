@@ -183,8 +183,16 @@ PrefabInstance:
       value: KBCube
       objectReference: {fileID: 0}
     - target: {fileID: 7811419308292061019, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
+      propertyPath: jumpForce
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811419308292061019, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
       propertyPath: knockback
       value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811419308292061019, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
+      propertyPath: resetPosition.y
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

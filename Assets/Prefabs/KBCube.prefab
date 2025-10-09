@@ -252,8 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d72c8ddf6445edb479efa77466112688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpForce: 75
+  moveSpeed: 15
+  jumpForce: 150
   grounded: 0
   hInput: 0
   knockback: 0
@@ -261,3 +261,4 @@ MonoBehaviour:
   positions:
   - {x: 0.75581455, y: -0.041999817, z: -0.049861252}
   - {x: -0.7558146, y: -0.041999817, z: -0.049861252}
+  resetPosition: {x: 0, y: 0, z: 0}

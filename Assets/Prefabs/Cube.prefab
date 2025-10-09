@@ -129,6 +129,8 @@ MonoBehaviour:
   positions:
   - {x: 0.75581455, y: -0.041999817, z: -0.049861252}
   - {x: -0.7558146, y: -0.041999817, z: -0.049861252}
+  resetPosition: {x: 0, y: 10, z: 0}
+  secondJump: 0
 --- !u!114 &1553446653892103366
 MonoBehaviour:
   m_ObjectHideFlags: 0
