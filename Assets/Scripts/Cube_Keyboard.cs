@@ -39,11 +39,11 @@ public class Cube_Keyboard : MonoBehaviour
         hInput = Input.GetAxis("Horizontal");
         xSpeed = hInput * moveSpeed * Time.deltaTime;
         transform.Translate(xSpeed, ySpeed, 0);
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             Jump();
         }
-        if (Input.GetKeyDown(KeyCode.E) && atkTimerActive == false)
+        if (Input.GetKeyDown(KeyCode.Space) && atkTimerActive == false)
         {
             Attack();
         }
