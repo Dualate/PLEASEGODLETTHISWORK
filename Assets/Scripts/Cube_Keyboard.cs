@@ -10,11 +10,18 @@ public class Cube_Keyboard : MonoBehaviour
     float xSpeed;
     float ySpeed;
     public float hInput;
+    private GameObject attackBox;
+    private float atkTimer = 0f;
+    private float atkDelayTime = .1f;
+    private bool atkTimerActive = false;
+    public float knockback;
+    public float damagePercent;
     // Start is called before the first frame update
     void Start()
     {
         GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
-
+        attackBox = GameObject.Find("attackBox"); //find attackBox
+        attackBox.SetActive(false); //deactivate attackbox
     }
 
     void Update()
@@ -22,8 +29,24 @@ public class Cube_Keyboard : MonoBehaviour
         hInput = Input.GetAxis("Horizontal");
         xSpeed = hInput * moveSpeed * Time.deltaTime;
         transform.Translate(xSpeed, ySpeed, 0);
-        if (Input.GetKeyDown(KeyCode.Space)){
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             Jump();
+        }
+        if (Input.GetKeyDown(KeyCode.E) && atkTimerActive == false)
+        {
+            Attack();
+        }
+        if (atkTimerActive == true) //This section deactivates the attackbox after a timer
+        {
+            atkTimer += Time.deltaTime;
+            //Debug.Log(atkTimer);
+            if (atkTimer >= atkDelayTime)
+            {
+                attackBox.SetActive(false);
+                atkTimerActive = false;
+                atkTimer = 0f;
+            }
         }
     }
 
@@ -42,6 +65,21 @@ public class Cube_Keyboard : MonoBehaviour
         if (collider.gameObject.CompareTag("Ground"))
         {
             grounded = true;
-        }   
+        }
+        
+    }
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.CompareTag("attack"))
+        {
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            gameObject.GetComponent<Rigidbody>().AddForce(damagePercent* knockback * Vector3.right, ForceMode.Impulse);
+        }
+    }
+    public void Attack()
+    {
+        attackBox.SetActive(true);
+        atkTimerActive = true;
     }
 }
