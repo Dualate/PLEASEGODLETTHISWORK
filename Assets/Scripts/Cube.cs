@@ -20,7 +20,7 @@ public class Cube : MonoBehaviour
     public float knockback;
     public float damagePercent;
     private float atkDelayTime = .5f;
-
+    public Vector3[] positions;
     void Start()
     {
         GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
@@ -37,6 +37,14 @@ public class Cube : MonoBehaviour
 
     void Update()
     {
+        if (moveVector.x > 0)
+        {
+            attackBox.transform.localPosition = positions[0];
+        }
+        else if (moveVector.x < 0)
+        {
+            attackBox.transform.localPosition = positions[1];
+        }
         xSpeed = moveVector.x * moveSpeed * Time.deltaTime;
         transform.Translate(xSpeed, ySpeed, 0);
 

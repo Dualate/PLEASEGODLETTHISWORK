@@ -16,6 +16,8 @@ public class Cube_Keyboard : MonoBehaviour
     private bool atkTimerActive = false;
     public float knockback;
     public float damagePercent;
+    public Vector3[] positions;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,14 @@ public class Cube_Keyboard : MonoBehaviour
 
     void Update()
     {
+        if (hInput > 0)
+        {
+            attackBox.transform.localPosition = positions[0];
+        }
+        else if (hInput < 0)
+        {
+            attackBox.transform.localPosition = positions[1];
+        }
         hInput = Input.GetAxis("Horizontal");
         xSpeed = hInput * moveSpeed * Time.deltaTime;
         transform.Translate(xSpeed, ySpeed, 0);
