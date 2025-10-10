@@ -124,7 +124,7 @@ MonoBehaviour:
   moveSpeed: 15
   jumpForce: 75
   grounded: 0
-  knockback: 0
+  knockback: 150
   damagePercent: 0
   positions:
   - {x: 0.75581455, y: -0.041999817, z: -0.049861252}

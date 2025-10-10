@@ -119,9 +119,18 @@ public class Cube : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("attack"))
         {
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
             damagePercent += .1f;
             Debug.Log("Hit");
-            gameObject.GetComponent<Rigidbody>().AddForce(damagePercent * knockback * Vector3.right, ForceMode.Impulse);
+            gameObject.GetComponent<Rigidbody>().AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
     }
 }

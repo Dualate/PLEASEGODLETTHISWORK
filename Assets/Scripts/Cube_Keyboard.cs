@@ -18,6 +18,7 @@ public class Cube_Keyboard : MonoBehaviour
     public float damagePercent;
     public Vector3[] positions;
     public Vector3 resetPosition;
+    public bool secondJump = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,10 +69,19 @@ public class Cube_Keyboard : MonoBehaviour
 
     public void Jump()
     {
+        Debug.Log("Jump");
         if (grounded)
         {
             gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
             grounded = false;
+            return;
+        }
+        else if (secondJump && !grounded)
+        {
+            
+            gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
+            secondJump = false;
+
         }
 
     }
@@ -82,7 +92,15 @@ public class Cube_Keyboard : MonoBehaviour
         {
             grounded = true;
         }
-        
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.gameObject.CompareTag("Ground"))
+        {
+            grounded = false;
+            secondJump = true;
+        }
     }
     void OnTriggerEnter(Collider collider)
     {
