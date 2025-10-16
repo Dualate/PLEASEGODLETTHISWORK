@@ -27,6 +27,7 @@ public class Cube : MonoBehaviour
     void Start()
     {
         GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
+        transform.parent = GameObject.Find("MHandler").transform;
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
     }

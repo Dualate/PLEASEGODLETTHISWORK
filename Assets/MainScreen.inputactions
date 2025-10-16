@@ -1,0 +1,40 @@
+{
+    "name": "MainScreen",
+    "maps": [
+        {
+            "name": "MainMenuUI",
+            "id": "69bd69ca-18e0-4635-a2da-64a3ff455517",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "9755e926-d22b-4244-96f5-97cac867006c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f24c0ee6-ff00-4641-9724-5509a8bacf55",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "MainMenuUI",
+            "bindingGroup": "MainMenuUI",
+            "devices": []
+        }
+    ]
+}
