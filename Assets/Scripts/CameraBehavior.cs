@@ -28,7 +28,7 @@ public class CameraBehavior : MonoBehaviour
         {
             foreach (Transform t in players)
             {
-                if (t.position.y > highest.position.y)
+                if (t.position.y > highest.position.y && t.position.x >= -20 && t.position.x <= 30) //camera follows highest position player unless they are too far to the left or right
                 {
                     highest = t;
                 }

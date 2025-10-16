@@ -87,6 +87,7 @@ public class Cube : MonoBehaviour
             }
             if (jumpDelay == 0)
             {
+                
                 gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
                 secondJump = false;
                 jumpDelay = 3;

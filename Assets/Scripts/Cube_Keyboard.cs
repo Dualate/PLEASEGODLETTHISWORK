@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Cube_Keyboard : MonoBehaviour
 {
     public float moveSpeed;
@@ -19,6 +20,8 @@ public class Cube_Keyboard : MonoBehaviour
     public Vector3[] positions;
     public Vector3 resetPosition;
     public bool secondJump = false;
+    int jumpDelay = 3;
+    bool jumping = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,10 @@ public class Cube_Keyboard : MonoBehaviour
 
     void Update()
     {
+        if (jumping){
+            jumpDelay--;
+        }
+        
         if (transform.position.y < -15)
         {
             transform.position = resetPosition;
@@ -49,6 +56,7 @@ public class Cube_Keyboard : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             Jump();
+            jumping = true;
         }
         if (Input.GetKeyDown(KeyCode.Space) && atkTimerActive == false)
         {
@@ -69,7 +77,6 @@ public class Cube_Keyboard : MonoBehaviour
 
     public void Jump()
     {
-        Debug.Log("Jump");
         if (grounded)
         {
             gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
@@ -79,8 +86,28 @@ public class Cube_Keyboard : MonoBehaviour
         else if (secondJump && !grounded)
         {
             
-            gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
-            secondJump = false;
+            if (jumpDelay > 0)
+            {
+                jumpDelay--;
+            }
+            if (jumpDelay <= 0)
+            {
+                Rigidbody rb = GetComponent<Rigidbody>();
+                float cancelForce;
+                if (rb.velocity.y < 0)
+                {
+                    rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                    //cancelForce = -0.5f * rb.mass * rb.velocity.y;
+                }
+                else
+                {
+                    cancelForce = 0;
+                }
+                Debug.Log(rb.mass);
+                gameObject.GetComponent<Rigidbody>().AddForce((jumpForce) * Vector3.up, ForceMode.Impulse);
+                secondJump = false;
+                jumpDelay = 3;
+            }
 
         }
 
