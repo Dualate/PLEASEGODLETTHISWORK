@@ -15,8 +15,8 @@ public class Cube_Keyboard : MonoBehaviour
     private float atkTimer = 0f;
     private float atkDelayTime = .5f;
     private bool atkTimerActive = false;
-    public float knockback;
-    public float atkKnockback;
+    public float knockback; //Knockback level of character
+    public float atkKnockback; //Knockback level of attacks
     public float damagePercent;
     public Vector3[] positions;
     public Vector3 resetPosition;
@@ -33,6 +33,14 @@ public class Cube_Keyboard : MonoBehaviour
 
     void Update()
     {
+        if (hInput > 0 && yInput == 0) //moves attack right
+        {
+            attackBox.transform.localPosition = positions[0];
+        }
+        else if (hInput < 0 && yInput == 0) //moves attack left
+        {
+            attackBox.transform.localPosition = positions[1];
+        }
         if (jumping)
         {
             jumpDelay--;
@@ -142,15 +150,7 @@ public class Cube_Keyboard : MonoBehaviour
     }
     public void Attack()
     {
-        if (hInput > 0 && yInput == 0) //right
-        {
-            attackBox.transform.localPosition = positions[0];
-        }
-        else if (hInput < 0 && yInput == 0) //left
-        {
-            attackBox.transform.localPosition = positions[1];
-        }
-        else if (hInput == 0 && yInput > 0) //up
+        if (hInput == 0 && yInput > 0) //up
         {
             attackBox.transform.localPosition = positions[2];
         }
