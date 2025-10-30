@@ -122,7 +122,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &111797088
+--- !u!1001 &173132864
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -130,21 +130,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 891587421933135710, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1110250969279058199, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.17
+      value: 0.7295948
       objectReference: {fileID: 0}
     - target: {fileID: 1110250969279058199, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.33
+      value: 3.31
       objectReference: {fileID: 0}
     - target: {fileID: 1110250969279058199, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.22986126
+      value: -0.37898064
       objectReference: {fileID: 0}
     - target: {fileID: 1110250969279058199, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -174,25 +170,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1902005791334795534, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4317690307768937370, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
       propertyPath: m_Name
       value: KBCube
-      objectReference: {fileID: 0}
-    - target: {fileID: 7811419308292061019, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
-      propertyPath: jumpForce
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7811419308292061019, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
-      propertyPath: knockback
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 7811419308292061019, guid: 57032e4ee005f8a459b384bcc98528d5, type: 3}
-      propertyPath: resetPosition.y
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1020,4 +1000,4 @@ SceneRoots:
   - {fileID: 2017870900}
   - {fileID: 535087046}
   - {fileID: 1012078672}
-  - {fileID: 111797088}
+  - {fileID: 173132864}

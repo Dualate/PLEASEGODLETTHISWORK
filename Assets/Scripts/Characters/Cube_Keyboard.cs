@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Cube_Keyboard : MonoBehaviour
 {
     public float moveSpeed;
@@ -11,11 +10,13 @@ public class Cube_Keyboard : MonoBehaviour
     float xSpeed;
     float ySpeed;
     public float hInput;
+    public float yInput;
     private GameObject attackBox;
     private float atkTimer = 0f;
     private float atkDelayTime = .5f;
     private bool atkTimerActive = false;
-    public float knockback;
+    public float knockback; //Knockback level of character
+    public float atkKnockback; //Knockback level of attacks
     public float damagePercent;
     public Vector3[] positions;
     public Vector3 resetPosition;
@@ -32,7 +33,16 @@ public class Cube_Keyboard : MonoBehaviour
 
     void Update()
     {
-        if (jumping){
+        if (hInput > 0 && yInput == 0) //moves attack right
+        {
+            attackBox.transform.localPosition = positions[0];
+        }
+        else if (hInput < 0 && yInput == 0) //moves attack left
+        {
+            attackBox.transform.localPosition = positions[1];
+        }
+        if (jumping)
+        {
             jumpDelay--;
         }
         
@@ -42,23 +52,16 @@ public class Cube_Keyboard : MonoBehaviour
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             damagePercent = 0f;
         }
-        if (hInput > 0)
-        {
-            attackBox.transform.localPosition = positions[0];
-        }
-        else if (hInput < 0)
-        {
-            attackBox.transform.localPosition = positions[1];
-        }
         hInput = Input.GetAxis("Horizontal");
+        yInput = Input.GetAxis("Vertical");
         xSpeed = hInput * moveSpeed * Time.deltaTime;
         transform.Translate(xSpeed, ySpeed, 0);
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
             jumping = true;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && atkTimerActive == false)
+        if (Input.GetMouseButtonDown(0) && atkTimerActive == false)
         {
             Attack();
         }
@@ -71,12 +74,14 @@ public class Cube_Keyboard : MonoBehaviour
                 attackBox.SetActive(false);
                 atkTimerActive = false;
                 atkTimer = 0f;
+                attackBox.transform.localPosition = positions[0]; //reset position of attacks
             }
         }
     }
 
     public void Jump()
     {
+        Debug.Log("Jump");
         if (grounded)
         {
             gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
@@ -85,7 +90,6 @@ public class Cube_Keyboard : MonoBehaviour
         }
         else if (secondJump && !grounded)
         {
-            
             if (jumpDelay > 0)
             {
                 jumpDelay--;
@@ -103,14 +107,11 @@ public class Cube_Keyboard : MonoBehaviour
                 {
                     cancelForce = 0;
                 }
-                Debug.Log(rb.mass);
-                gameObject.GetComponent<Rigidbody>().AddForce((jumpForce) * Vector3.up, ForceMode.Impulse);
+                gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
                 secondJump = false;
-                jumpDelay = 3;
             }
 
         }
-
     }
 
     void OnCollisionEnter(Collision collider)
@@ -149,6 +150,30 @@ public class Cube_Keyboard : MonoBehaviour
     }
     public void Attack()
     {
+        if (hInput == 0 && yInput > 0) //up
+        {
+            attackBox.transform.localPosition = positions[2];
+        }
+        else if (hInput == 0 && yInput < 0) //down
+        {
+            attackBox.transform.localPosition = positions[3];
+        }
+        else if (hInput > 0 && yInput > 0) //top right
+        {
+            attackBox.transform.localPosition = positions[4];
+        }
+        else if (hInput < 0 && yInput > 0) //top left
+        {
+            attackBox.transform.localPosition = positions[5];
+        }
+        else if (hInput < 0 && yInput < 0) //bottom left
+        {
+            attackBox.transform.localPosition = positions[6];
+        }
+        else if (hInput > 0 && yInput < 0) //bottom right
+        {
+            attackBox.transform.localPosition = positions[7];
+        }
         attackBox.SetActive(true);
         atkTimerActive = true;
     }
