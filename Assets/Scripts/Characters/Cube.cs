@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 public class Cube : MonoBehaviour
 {
@@ -26,7 +27,10 @@ public class Cube : MonoBehaviour
     int jumpDelay = 3;
     void Start()
     {
-        GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
+        if (SceneManager.GetActiveScene().name == "SampleScene")
+        {
+            GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
+        }
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
     }

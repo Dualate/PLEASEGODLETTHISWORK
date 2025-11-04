@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Cube_Keyboard : MonoBehaviour
 {
     public float moveSpeed;
@@ -26,8 +26,10 @@ public class Cube_Keyboard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
-        attackBox = GameObject.Find("attackBox"); //find attackBox
+        if (SceneManager.GetActiveScene().name == "SampleScene"){
+            GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
+        }
+            attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
     }
 
