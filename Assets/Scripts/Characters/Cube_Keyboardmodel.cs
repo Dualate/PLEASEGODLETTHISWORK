@@ -57,7 +57,7 @@ public class Cube_Keyboard_Model : MonoBehaviour
         hInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
         xSpeed = hInput * moveSpeed * Time.deltaTime;
-        transform.Translate(xSpeed, ySpeed, 0);
+        transform.Translate(xSpeed, ySpeed, 0, Space.World);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
