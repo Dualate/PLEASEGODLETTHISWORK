@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 15
-  jumpForce: 75
+  jumpForce: 125
   grounded: 0
   knockback: 150
   damagePercent: 0
