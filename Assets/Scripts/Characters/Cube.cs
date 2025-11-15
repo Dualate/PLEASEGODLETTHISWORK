@@ -5,13 +5,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
+using TMPro;
 public class Cube : MonoBehaviour
 {
-    enum STATE { 
+    public enum STATE { 
         DORMANT, ACTIVE
     }
 
-    PlayerControls controls;
+
+    TextMeshProUGUI readyText;
     public float moveSpeed;
     public float jumpForce;
     public bool grounded;
@@ -20,7 +22,7 @@ public class Cube : MonoBehaviour
     Vector2 moveVector;
 
 
-    STATE state;
+    public STATE state;
     private GameObject attackBox;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
@@ -32,14 +34,19 @@ public class Cube : MonoBehaviour
     public bool secondJump = false;
     int jumpDelay = 3;
 
+    bool ready;
+
     void Start()
     {
         state = STATE.DORMANT;
-        GameObject.Find("Courier").GetComponent<Courier>().PlayerJoined(transform);
+        readyText = GameObject.Find("GameManager").GetComponent<GameManager>().CheckIn(this.gameObject);
+        //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
-       
+        readyText.text = "Ready?";
     }
+
+
 
     public void PLEASEGOTLETTHISWORK(CallbackContext context)
     {
@@ -50,11 +57,13 @@ public class Cube : MonoBehaviour
 
     public void Activate()
     {
-        state = STATE.ACTIVE;
+        if (ready)
+            state = STATE.ACTIVE;
     }
 
     void Update()
     {
+        
         if (state == STATE.ACTIVE)
         {
             if (transform.position.y < -15)
@@ -90,29 +99,30 @@ public class Cube : MonoBehaviour
 
     public void Jump()
     {
-        Debug.Log("Jump");
-        if (grounded)
+        if (state == STATE.ACTIVE)
         {
-            gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
-            grounded = false;
-            return;
-        }
-        else if (secondJump && !grounded)
-        {
-            if (jumpDelay > 0)
+            if (grounded)
             {
-                jumpDelay--;
-            }
-            if (jumpDelay == 0)
-            {
-                
                 gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
-                secondJump = false;
-                jumpDelay = 3;
+                grounded = false;
+                return;
             }
+            else if (secondJump && !grounded)
+            {
+                if (jumpDelay > 0)
+                {
+                    jumpDelay--;
+                }
+                if (jumpDelay == 0)
+                {
 
+                    gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
+                    secondJump = false;
+                    jumpDelay = 3;
+                }
+
+            }
         }
-
     }
 
     void OnCollisionEnter(Collision collider)
@@ -124,14 +134,23 @@ public class Cube : MonoBehaviour
         }   
     }
 
+    public void Ready()
+    {
+        readyText.text = "Ready!";
+        ready = true;
+        Activate();
+    }
     public void Attack()
     {
-        if (atkTimerActive)
+        if (state == STATE.ACTIVE)
         {
-            return;
+            if (atkTimerActive)
+            {
+                return;
+            }
+            attackBox.SetActive(true);
+            atkTimerActive = true;
         }
-        attackBox.SetActive(true);
-        atkTimerActive = true;
     }
 
     void OnTriggerEnter(Collider collider)

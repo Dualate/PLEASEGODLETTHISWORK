@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4106997740335320076}
   - component: {fileID: 2913163440644771194}
   - component: {fileID: 4259786053918987035}
-  - component: {fileID: 449341674185871103}
+  - component: {fileID: 1882047885291033911}
   m_Layer: 5
-  m_Name: selector.drawio
+  m_Name: ProtoConfig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4689926286576663413}
+  - {fileID: 6365747028984101511}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2913163440644771194
@@ -102,7 +103,7 @@ MonoBehaviour:
   moveSpeed: 10
   labelText: {fileID: 5554649677745583907}
   characterIcons: []
---- !u!114 &449341674185871103
+--- !u!114 &1882047885291033911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,7 +143,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 735c0d54-5b5f-40e0-84b5-36bec5e0a0e2
-    m_ActionName: SelectorLocomotion/Move
+    m_ActionName: SelectorLocomotion/Move[/XInputControllerWindows1/leftStick,/XInputControllerWindows/leftStick,/SwitchProControllerHID/leftStick]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4259786053918987035}
@@ -158,7 +159,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 6d1f8b58-63df-409d-801e-05f0ad0b6b92
-    m_ActionName: SelectorLocomotion/Select[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth,/SwitchProControllerHID/buttonSouth]
+    m_ActionName: SelectorLocomotion/Select[/XInputControllerWindows1/buttonSouth,/XInputControllerWindows/buttonSouth,/SwitchProControllerHID/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4259786053918987035}
@@ -174,7 +175,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: c57f0e97-f433-40aa-b2be-c6d279d65943
-    m_ActionName: SelectorLocomotion/Deselect[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast,/SwitchProControllerHID/buttonEast]
+    m_ActionName: SelectorLocomotion/Deselect[/XInputControllerWindows1/buttonEast,/XInputControllerWindows/buttonEast,/SwitchProControllerHID/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: SelectorLocomotion
@@ -416,3 +417,34 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &7775257404765972487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6365747028984101511}
+  m_Layer: 5
+  m_Name: ProtoConfig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6365747028984101511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7775257404765972487}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4106997740335320076}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

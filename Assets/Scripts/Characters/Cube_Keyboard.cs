@@ -97,15 +97,9 @@ public class Cube_Keyboard : MonoBehaviour
             if (jumpDelay <= 0)
             {
                 Rigidbody rb = GetComponent<Rigidbody>();
-                float cancelForce;
                 if (rb.velocity.y < 0)
                 {
                     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                    //cancelForce = -0.5f * rb.mass * rb.velocity.y;
-                }
-                else
-                {
-                    cancelForce = 0;
                 }
                 gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
                 secondJump = false;

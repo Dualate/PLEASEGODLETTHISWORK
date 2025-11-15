@@ -117,6 +117,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ready"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf3cc170-ca76-43e6-a1fc-4ba3534bdd3f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -163,6 +172,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65837268-955a-4718-b84a-255818f4e955"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ready"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -174,6 +194,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
+        m_Gameplay_Ready = m_Gameplay.FindAction("Ready", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -257,6 +278,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Attack;
+    private readonly InputAction m_Gameplay_Ready;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -280,6 +302,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Attack".
         /// </summary>
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/Ready".
+        /// </summary>
+        public InputAction @Ready => m_Wrapper.m_Gameplay_Ready;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -315,6 +341,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @Ready.started += instance.OnReady;
+            @Ready.performed += instance.OnReady;
+            @Ready.canceled += instance.OnReady;
         }
 
         /// <summary>
@@ -335,6 +364,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @Ready.started -= instance.OnReady;
+            @Ready.performed -= instance.OnReady;
+            @Ready.canceled -= instance.OnReady;
         }
 
         /// <summary>
@@ -396,5 +428,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Ready" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnReady(InputAction.CallbackContext context);
     }
 }

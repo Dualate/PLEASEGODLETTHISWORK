@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 using TMPro;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class SelectorScript : MonoBehaviour
 {
     Vector2 moveVector;
@@ -15,7 +17,7 @@ public class SelectorScript : MonoBehaviour
     bool chosen = false;
     void Start()
     {
-        cornerText = GameObject.Find("SceneMenuManager").GetComponent<SceneMenuManager>().getCorner();
+        cornerText = GameObject.Find("SceneHandler").GetComponent<SceneHandler>().getCorner();
         labelText.text = "P" + cornerText.name;
         cornerText.text = "Select a character";
         characterIcons = GameObject.Find("Characters").GetComponentsInChildren<Transform>();
@@ -29,6 +31,10 @@ public class SelectorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneManager.GetActiveScene().name == "SampleScene")
+        {
+            Destroy(this.gameObject);
+        }
         if (!chosen)
         {
             ySpeed = moveVector.y * moveSpeed * Time.deltaTime;
@@ -57,7 +63,7 @@ public class SelectorScript : MonoBehaviour
         if (!chosen)
         {
             chosen = true;
-            cornerText.text += " (ready!)";
+            cornerText.text = "Ready! East to cancel";
         }
     }
 
@@ -65,6 +71,6 @@ public class SelectorScript : MonoBehaviour
     public void Deselect()
     {
         chosen = false;
-        cornerText.text = cornerText.text.Replace(" (ready!)", "");
+        cornerText.text = "";
     }
 }

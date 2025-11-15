@@ -124,6 +124,7 @@ MonoBehaviour:
   moveSpeed: 15
   jumpForce: 125
   grounded: 0
+  state: 0
   knockback: 150
   damagePercent: 0
   positions:
@@ -204,6 +205,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6a9136d7-18c8-4cfb-96e4-5bc6220fcdba
     m_ActionName: Gameplay/Attack[/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8999831084868238245}
+        m_TargetAssemblyTypeName: Cube, Assembly-CSharp
+        m_MethodName: Ready
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cf3cc170-ca76-43e6-a1fc-4ba3534bdd3f
+    m_ActionName: Gameplay/Ready[/XInputControllerWindows1/buttonNorth,/XInputControllerWindows/buttonNorth,/SwitchProControllerHID/buttonNorth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

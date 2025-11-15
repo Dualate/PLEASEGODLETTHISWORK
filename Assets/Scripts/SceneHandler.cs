@@ -1,15 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    int index = 0;
+    public TextMeshProUGUI[] cornerTexts;
 
     // Update is called once per frame
     void Update()
@@ -18,5 +17,10 @@ public class SceneHandler : MonoBehaviour
         {
             SceneManager.LoadScene("SampleScene");
         }
+    }
+    public TextMeshProUGUI getCorner()
+    {
+        index += 1;
+        return cornerTexts[index - 1];
     }
 }

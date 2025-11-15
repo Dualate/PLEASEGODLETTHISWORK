@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    enum STATE { DORMANT, ACTIVE }
+    STATE state = STATE.DORMANT;
     public float moveSpeed;
     public GameObject platform;
     int sent = 0;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        InvokeRepeating("SpawnPlatform", 0, .1f);
+        
     }
 
     // Update is called once per frame
@@ -21,13 +23,22 @@ public class Spawner : MonoBehaviour
         sent++;
     }
 
+    public void Activate()
+    {
+        state = STATE.ACTIVE;
+        InvokeRepeating("SpawnPlatform", .15f, .1f);
+    }
+
     void Update()
     {
-        transform.Translate(Vector3.up * Time.deltaTime * moveSpeed);
-        if (sent == 50)
+        if (state == STATE.ACTIVE)
         {
-            CancelInvoke("SpawnPlatform");
-            moveSpeed = 0;
+            transform.Translate(Vector3.up * Time.deltaTime * moveSpeed);
+            if (sent == 50)
+            {
+                CancelInvoke("SpawnPlatform");
+                moveSpeed = 0;
+            }
         }
     }
 }

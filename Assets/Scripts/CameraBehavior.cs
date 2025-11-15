@@ -7,18 +7,21 @@ public class CameraBehavior : MonoBehaviour
     public List<Transform> players;
 
     public Vector3 offset;
-    Transform highest;
+    public Transform highest;
     public float smoothing;
     void Start()
     { 
+        
         highest = transform;
-        players =  GameObject.Find("Courier").GetComponent<Courier>().ReturnPlayers();
         foreach(Transform cube in players)
         {
             cube.gameObject.GetComponent<Cube>().Activate();
         }
     }
-
+    public void Add(Transform player)
+    {
+        players.Add(player);
+    }
     // Update is called once per frame
     void LateUpdate()
     {
