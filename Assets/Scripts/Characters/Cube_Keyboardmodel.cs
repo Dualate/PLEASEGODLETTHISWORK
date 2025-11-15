@@ -26,10 +26,7 @@ public class Cube_Keyboard_Model : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "SampleScene"){
-            GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
-        }
-            attackBox = GameObject.Find("attackBox"); //find attackBox
+        attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
     }
 

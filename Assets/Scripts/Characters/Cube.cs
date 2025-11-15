@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 public class Cube : MonoBehaviour
 {
+    enum STATE { 
+        DORMANT, ACTIVE
+    }
+
     PlayerControls controls;
     public float moveSpeed;
     public float jumpForce;
@@ -15,6 +19,8 @@ public class Cube : MonoBehaviour
     float ySpeed;
     Vector2 moveVector;
 
+
+    STATE state;
     private GameObject attackBox;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
@@ -25,14 +31,14 @@ public class Cube : MonoBehaviour
     public Vector3 resetPosition;
     public bool secondJump = false;
     int jumpDelay = 3;
+
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "SampleScene")
-        {
-            GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
-        }
+        state = STATE.DORMANT;
+        GameObject.Find("Courier").GetComponent<Courier>().PlayerJoined(transform);
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
+       
     }
 
     public void PLEASEGOTLETTHISWORK(CallbackContext context)
@@ -42,34 +48,42 @@ public class Cube : MonoBehaviour
 
     }
 
+    public void Activate()
+    {
+        state = STATE.ACTIVE;
+    }
+
     void Update()
     {
-        if (transform.position.y < -15)
+        if (state == STATE.ACTIVE)
         {
-            transform.position = resetPosition;
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
-            damagePercent = 0f;
-        }
-        if (moveVector.x > 0)
-        {
-            attackBox.transform.localPosition = positions[0];
-        }
-        else if (moveVector.x < 0)
-        {
-            attackBox.transform.localPosition = positions[1];
-        }
-        xSpeed = moveVector.x * moveSpeed * Time.deltaTime;
-        transform.Translate(xSpeed, ySpeed, 0);
-
-        if (atkTimerActive == true) //This section deactivates the attackbox after a timer
-        {
-            atkTimer += Time.deltaTime;
-            //Debug.Log(atkTimer);
-            if (atkTimer >= atkDelayTime)
+            if (transform.position.y < -15)
             {
-                attackBox.SetActive(false);
-                atkTimerActive = false;
-                atkTimer = 0f;
+                transform.position = resetPosition;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+                damagePercent = 0f;
+            }
+            if (moveVector.x > 0)
+            {
+                attackBox.transform.localPosition = positions[0];
+            }
+            else if (moveVector.x < 0)
+            {
+                attackBox.transform.localPosition = positions[1];
+            }
+            xSpeed = moveVector.x * moveSpeed * Time.deltaTime;
+            transform.Translate(xSpeed, ySpeed, 0);
+
+            if (atkTimerActive == true) //This section deactivates the attackbox after a timer
+            {
+                atkTimer += Time.deltaTime;
+                //Debug.Log(atkTimer);
+                if (atkTimer >= atkDelayTime)
+                {
+                    attackBox.SetActive(false);
+                    atkTimerActive = false;
+                    atkTimer = 0f;
+                }
             }
         }
     }
