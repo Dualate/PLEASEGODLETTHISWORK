@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     List<TextMeshProUGUI> texts;
 
-    List<Cube> players = new List<Cube>();
+    List<Transform> players = new List<Transform>();
 
     public bool running = false;
     // Start is called before the first frame update
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI CheckIn(GameObject player)
     {
-        players.Add(player.GetComponent<Cube>());
+        players.Add(player.GetComponent<Transform>());
          int number = Random.Range(0, starters.Count);
         Transform startingPos = starters[number];
         player.transform.position = startingPos.position;
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
             return;
         foreach (var player in players)
         {
-            if (player.state == Cube.STATE.DORMANT)
+            if (player.gameObject.GetComponent<Cube_Keyboard>().state == Cube_Keyboard.STATE.DORMANT)
             {
                 return;
             }
