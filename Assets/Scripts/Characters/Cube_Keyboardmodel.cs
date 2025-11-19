@@ -23,6 +23,8 @@ public class Cube_Keyboard_Model : MonoBehaviour
     public bool secondJump = false;
     int jumpDelay = 3;
     bool jumping = false;
+    public ParticleSystem landingEffectPrefab;
+    public ParticleSystem hitEffectPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +59,7 @@ public class Cube_Keyboard_Model : MonoBehaviour
         hInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Vertical");
         xSpeed = hInput * moveSpeed * Time.deltaTime;
-        transform.Translate(xSpeed, ySpeed, 0);
+        transform.Translate(xSpeed, ySpeed, 0, Space.World);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
@@ -120,6 +122,12 @@ public class Cube_Keyboard_Model : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Ground"))
         {
+            if(collider.transform.position.y<transform.position.y - 3.5)
+            {
+                ParticleSystem landingInstance = Instantiate(landingEffectPrefab, collider.contacts[0].point, Quaternion.identity);
+                landingInstance.Play();
+                Destroy(landingInstance.gameObject, landingEffectPrefab.main.duration);
+            }
             grounded = true;
         }
     }
@@ -136,6 +144,10 @@ public class Cube_Keyboard_Model : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("attack"))
         {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
             Vector3 scalar = Vector3.zero;
             if (collider.transform.position.x < transform.position.x)
             {
