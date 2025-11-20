@@ -39,7 +39,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         playerConfigs[index].IsReady = true;
         if (playerConfigs.Count == MaxPlayers && playerConfigs.All(p => p.IsReady == true))
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("bad_select");
         }
     }
 
@@ -47,11 +47,16 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         Debug.Log("Player Joined " + pi.playerIndex);
         
-        if (playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
+        if (!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
         {
             playerConfigs.Add(new PlayerConfiguration(pi));
             pi.transform.SetParent(transform);
         }
+    }
+
+    public List<PlayerConfiguration> GetPlayerConfigs()
+    {
+        return playerConfigs;
     }
 }
 

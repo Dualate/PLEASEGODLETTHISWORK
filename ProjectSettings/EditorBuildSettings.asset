@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/bad_select.unity
     guid: 842da7b5cb9cc5a439ae805b61ce60c7
+  - enabled: 1
+    path: Assets/Scenes/inputPermanenceTest.unity
+    guid: a0afbb8e7c8f82648ae5d1723e2b5d3d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: cf2cdf06ce3fb45c192ef6a7bc0a955d, type: 2}

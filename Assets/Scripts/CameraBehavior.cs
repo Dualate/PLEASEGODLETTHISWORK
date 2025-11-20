@@ -13,10 +13,7 @@ public class CameraBehavior : MonoBehaviour
     { 
         
         highest = transform;
-        foreach(Transform cube in players)
-        {
-            cube.gameObject.GetComponent<Cube>().Activate();
-        }
+        
     }
     public void Add(Transform player)
     {
