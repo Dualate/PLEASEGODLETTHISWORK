@@ -124,7 +124,6 @@ MonoBehaviour:
   moveSpeed: 15
   jumpForce: 125
   grounded: 0
-  state: 0
   knockback: 150
   damagePercent: 0
   positions:
@@ -132,6 +131,8 @@ MonoBehaviour:
   - {x: -0.7558146, y: -0.041999817, z: -0.049861252}
   resetPosition: {x: 0, y: 10, z: 0}
   secondJump: 0
+  landingEffectPrefab: {fileID: 2553654953159236003, guid: 5cd13d31c2675284c875d4d86e6e7fb6, type: 3}
+  hitEffectPrefab: {fileID: 6395329100671518530, guid: 2596555950a94de489cb57282c949e60, type: 3}
 --- !u!114 &1553446653892103366
 MonoBehaviour:
   m_ObjectHideFlags: 0

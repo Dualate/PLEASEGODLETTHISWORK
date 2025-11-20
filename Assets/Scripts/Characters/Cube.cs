@@ -23,7 +23,8 @@ public class Cube : MonoBehaviour
     private GameObject attackBox;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
-    public float knockback;
+    public float knockback; //base knockback taken by character
+    public float atkKnockback; //base knockback dealt by attacks
     public float damagePercent;
     private float atkDelayTime = .5f;
     public Vector3[] positions;
@@ -32,6 +33,9 @@ public class Cube : MonoBehaviour
     int jumpDelay = 3;
 
     bool ready;
+
+    public ParticleSystem landingEffectPrefab;
+    public ParticleSystem hitEffectPrefab;
 
     void Start()
     {
@@ -70,7 +74,7 @@ public class Cube : MonoBehaviour
             attackBox.transform.localPosition = positions[1];
         }
         xSpeed = moveVector.x * moveSpeed * Time.deltaTime;
-        transform.Translate(xSpeed, ySpeed, 0);
+        transform.Translate(xSpeed, ySpeed, 0, Space.World);
 
         if (atkTimerActive == true) //This section deactivates the attackbox after a timer
         {
@@ -81,6 +85,7 @@ public class Cube : MonoBehaviour
                 attackBox.SetActive(false);
                 atkTimerActive = false;
                 atkTimer = 0f;
+                attackBox.transform.localPosition = positions[0]; //reset position of attacks
             }
         }     
     }
@@ -99,8 +104,13 @@ public class Cube : MonoBehaviour
             {
                 jumpDelay--;
             }
-            if (jumpDelay == 0)
+            if (jumpDelay <= 0)
             {
+                Rigidbody rb = GetComponent<Rigidbody>();
+                if (rb.velocity.y < 0)
+                {
+                    rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                }
                 gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
                 secondJump = false;
                 jumpDelay = 3;
@@ -113,6 +123,12 @@ public class Cube : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Ground"))
         {
+            if (collider.transform.position.y < transform.position.y - 3.5)
+            {
+                ParticleSystem landingInstance = Instantiate(landingEffectPrefab, collider.contacts[0].point, Quaternion.identity);
+                landingInstance.Play();
+                Destroy(landingInstance.gameObject, landingEffectPrefab.main.duration);
+            }
             grounded = true;
             secondJump = true;
             resetPosition = transform.position;
@@ -122,6 +138,7 @@ public class Cube : MonoBehaviour
 
     public void Attack()
     {
+        //to add: the rest of the directional inputs
         if (atkTimerActive)
         {
             return;
@@ -134,6 +151,10 @@ public class Cube : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("attack"))
         {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
             Vector3 scalar = Vector3.zero;
             if (collider.transform.position.x < transform.position.x)
             {
