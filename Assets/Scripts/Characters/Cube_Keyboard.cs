@@ -34,10 +34,9 @@ public class Cube_Keyboard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       readyText = GameObject.Find("GameManager").GetComponent<GameManager>().CheckIn(this.gameObject);
+      
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
-        readyText.text = "Ready!";
     }
 
     void Update()

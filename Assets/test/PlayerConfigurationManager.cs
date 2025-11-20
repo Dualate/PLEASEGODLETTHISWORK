@@ -39,7 +39,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         playerConfigs[index].IsReady = true;
         if (playerConfigs.Count == MaxPlayers && playerConfigs.All(p => p.IsReady == true))
         {
-            SceneManager.LoadScene("bad_select");
+            SceneManager.LoadScene("SampleScene");
         }
     }
 

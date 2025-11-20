@@ -12,7 +12,8 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        
+        InvokeRepeating("SpawnPlatform", .15f, .1f);
+
     }
 
     // Update is called once per frame
@@ -23,22 +24,15 @@ public class Spawner : MonoBehaviour
         sent++;
     }
 
-    public void Activate()
-    {
-        state = STATE.ACTIVE;
-        InvokeRepeating("SpawnPlatform", .15f, .1f);
-    }
 
     void Update()
     {
-        if (state == STATE.ACTIVE)
-        {
-            transform.Translate(Vector3.up * Time.deltaTime * moveSpeed);
-            if (sent == 50)
-            {
-                CancelInvoke("SpawnPlatform");
-                moveSpeed = 0;
-            }
-        }
+
+       transform.Translate(Vector3.up * Time.deltaTime * moveSpeed);
+       if (sent == 50)
+       {
+            CancelInvoke("SpawnPlatform");
+            moveSpeed = 0;
+       }
     }
 }

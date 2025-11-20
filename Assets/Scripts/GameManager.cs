@@ -21,22 +21,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public TextMeshProUGUI CheckIn(GameObject player)
-    {
-        players.Add(player.GetComponent<Transform>());
-         int number = Random.Range(0, starters.Count);
-        Transform startingPos = starters[number];
-        player.transform.position = startingPos.position;
-        starters.Remove(startingPos);
-
-        Material color = colors[number];
-        player.GetComponent<MeshRenderer>().material = color;
-        colors.Remove(color);
-        TextMeshProUGUI readyText = texts[number];
-        texts.Remove(readyText);
-
-        return readyText;
-    }
+    
 
     void Update()
     {
@@ -58,7 +43,6 @@ public class GameManager : MonoBehaviour
         {
             GameObject.Find("Main Camera").GetComponent<SelectCameraScript>().Setup(transforms);
             running = true;
-            GameObject.Find("Spawner").GetComponent<Spawner>().Activate();
         }
     }
 
