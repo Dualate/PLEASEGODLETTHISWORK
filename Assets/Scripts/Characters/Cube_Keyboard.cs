@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Cube_Keyboard : MonoBehaviour
@@ -23,13 +24,18 @@ public class Cube_Keyboard : MonoBehaviour
     public bool secondJump = false;
     int jumpDelay = 3;
     bool jumping = false;
+
+    bool ready = true;
+
+    TextMeshProUGUI readyText;
+    public STATE state = STATE.ACTIVE;
+    public enum STATE { DORMANT, ACTIVE}
+
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "SampleScene"){
-            GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
-        }
-            attackBox = GameObject.Find("attackBox"); //find attackBox
+      
+        attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
     }
 
@@ -99,15 +105,9 @@ public class Cube_Keyboard : MonoBehaviour
             if (jumpDelay <= 0)
             {
                 Rigidbody rb = GetComponent<Rigidbody>();
-                float cancelForce;
                 if (rb.velocity.y < 0)
                 {
                     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                    //cancelForce = -0.5f * rb.mass * rb.velocity.y;
-                }
-                else
-                {
-                    cancelForce = 0;
                 }
                 gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
                 secondJump = false;

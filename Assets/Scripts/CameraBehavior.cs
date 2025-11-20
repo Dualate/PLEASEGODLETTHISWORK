@@ -7,19 +7,18 @@ public class CameraBehavior : MonoBehaviour
     public List<Transform> players;
 
     public Vector3 offset;
-    Transform highest;
+    public Transform highest;
     public float smoothing;
-    void Awake()
-    {
-        players = new List<Transform>();
+    void Start()
+    { 
+        
         highest = transform;
+        
     }
-
     public void Add(Transform player)
     {
         players.Add(player);
     }
-
     // Update is called once per frame
     void LateUpdate()
     {

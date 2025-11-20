@@ -269,5 +269,5 @@ MonoBehaviour:
   - {x: -0.75, y: 0.75, z: 0}
   - {x: -0.75, y: -0.75, z: 0}
   - {x: 0.75, y: -0.75, z: 0}
-  resetPosition: {x: 0, y: 0, z: 0}
+  resetPosition: {x: 0, y: 17, z: 0}
   secondJump: 0

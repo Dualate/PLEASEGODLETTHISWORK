@@ -5,15 +5,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
+using TMPro;
 public class Cube : MonoBehaviour
 {
-    PlayerControls controls;
+
+
+
     public float moveSpeed;
     public float jumpForce;
     public bool grounded;
     float xSpeed;
     float ySpeed;
     Vector2 moveVector;
+
+    
 
     private GameObject attackBox;
     private float atkTimer = 0f;
@@ -25,25 +30,31 @@ public class Cube : MonoBehaviour
     public Vector3 resetPosition;
     public bool secondJump = false;
     int jumpDelay = 3;
+
+    bool ready;
+
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "SampleScene")
-        {
-            GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
-        }
+        //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
+
     }
 
-    public void PLEASEGOTLETTHISWORK(CallbackContext context)
+
+
+    public void UpdateMoveVector(Vector2 moveVector)
     {
 
-        moveVector = context.ReadValue<Vector2>();
+        this.moveVector = moveVector;
 
     }
+
 
     void Update()
     {
+        
+
         if (transform.position.y < -15)
         {
             transform.position = resetPosition;
@@ -51,7 +62,7 @@ public class Cube : MonoBehaviour
             damagePercent = 0f;
         }
         if (moveVector.x > 0)
-        {
+            {
             attackBox.transform.localPosition = positions[0];
         }
         else if (moveVector.x < 0)
@@ -66,17 +77,16 @@ public class Cube : MonoBehaviour
             atkTimer += Time.deltaTime;
             //Debug.Log(atkTimer);
             if (atkTimer >= atkDelayTime)
-            {
+                {
                 attackBox.SetActive(false);
                 atkTimerActive = false;
                 atkTimer = 0f;
             }
-        }
+        }     
     }
 
     public void Jump()
     {
-        Debug.Log("Jump");
         if (grounded)
         {
             gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
@@ -91,14 +101,12 @@ public class Cube : MonoBehaviour
             }
             if (jumpDelay == 0)
             {
-                
                 gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
                 secondJump = false;
                 jumpDelay = 3;
             }
 
         }
-
     }
 
     void OnCollisionEnter(Collision collider)
@@ -107,8 +115,10 @@ public class Cube : MonoBehaviour
         {
             grounded = true;
             secondJump = true;
+            resetPosition = transform.position;
         }   
     }
+
 
     public void Attack()
     {
