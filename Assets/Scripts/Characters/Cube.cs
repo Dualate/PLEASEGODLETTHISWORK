@@ -23,7 +23,8 @@ public class Cube : MonoBehaviour
     private GameObject attackBox;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
-    public float knockback;
+    public float knockback; //base knockback taken by character
+    public float atkKnockback; //base knockback dealt by attacks
     public float damagePercent;
     private float atkDelayTime = .5f;
     public Vector3[] positions;
@@ -32,6 +33,9 @@ public class Cube : MonoBehaviour
     int jumpDelay = 3;
 
     bool ready;
+
+    public ParticleSystem landingEffectPrefab;
+    public ParticleSystem hitEffectPrefab;
 
     void Start()
     {
@@ -53,24 +57,29 @@ public class Cube : MonoBehaviour
 
     void Update()
     {
-        
-
         if (transform.position.y < -15)
         {
             transform.position = resetPosition;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             damagePercent = 0f;
         }
-        if (moveVector.x > 0)
-            {
-            attackBox.transform.localPosition = positions[0];
-        }
-        else if (moveVector.x < 0)
+        if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
         {
-            attackBox.transform.localPosition = positions[1];
+            if (atkTimerActive == false)
+            {
+                attackBox.transform.localPosition = positions[0];
+            }
+            
+        }
+        else if (moveVector.x < -0.5f && Mathf.Abs(moveVector.y) < 0.5f)
+        {
+            if (atkTimerActive == false)
+            {
+                attackBox.transform.localPosition = positions[1];
+            }
         }
         xSpeed = moveVector.x * moveSpeed * Time.deltaTime;
-        transform.Translate(xSpeed, ySpeed, 0);
+        transform.Translate(xSpeed, ySpeed, 0, Space.World);
 
         if (atkTimerActive == true) //This section deactivates the attackbox after a timer
         {
@@ -81,6 +90,7 @@ public class Cube : MonoBehaviour
                 attackBox.SetActive(false);
                 atkTimerActive = false;
                 atkTimer = 0f;
+                attackBox.transform.localPosition = positions[0]; //reset position of attacks
             }
         }     
     }
@@ -99,8 +109,13 @@ public class Cube : MonoBehaviour
             {
                 jumpDelay--;
             }
-            if (jumpDelay == 0)
+            if (jumpDelay <= 0)
             {
+                Rigidbody rb = GetComponent<Rigidbody>();
+                if (rb.velocity.y < 0)
+                {
+                    rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                }
                 gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
                 secondJump = false;
                 jumpDelay = 3;
@@ -113,6 +128,12 @@ public class Cube : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Ground"))
         {
+            if (collider.transform.position.y < transform.position.y - 3.5)
+            {
+                ParticleSystem landingInstance = Instantiate(landingEffectPrefab, collider.contacts[0].point, Quaternion.identity);
+                landingInstance.Play();
+                Destroy(landingInstance.gameObject, landingEffectPrefab.main.duration);
+            }
             grounded = true;
             secondJump = true;
             resetPosition = transform.position;
@@ -126,6 +147,30 @@ public class Cube : MonoBehaviour
         {
             return;
         }
+        if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y > 0.5f) //up
+        {
+            attackBox.transform.localPosition = positions[2];
+        }
+        else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.5f) //down
+        {
+            attackBox.transform.localPosition = positions[3];
+        }
+        else if (moveVector.x > 0.5f && moveVector.y > 0.5f) //top right
+        {
+            attackBox.transform.localPosition = positions[4];
+        }
+        else if (moveVector.x < -0.5f && moveVector.y > 0.5f) //top left
+        {
+            attackBox.transform.localPosition = positions[5];
+        }
+        else if (moveVector.x < -0.5f && moveVector.y < -0.5f) //bottom left
+        {
+            attackBox.transform.localPosition = positions[6];
+        }
+        else if (moveVector.x > 0.5f && moveVector.y < -0.5f) //bottom right
+        {
+            attackBox.transform.localPosition = positions[7];
+        }
         attackBox.SetActive(true);
         atkTimerActive = true;
     }
@@ -134,6 +179,10 @@ public class Cube : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("attack"))
         {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
             Vector3 scalar = Vector3.zero;
             if (collider.transform.position.x < transform.position.x)
             {
@@ -147,5 +196,10 @@ public class Cube : MonoBehaviour
             Debug.Log("Hit");
             gameObject.GetComponent<Rigidbody>().AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
+    }
+    public void OnMove(CallbackContext context)
+    {
+        Vector2 moveVector = context.ReadValue<Vector2>();
+        UpdateMoveVector(moveVector);
     }
 }
