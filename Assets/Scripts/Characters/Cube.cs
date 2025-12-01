@@ -57,21 +57,26 @@ public class Cube : MonoBehaviour
 
     void Update()
     {
-        
-
         if (transform.position.y < -15)
         {
             transform.position = resetPosition;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             damagePercent = 0f;
         }
-        if (moveVector.x > 0)
-            {
-            attackBox.transform.localPosition = positions[0];
-        }
-        else if (moveVector.x < 0)
+        if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
         {
-            attackBox.transform.localPosition = positions[1];
+            if (atkTimerActive == false)
+            {
+                attackBox.transform.localPosition = positions[0];
+            }
+            
+        }
+        else if (moveVector.x < -0.5f && Mathf.Abs(moveVector.y) < 0.5f)
+        {
+            if (atkTimerActive == false)
+            {
+                attackBox.transform.localPosition = positions[1];
+            }
         }
         xSpeed = moveVector.x * moveSpeed * Time.deltaTime;
         transform.Translate(xSpeed, ySpeed, 0, Space.World);
@@ -138,10 +143,33 @@ public class Cube : MonoBehaviour
 
     public void Attack()
     {
-        //to add: the rest of the directional inputs
         if (atkTimerActive)
         {
             return;
+        }
+        if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y > 0.5f) //up
+        {
+            attackBox.transform.localPosition = positions[2];
+        }
+        else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.5f) //down
+        {
+            attackBox.transform.localPosition = positions[3];
+        }
+        else if (moveVector.x > 0.5f && moveVector.y > 0.5f) //top right
+        {
+            attackBox.transform.localPosition = positions[4];
+        }
+        else if (moveVector.x < -0.5f && moveVector.y > 0.5f) //top left
+        {
+            attackBox.transform.localPosition = positions[5];
+        }
+        else if (moveVector.x < -0.5f && moveVector.y < -0.5f) //bottom left
+        {
+            attackBox.transform.localPosition = positions[6];
+        }
+        else if (moveVector.x > 0.5f && moveVector.y < -0.5f) //bottom right
+        {
+            attackBox.transform.localPosition = positions[7];
         }
         attackBox.SetActive(true);
         atkTimerActive = true;
@@ -168,5 +196,10 @@ public class Cube : MonoBehaviour
             Debug.Log("Hit");
             gameObject.GetComponent<Rigidbody>().AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
+    }
+    public void OnMove(CallbackContext context)
+    {
+        Vector2 moveVector = context.ReadValue<Vector2>();
+        UpdateMoveVector(moveVector);
     }
 }
