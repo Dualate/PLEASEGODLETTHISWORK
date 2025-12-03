@@ -411,6 +411,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: player_base_model_controller
       objectReference: {fileID: 0}
+    - target: {fileID: 7218944621088013938, guid: 6e84e37394a37624db7c353b01a88ec6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8026829943446611144, guid: 6e84e37394a37624db7c353b01a88ec6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.3562093
@@ -486,7 +490,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 45
-  platform: {fileID: 7456397002567830584, guid: 13e91e348f21b104ea517a443b2e5151, type: 3}
+  platform:
+  - {fileID: 554192916837868908, guid: c1bbb234101bfa545b80fd91258d30ac, type: 3}
+  - {fileID: 2022180637080873360, guid: 7f2743d74f074d748b35c6f792f3583f, type: 3}
 --- !u!4 &696309581
 Transform:
   m_ObjectHideFlags: 0
@@ -786,7 +792,7 @@ MonoBehaviour:
   - {fileID: 460454666}
   - {fileID: 1338311875}
   - {fileID: 1795309348}
-  playerPrefab: {fileID: 5329143789351019111, guid: d62e7a55f7c8d604ba97d42546c82484, type: 3}
+  playerPrefab: {fileID: 3997630692993648602, guid: 635d74da0054700468b2061855c3cc31, type: 3}
   camera: {fileID: 1861031886}
 --- !u!1 &1795309347
 GameObject:

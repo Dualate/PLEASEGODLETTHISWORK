@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     enum STATE { DORMANT, ACTIVE }
     STATE state = STATE.DORMANT;
     public float moveSpeed;
-    public GameObject platform;
+    public GameObject[] platform;
     int sent = 0;
     // Start is called before the first frame update
     private void Start()
@@ -19,8 +19,9 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void SpawnPlatform()
     {
+        int index = Random.Range(0, platform.Length);
         float xVariation = 3f * Random.Range(-3, 4);
-        Instantiate(platform, transform.position + new Vector3(xVariation, 0, 0), transform.rotation);
+        Instantiate(platform[index], transform.position + new Vector3(xVariation, 0, 0), platform[index].transform.rotation);
         sent++;
     }
 
