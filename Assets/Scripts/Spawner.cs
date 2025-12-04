@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour
     STATE state = STATE.DORMANT;
     public float moveSpeed;
     public GameObject[] platform;
+    public GameObject finishLine;
     int sent = 0;
     // Start is called before the first frame update
     private void Start()
@@ -23,6 +24,10 @@ public class Spawner : MonoBehaviour
         float xVariation = 3f * Random.Range(-3, 4);
         Instantiate(platform[index], transform.position + new Vector3(xVariation, 0, 0), platform[index].transform.rotation);
         sent++;
+        if (sent == 50)
+        {
+            Instantiate(finishLine, transform.position + new Vector3(0,7,0), Quaternion.identity);
+        }
     }
 
 
