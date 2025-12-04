@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FinishLine : MonoBehaviour
 {
+    public bool finishLineCrossed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,7 @@ public class FinishLine : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Player"))
         {
+            finishLineCrossed = true;
             Debug.Log("Finish");
         }
     }
