@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Select.unity
     guid: b4a4ceaf930b618499ad7ca211cbd224
   - enabled: 1
+    path: Assets/Scenes/StartScreen.unity
+    guid: 5189e05170c678c47b2ff1b3f51d9985
+  - enabled: 1
+    path: Assets/Scenes/PlayQuit.unity
+    guid: 4fc332efff785b4459070e79e7b26ea0
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
