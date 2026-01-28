@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
+    [SerializeField]
+    GameObject joinText;
     private List<PlayerConfiguration> playerConfigs;
 
     [SerializeField]
@@ -45,7 +47,8 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
-        Debug.Log("Player Joined " + pi.playerIndex);
+        if (joinText.activeSelf == true)
+            joinText.SetActive(false);
         
         if (!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
         {

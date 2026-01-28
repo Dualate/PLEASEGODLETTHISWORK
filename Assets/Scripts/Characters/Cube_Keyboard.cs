@@ -37,6 +37,7 @@ public class Cube_Keyboard : MonoBehaviour
       
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
+        GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
     }
 
     void Update()

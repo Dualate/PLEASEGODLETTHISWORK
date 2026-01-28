@@ -41,6 +41,11 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
+    public int GetIndex()
+    {
+        return playerConfig.PlayerIndex;
+    }
+
     public void OnMove(CallbackContext context)
     {
         Vector2 moveVector = context.ReadValue<Vector2>();

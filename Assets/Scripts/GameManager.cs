@@ -2,19 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    List<Material> colors;
+    GameObject winScreen;
     [SerializeField]
-    List<Transform> starters;
-    [SerializeField]
-    List<TextMeshProUGUI> texts;
-
-    List<Transform> players = new List<Transform>();
-
-    public bool running = false;
+    TextMeshProUGUI winnerText;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,25 +20,25 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (players.Count == 0)
-            return;
-        foreach (var player in players)
-        {
-            if (player.gameObject.GetComponent<Cube_Keyboard>().state == Cube_Keyboard.STATE.DORMANT)
-            {
-                return;
-            }
-        }
-        Transform[] transforms = new Transform[players.Count];
-        for (int i = 0; i < players.Count; i++)
-        {
-            transforms[i] = players[i].transform;
-        }
-        if (!running)
-        {
-            GameObject.Find("Main Camera").GetComponent<SelectCameraScript>().Setup(transforms);
-            running = true;
-        }
+        
+        
     }
 
+    public void EndGame(int index)
+    {
+
+        winScreen.SetActive(true);
+
+        winnerText.text = "Player " + index + " wins!";
+    }
+
+    public void PlayAgain()
+    {
+        Debug.Log("Feature not implemented");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
