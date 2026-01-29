@@ -18,7 +18,15 @@ public class Cube : MonoBehaviour
     float ySpeed;
     Vector2 moveVector;
 
-    
+    //jump variables
+    float initialJumpVelocity;
+    float doubleJumpVelocity;
+    float maxJumpHeight = 3.5f;
+    float maxJumpTime = 1.5f;
+    float jumpGravity;
+
+    //isGrounded variables
+    public float distToGround = .5f;
 
     private GameObject attackBox;
     private float atkTimer = 0f;
@@ -30,22 +38,32 @@ public class Cube : MonoBehaviour
     public Vector3[] positions;
     public Vector3 resetPosition;
     public bool secondJump = false;
-    int jumpDelay = 3;
+    public float maxJumpDelay = 1f;
+    float jumpDelay = 0;
 
     bool ready;
 
     public ParticleSystem landingEffectPrefab;
     public ParticleSystem hitEffectPrefab;
-
     void Start()
     {
         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
-
     }
 
+    void Awake()
+    {
+        setJumpVariables();
+    }
 
+    void setJumpVariables()
+    {
+        float timeToApex = maxJumpTime/2;
+        jumpGravity = (-2* maxJumpHeight)/Mathf.Pow(timeToApex, 2);
+        initialJumpVelocity = (2*maxJumpHeight)/timeToApex;
+        doubleJumpVelocity = initialJumpVelocity/2;
+    }
 
     public void UpdateMoveVector(Vector2 moveVector)
     {
@@ -57,6 +75,8 @@ public class Cube : MonoBehaviour
 
     void Update()
     {
+        GroundCheck();
+
         if (transform.position.y < -15)
         {
             transform.position = resetPosition;
@@ -92,35 +112,56 @@ public class Cube : MonoBehaviour
                 atkTimer = 0f;
                 attackBox.transform.localPosition = positions[0]; //reset position of attacks
             }
-        }     
+        }
+    }
+
+    void GroundCheck()
+    {
+        if(Physics.Raycast(transform.position, Vector3.down, distToGround + .1f))
+        {
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            grounded = true;
+            jumpDelay = 0;
+            secondJump = true;
+            resetPosition = transform.position;
+        }
+        else
+        {
+            grounded = false;
+            if (jumpDelay < maxJumpDelay && secondJump)
+            {
+                jumpDelay += Time.deltaTime;
+            }
+        }
     }
 
     public void Jump()
-    {
+    {   
         if (grounded)
         {
-            gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
-            grounded = false;
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            gameObject.GetComponent<Rigidbody>().AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
             return;
         }
         else if (secondJump && !grounded)
         {
-            if (jumpDelay > 0)
-            {
-                jumpDelay--;
-            }
-            if (jumpDelay <= 0)
+            // if (jumpDelay > 0)
+            // {
+            //     jumpDelay--;
+            // }
+            if (jumpDelay >= maxJumpDelay)
             {
                 Rigidbody rb = GetComponent<Rigidbody>();
                 if (rb.velocity.y < 0)
                 {
                     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 }
-                gameObject.GetComponent<Rigidbody>().AddForce(jumpForce * Vector3.up, ForceMode.Impulse);
+                gameObject.GetComponent<Rigidbody>().AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
                 secondJump = false;
-                jumpDelay = 3;
+                Debug.Log("double jump");
             }
-
         }
     }
 
@@ -134,9 +175,11 @@ public class Cube : MonoBehaviour
                 landingInstance.Play();
                 Destroy(landingInstance.gameObject, landingEffectPrefab.main.duration);
             }
-            grounded = true;
-            secondJump = true;
-            resetPosition = transform.position;
+            // Rigidbody rb = GetComponent<Rigidbody>();
+            // rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            // grounded = true;
+            // secondJump = true;
+            // resetPosition = transform.position;
         }   
     }
 
