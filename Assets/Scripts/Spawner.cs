@@ -10,6 +10,9 @@ public class Spawner : MonoBehaviour
     public GameObject[] platform;
     public GameObject finishLine;
     int sent = 0;
+    int chunk = 0;
+    int xScal = 1;
+    int yScal = 1;
     // Start is called before the first frame update
     private void Start()
     {

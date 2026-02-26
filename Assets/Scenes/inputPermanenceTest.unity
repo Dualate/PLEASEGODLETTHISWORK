@@ -765,6 +765,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 202175943428653811, guid: 436d5d0e187810144bbe2c659340966f, type: 3}
+      propertyPath: m_MaxPlayerCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 202175943428653811, guid: 436d5d0e187810144bbe2c659340966f, type: 3}
       propertyPath: m_NotificationBehavior
       value: 2
       objectReference: {fileID: 0}
