@@ -22,7 +22,7 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         SpawnChunk();
-        chunks = Random.Range(5, 10);
+        chunks = Random.Range(10, 15);
     }
 
     // Update is called once per frame
@@ -56,6 +56,7 @@ public class Spawner : MonoBehaviour
                 {
                     if (Random.Range(1, 4) == 2)
                     {
+                        // these lines spawn the fight pause arena
                         //GameObject temp = Instantiate(arena, transform.position + new Vector3(0, 7, 0), Quaternion.identity) as GameObject;
                         //spawning = false;
                         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().arenaLanded(temp.GetComponent<Transform>());
@@ -80,7 +81,7 @@ public class Spawner : MonoBehaviour
     {
         int[] chunk_x = { -2, 0, 2 };
         float repeatRate = 0;
-        chunk = Random.Range(1, 10);
+        chunk = Random.Range(1, 6);
         xScal = chunk_x[Random.Range(0, chunk_x.Length)];
         Debug.Log(xScal);
         if (xScal < 0)
