@@ -572,6 +572,7 @@ MonoBehaviour:
   platform:
   - {fileID: 554192916837868908, guid: c1bbb234101bfa545b80fd91258d30ac, type: 3}
   finishLine: {fileID: 5319693299969381292, guid: 382fe98301eae4049b32f7712d1d9a21, type: 3}
+  arena: {fileID: 3058798213534914161, guid: c6894ca0b40ddbf4a99422f6b03e040a, type: 3}
 --- !u!4 &696309581
 Transform:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
 
     public GameObject[] platform;
     public GameObject finishLine;
+    public GameObject arena;
     int sent = 0;
     int chunk = 0;
     float xScal = 1;
@@ -41,25 +42,38 @@ public class Spawner : MonoBehaviour
         {
             transform.Translate(new Vector3(0, 1, 0) * Time.deltaTime * moveSpeed);
             transform.Translate(new Vector3(xScal, 0, 0) * Time.deltaTime * xMoveSpeed);
+            
+            if (sent == chunk)
+            {
+                CancelInvoke("SpawnPlatform");
+                if (chunks == 0)
+                {
+                    spawning = false;
+                    Instantiate(finishLine, transform.position + new Vector3(0, 7, 0), Quaternion.identity);
+                    EndSpawn();
+                }
+                else
+                {
+                    if (Random.Range(1, 4) == 2)
+                    {
+                        GameObject temp = Instantiate(arena, transform.position + new Vector3(0, 7, 0), Quaternion.identity) as GameObject;
+                        spawning = false;
+                        GameObject.Find("Main Camera").GetComponent<CameraBehavior>().arenaLanded(temp.GetComponent<Transform>());
+                    }
+                    else
+                    {
+                        chunks -= 1;
+                        sent = 0;
+                        SpawnChunk();
+                    }
+
+                }
+
+            }
+
         }
 
-        if (sent == chunk)
-        {
-            CancelInvoke("SpawnPlatform");
-            if (chunks == 0)
-            {
-                spawning = false;
-                Instantiate(finishLine, transform.position + new Vector3(0, 7, 0), Quaternion.identity);
-                EndSpawn();
-            }
-            else
-            {
-                chunks -= 1;
-                sent = 0;
-                SpawnChunk();
-            }
-
-        }
+        
     }
 
     void SpawnChunk()

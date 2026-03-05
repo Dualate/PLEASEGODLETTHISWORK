@@ -766,7 +766,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 202175943428653811, guid: 436d5d0e187810144bbe2c659340966f, type: 3}
       propertyPath: m_MaxPlayerCount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 202175943428653811, guid: 436d5d0e187810144bbe2c659340966f, type: 3}
       propertyPath: m_NotificationBehavior
@@ -790,7 +790,7 @@ PrefabInstance:
       objectReference: {fileID: 612854353}
     - target: {fileID: 3950080873631329603, guid: 436d5d0e187810144bbe2c659340966f, type: 3}
       propertyPath: MaxPlayers
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5988536711312755682, guid: 436d5d0e187810144bbe2c659340966f, type: 3}
       propertyPath: m_Name
