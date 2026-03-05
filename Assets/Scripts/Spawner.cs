@@ -56,9 +56,9 @@ public class Spawner : MonoBehaviour
                 {
                     if (Random.Range(1, 4) == 2)
                     {
-                        GameObject temp = Instantiate(arena, transform.position + new Vector3(0, 7, 0), Quaternion.identity) as GameObject;
-                        spawning = false;
-                        GameObject.Find("Main Camera").GetComponent<CameraBehavior>().arenaLanded(temp.GetComponent<Transform>());
+                        //GameObject temp = Instantiate(arena, transform.position + new Vector3(0, 7, 0), Quaternion.identity) as GameObject;
+                        //spawning = false;
+                        //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().arenaLanded(temp.GetComponent<Transform>());
                     }
                     else
                     {
@@ -92,6 +92,7 @@ public class Spawner : MonoBehaviour
         {
             moveSpeed = 45;
             repeatRate = .1f;
+            
         }
         else if (xScal > 0)
         {
