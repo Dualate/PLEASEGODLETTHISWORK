@@ -117,9 +117,18 @@ public class HeavyMelee : MonoBehaviour
 
     void GroundCheck()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, distToGround + .1f))
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, distToGround + .1f))
         {
             Rigidbody rb = GetComponent<Rigidbody>();
+            if(hit.transform.CompareTag("Player"))
+            {
+                Debug.Log("Player hit");
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                gameObject.GetComponent<Rigidbody>().AddForce(initialJumpVelocity/4 * Vector3.up, ForceMode.VelocityChange);
+                return;
+            }
+            
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             grounded = true;
             jumpDelay = 0;
