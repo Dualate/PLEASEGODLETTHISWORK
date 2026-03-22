@@ -21,8 +21,8 @@ public class Cube : MonoBehaviour
     //jump variables
     float initialJumpVelocity;
     float doubleJumpVelocity;
-    float maxJumpHeight = 3.5f;
-    float maxJumpTime = 1.5f;
+    public float maxJumpHeight = 2f;
+    public float maxJumpTime = 1.5f;
     float jumpGravity;
 
     //isGrounded variables
@@ -45,19 +45,22 @@ public class Cube : MonoBehaviour
 
     public ParticleSystem landingEffectPrefab;
     public ParticleSystem hitEffectPrefab;
+
+    private Rigidbody rb;
     void Start()
     {
         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
+        rb = GetComponent<Rigidbody>();
     }
 
     void Awake()
     {
-        setJumpVariables();
+        SetJumpVariables();
     }
 
-    void setJumpVariables()
+    void SetJumpVariables()
     {
         float timeToApex = maxJumpTime/2;
         jumpGravity = (-2* maxJumpHeight)/Mathf.Pow(timeToApex, 2);
@@ -80,7 +83,7 @@ public class Cube : MonoBehaviour
         if (transform.position.y < -15)
         {
             transform.position = resetPosition;
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            rb.velocity = Vector3.zero;
             damagePercent = 0f;
         }
         if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
@@ -98,8 +101,9 @@ public class Cube : MonoBehaviour
                 attackBox.transform.localPosition = positions[1];
             }
         }
-        xSpeed = moveVector.x * moveSpeed * Time.deltaTime;
-        transform.Translate(xSpeed, ySpeed, 0, Space.World);
+        xSpeed = moveVector.x * moveSpeed;
+        //transform.Translate(xSpeed, ySpeed, 0, Space.World);
+        rb.velocity = new Vector3(xSpeed, rb.velocity.y, 0);
 
         if (atkTimerActive == true) //This section deactivates the attackbox after a timer
         {
@@ -117,14 +121,31 @@ public class Cube : MonoBehaviour
 
     void GroundCheck()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, distToGround + .1f))
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, distToGround + .1f))
         {
-            Rigidbody rb = GetComponent<Rigidbody>();
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            grounded = true;
-            jumpDelay = 0;
-            secondJump = true;
-            resetPosition = transform.position;
+            if(hit.collider.CompareTag("Ground"))
+            {
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                grounded = true;
+                jumpDelay = 0;
+                secondJump = true;
+                resetPosition = transform.position;
+            }
+            else if(hit.collider.CompareTag("Player"))
+            {
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.VelocityChange);
+            }
+            if(hit.collider.CompareTag("BouncePlatform"))
+            {
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                grounded = true;
+                jumpDelay = 0;
+                secondJump = true;
+                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.VelocityChange);
+            }
+            
         }
         else
         {
@@ -140,27 +161,20 @@ public class Cube : MonoBehaviour
     {   
         if (grounded)
         {
-            Rigidbody rb = GetComponent<Rigidbody>();
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            gameObject.GetComponent<Rigidbody>().AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
+            rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
             return;
         }
         else if (secondJump && !grounded)
         {
-            // if (jumpDelay > 0)
-            // {
-            //     jumpDelay--;
-            // }
             if (jumpDelay >= maxJumpDelay)
             {
-                Rigidbody rb = GetComponent<Rigidbody>();
                 if (rb.velocity.y < 0)
                 {
                     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 }
-                gameObject.GetComponent<Rigidbody>().AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
+                rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
                 secondJump = false;
-                Debug.Log("double jump");
             }
         }
     }
@@ -175,11 +189,6 @@ public class Cube : MonoBehaviour
                 landingInstance.Play();
                 Destroy(landingInstance.gameObject, landingEffectPrefab.main.duration);
             }
-            // Rigidbody rb = GetComponent<Rigidbody>();
-            // rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            // grounded = true;
-            // secondJump = true;
-            // resetPosition = transform.position;
         }   
     }
 
@@ -237,7 +246,7 @@ public class Cube : MonoBehaviour
             }
             damagePercent += .1f;
             Debug.Log("Hit");
-            gameObject.GetComponent<Rigidbody>().AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
     }
     public void OnMove(CallbackContext context)

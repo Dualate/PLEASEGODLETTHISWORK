@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - attack
+  - BouncePlatform
   layers:
   - Default
   - TransparentFX
