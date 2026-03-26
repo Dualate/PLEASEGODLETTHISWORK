@@ -7,6 +7,10 @@ TagManager:
   - Ground
   - attack
   - BouncePlatform
+  - HMelee
+  - HRanged
+  - LMelee
+  - LRanged
   layers:
   - Default
   - TransparentFX

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 using TMPro;
-public class Cube : MonoBehaviour
+public class HeavyMelee : MonoBehaviour
 {
 
 
@@ -79,7 +79,6 @@ public class Cube : MonoBehaviour
     void Update()
     {
         GroundCheck();
-        FootstoolCheck();
 
         if (transform.position.y < -15)
         {
@@ -133,13 +132,18 @@ public class Cube : MonoBehaviour
                 secondJump = true;
                 resetPosition = transform.position;
             }
+            else if(hit.collider.CompareTag("Player"))
+            {
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.VelocityChange);
+            }
             if(hit.collider.CompareTag("BouncePlatform"))
             {
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 grounded = true;
                 jumpDelay = 0;
                 secondJump = true;
-                rb.AddForce(initialJumpVelocity/2 * Vector3.up, ForceMode.VelocityChange);
+                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.VelocityChange);
             }
             
         }
@@ -150,29 +154,6 @@ public class Cube : MonoBehaviour
             {
                 jumpDelay += Time.deltaTime;
             }
-        }
-    }
-
-    public void FootstoolCheck()
-    {
-        RaycastHit hit;
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, distToGround + .1f))
-        {
-            if(hit.collider.CompareTag("Player"))
-            {
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity/3 * Vector3.up, ForceMode.VelocityChange);
-            }
-
-        }
-        if(Physics.Raycast(transform.position, Vector3.up, out hit, distToGround + .1f))
-        {
-            if(hit.collider.CompareTag("Player"))
-            {
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity/6 * Vector3.down, ForceMode.VelocityChange);
-            }
-            
         }
     }
 
