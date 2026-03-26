@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/inputPermanenceTest.unity
     guid: a0afbb8e7c8f82648ae5d1723e2b5d3d
+  - enabled: 1
+    path: Assets/Scenes/ModeSelector.unity
+    guid: ed58823b93c2ad0479592323a6f83998
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: cf2cdf06ce3fb45c192ef6a7bc0a955d, type: 2}

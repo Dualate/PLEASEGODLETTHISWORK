@@ -11,6 +11,7 @@ public class CameraBehavior : MonoBehaviour
     public Transform highest;
     public float smoothing;
     Transform arena;
+    Vector3 midpoint;
     void Start()
     { 
         
@@ -37,13 +38,31 @@ public class CameraBehavior : MonoBehaviour
                         highest = t;
                     }
                 }
-                transform.position = Vector3.Lerp(transform.position, highest.position + offset, smoothing * Time.deltaTime);
+                if (players.Count == 2)
+                {
+                    transform.position = Vector3.Lerp(transform.position, midpoint + offset, smoothing * Time.deltaTime);
+                }
+                else
+                    transform.position = Vector3.Lerp(transform.position, highest.position + offset, smoothing * Time.deltaTime);
             }
         }
         if (state == STATE.fight)
         {
             transform.position = arena.position + offset;
         }
+    }
+
+
+    void Update()
+    {
+        float midx = 0;
+        float midy = 0;
+        if (players.Count == 2)
+        {
+            midx = (players[0].transform.position.x + players[1].transform.position.x) / 2;
+            midy = (players[0].transform.position.y + players[1].transform.position.y) / 2;
+        }
+        midpoint = new Vector3(midx, midy, 0);
     }
 
     public void fight()
