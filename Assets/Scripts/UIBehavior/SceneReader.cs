@@ -17,7 +17,7 @@ public class SceneReader : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "inputPermanenceTest")
         {
-            Debug.Log(players);
+            Debug.Log(sceneIndex);
         }
     }
 
@@ -25,6 +25,16 @@ public class SceneReader : MonoBehaviour
     {
         sceneIndex = index;
         this.players = players;
+    }
+
+    public int GetMaxPlayers()
+    {
+        return players;
+    }
+
+    public int GetSceneIndex()
+    {
+        return sceneIndex;
     }
 
 }

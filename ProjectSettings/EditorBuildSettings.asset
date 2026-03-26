@@ -23,5 +23,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ModeSelector.unity
     guid: ed58823b93c2ad0479592323a6f83998
+  - enabled: 1
+    path: Assets/Scenes/combat practice.unity
+    guid: c6ce6b08d9d284d4bbcd535963b58667
+  - enabled: 1
+    path: Assets/Scenes/platform practic.unity
+    guid: a4154f1bb1e3cb14597eb891e730e4e3
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: cf2cdf06ce3fb45c192ef6a7bc0a955d, type: 2}

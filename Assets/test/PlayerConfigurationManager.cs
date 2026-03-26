@@ -14,6 +14,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     [SerializeField]
     private int MaxPlayers = 1;
 
+    int sceneIndex;
     public static PlayerConfigurationManager Instance { get; private set; }
 
     private void Awake()
@@ -28,6 +29,9 @@ public class PlayerConfigurationManager : MonoBehaviour
             DontDestroyOnLoad(Instance);
             this.playerConfigs = new List<PlayerConfiguration>();
         }
+        MaxPlayers = GameObject.Find("SceneReader").GetComponent<SceneReader>().GetMaxPlayers();
+        sceneIndex = GameObject.Find("SceneReader").GetComponent<SceneReader>().GetSceneIndex();
+        //GetComponent<PlayerInputManager>().maxPlayerCount = MaxPlayers;
     }
 
     public void SetPlayerColor(int index, Material color)
@@ -39,9 +43,9 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void ReadyPlayer(int index)
     {
         playerConfigs[index].IsReady = true;
-        if (playerConfigs.Count == MaxPlayers && playerConfigs.All(p => p.IsReady == true))
+        if (/*playerConfigs.Count == MaxPlayers &&*/playerConfigs.Count != 0 && playerConfigs.All(p => p.IsReady == true))
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene(sceneIndex);
         }
     }
 
