@@ -6,11 +6,9 @@ TagManager:
   tags:
   - Ground
   - attack
+  - LightProjectile
+  - HeavyProjectile
   - BouncePlatform
-  - HMelee
-  - HRanged
-  - LMelee
-  - LRanged
   layers:
   - Default
   - TransparentFX
