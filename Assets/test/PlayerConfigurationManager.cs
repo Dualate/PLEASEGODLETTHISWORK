@@ -31,7 +31,6 @@ public class PlayerConfigurationManager : MonoBehaviour
         }
         MaxPlayers = GameObject.Find("SceneReader").GetComponent<SceneReader>().GetMaxPlayers();
         sceneIndex = GameObject.Find("SceneReader").GetComponent<SceneReader>().GetSceneIndex();
-        //GetComponent<PlayerInputManager>().maxPlayerCount = MaxPlayers;
     }
 
     public void SetPlayerColor(int index, Material color)
@@ -51,6 +50,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
+        
         if (joinText.activeSelf == true)
             joinText.SetActive(false);
         
@@ -58,6 +58,10 @@ public class PlayerConfigurationManager : MonoBehaviour
         {
             playerConfigs.Add(new PlayerConfiguration(pi));
             pi.transform.SetParent(transform);
+            if (playerConfigs.Count == MaxPlayers)
+            {
+                GetComponent<PlayerInputManager>().DisableJoining();
+            }
         }
     }
 
