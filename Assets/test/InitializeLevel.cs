@@ -16,7 +16,8 @@ public class InitializeLevel : MonoBehaviour
         for (int i = 0; i < playerConfigs.Length; i++)
         {
             var player = Instantiate(playerPrefab, playerSpawns[i].position, playerSpawns[i].rotation);
-            
+            var animator = Instantiate(playerConfigs[i].animator, player.GetComponent<Transform>());    
+           
             player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
             camera.Add(player.transform);
         }

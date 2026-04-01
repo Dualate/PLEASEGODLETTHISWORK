@@ -33,9 +33,9 @@ public class PlayerConfigurationManager : MonoBehaviour
         sceneIndex = GameObject.Find("SceneReader").GetComponent<SceneReader>().GetSceneIndex();
     }
 
-    public void SetPlayerColor(int index, Material color)
+    public void SetPlayerColor(int index, GameObject animator)
     {
-        playerConfigs[index].PlayerMaterial = color;
+        playerConfigs[index].animator = animator;
     }
 
 
@@ -83,5 +83,7 @@ public class PlayerConfiguration
     public int PlayerIndex { get; set; }
     public bool IsReady { get; set; }
     public Material PlayerMaterial { get; set; }
+
+    public GameObject animator;
 
 }
