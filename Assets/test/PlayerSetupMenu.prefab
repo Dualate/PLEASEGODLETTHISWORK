@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 7184743152020454260}
   - component: {fileID: 2307547357518427976}
   m_Layer: 5
-  m_Name: Red
+  m_Name: Jimena
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -416,7 +416,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Blue
+  m_text: 'Nori
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -498,7 +500,7 @@ GameObject:
   - component: {fileID: 2422772663949421659}
   - component: {fileID: 6714599923246863615}
   m_Layer: 5
-  m_Name: Yellow
+  m_Name: Alicia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -683,7 +685,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Green
+  m_text: 'Annabeth
 
 '
   m_isRightToLeft: 0
@@ -819,7 +821,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Red
+  m_text: 'Jimena
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1037,7 +1041,7 @@ GameObject:
   - component: {fileID: 2390856798133045062}
   - component: {fileID: 4875709992830623330}
   m_Layer: 5
-  m_Name: Blue
+  m_Name: Nori
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1222,7 +1226,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Yellow
+  m_text: 'Alicia
 
 '
   m_isRightToLeft: 0
@@ -1843,7 +1847,7 @@ GameObject:
   - component: {fileID: 5655937089148720778}
   - component: {fileID: 1056332212345042936}
   m_Layer: 5
-  m_Name: Green
+  m_Name: Annabeth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
