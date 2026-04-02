@@ -21,7 +21,7 @@ public class CameraBehavior : MonoBehaviour
     }
     public void Add(Transform player)
     {
-        players.Add(player);
+        players.Add(player.GetChild(0).GetComponent<Transform>());
     }
     // Update is called once per frame
     void LateUpdate()

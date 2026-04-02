@@ -613,8 +613,8 @@ MonoBehaviour:
         m_MethodName: SetColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: f358d54885b298f40b0aad2d331169bb, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_ObjectArgument: {fileID: 8418788533303399972, guid: 03aca87e1030e38419a3f47d58f4ff84, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1960,7 +1960,7 @@ MonoBehaviour:
         m_MethodName: SetColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 6934895723980398555, guid: 6d5c9028b52747248a7f98ffd695f3c6, type: 3}
+          m_ObjectArgument: {fileID: 6563839678686156797, guid: 951501e91ff290b4ab7d6c1f61e7ab86, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0

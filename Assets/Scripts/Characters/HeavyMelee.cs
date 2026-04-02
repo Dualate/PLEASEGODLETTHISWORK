@@ -6,14 +6,35 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 using TMPro;
-public class HeavyMelee : MonoBehaviour
+public class HeavyMelee : Player
 {
 
+    public HeavyMelee(float movespeed,
+        float jumpForce,
+        float maxJumpHeight,
+        float maxJumpTime,
+        float specialGaugeDelay,
+        float specialAttackActiveTime,
+        float knockback, float atkKnockback,
+        float specialKnockback) : base(movespeed,
+            jumpForce, maxJumpHeight, maxJumpTime,
+            specialGaugeDelay, specialAttackActiveTime,
+            knockback, atkKnockback,
+            specialKnockback)
+    {
+        this.moveSpeed = movespeed;
+        this.jumpForce = jumpForce;
+        this.maxJumpHeight = maxJumpHeight;
+        this.maxJumpTime = maxJumpTime;
+        this.specialGaugeDelay = specialGaugeDelay;
+        this.specialAttackActiveTime = specialAttackActiveTime;
+        this.knockback = knockback;
+        this.atkKnockback = atkKnockback;
+        this.specialKnockback = specialKnockback;
+        this.specialGaugeDelay = 30f;
+        this.specialAttackActiveTime = .5f;
+    }
 
-
-    public float moveSpeed;
-    public float jumpForce;
-    public bool grounded;
     float xSpeed;
     float ySpeed;
     Vector2 moveVector;
@@ -21,12 +42,10 @@ public class HeavyMelee : MonoBehaviour
     //jump variables
     float initialJumpVelocity;
     float doubleJumpVelocity;
-    public float maxJumpHeight = 2f;
-    public float maxJumpTime = 1.5f;
+
     float jumpGravity;
 
     //isGrounded variables
-    public float distToGround = .5f;
 
     private GameObject attackBox;
     private GameObject specialAtkBox;
@@ -34,25 +53,16 @@ public class HeavyMelee : MonoBehaviour
     private bool atkTimerActive = false;
     private float specialGaugeTimer = 0f;
     private bool specialGaugeTimerActive = true;
-    public float specialGaugeDelay = 30f;
     private float specialAttackActiveTimer = 0f;
-    public float specialAttackActiveTime = .5f;
     private bool activateSpecial = false;
-    public float knockback; //base knockback taken by character
-    public float atkKnockback; //base knockback dealt by attacks
-    public float specialKnockback;
-    public float damagePercent;
+
     private float atkDelayTime = .5f;
-    public Vector3[] positions;
-    public Vector3 resetPosition;
-    public bool secondJump = false;
-    public float maxJumpDelay = 1f;
+
     float jumpDelay = 0;
 
     bool ready;
 
-    public ParticleSystem landingEffectPrefab;
-    public ParticleSystem hitEffectPrefab;
+
 
     private Rigidbody rb;
     void Start()
@@ -86,7 +96,7 @@ public class HeavyMelee : MonoBehaviour
     }
 
 
-    void Update()
+    void LateUpdate()
     {
         GroundCheck();
 
