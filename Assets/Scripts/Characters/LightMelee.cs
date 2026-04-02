@@ -33,7 +33,7 @@ public class LightMelee : MonoBehaviour
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
     private float specialGaugeTimer = 0f;
-    private bool specialGaugeTimerActive = true;
+    private bool specialGaugeTimerActive = false;
     public float specialGaugeDelay = 15f;
     private float specialAttackActiveTimer = 0f;
     public float specialAttackActiveTime = .5f;
@@ -141,7 +141,7 @@ public class LightMelee : MonoBehaviour
         }
         if(activateSpecial)
         {
-            specialAttackActiveTimer += specialAttackActiveTime;
+            specialAttackActiveTimer += Time.deltaTime;
             if(specialAttackActiveTimer >= specialAttackActiveTime)
             {
                 specialAtkBox.SetActive(false);

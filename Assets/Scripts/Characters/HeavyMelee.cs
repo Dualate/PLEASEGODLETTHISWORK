@@ -142,12 +142,12 @@ public class HeavyMelee : MonoBehaviour
 
         if(activateSpecial)
         {
-            specialAttackActiveTimer += specialAttackActiveTime;
+            specialAttackActiveTimer += Time.deltaTime;
             if(specialAttackActiveTimer >= specialAttackActiveTime)
             {
                 specialAtkBox.SetActive(false);
-                activateSpecial = false;
                 specialAttackActiveTimer = 0f;
+                activateSpecial = false;
             }
         }
 
@@ -263,7 +263,7 @@ public class HeavyMelee : MonoBehaviour
 
     public void SpecialAttack()
     {
-        Debug.Log("Special");
+        
         if (specialGaugeTimerActive)
         {
             return;
