@@ -29,10 +29,21 @@ public class LightMelee : MonoBehaviour
     public float distToGround = .5f;
 
     private GameObject attackBox;
+    private GameObject specialAtkBox;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
+    private float specialGaugeTimer = 0f;
+    private bool specialGaugeTimerActive = true;
+    public float specialGaugeDelay = 15f;
+    private float specialAttackActiveTimer = 0f;
+    public float specialAttackActiveTime = .5f;
+    private bool activateSpecial = false;
+    private float counterTimer = 0f;
+    public float counterTimerTotal = 3f;
+    private bool counterActive = false;
     public float knockback; //base knockback taken by character
     public float atkKnockback; //base knockback dealt by attacks
+    public float specialKnockback;
     public float damagePercent;
     private float atkDelayTime = .5f;
     public Vector3[] positions;
@@ -52,6 +63,8 @@ public class LightMelee : MonoBehaviour
         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
+        specialAtkBox = GameObject.Find("specialAtkBox");
+        specialAtkBox.SetActive(false);
         rb = GetComponent<Rigidbody>();
     }
 
@@ -115,6 +128,25 @@ public class LightMelee : MonoBehaviour
                 atkTimerActive = false;
                 atkTimer = 0f;
                 attackBox.transform.localPosition = positions[0]; //reset position of attacks
+            }
+        }
+        if(specialGaugeTimerActive == true)
+        {
+            specialGaugeTimer +=  Time.deltaTime;
+            if (specialGaugeTimer >= specialGaugeDelay)
+            {
+                specialGaugeTimerActive = false;
+                specialGaugeTimer = 0f;
+            }
+        }
+        if(activateSpecial)
+        {
+            specialAttackActiveTimer += specialAttackActiveTime;
+            if(specialAttackActiveTimer >= specialAttackActiveTime)
+            {
+                specialAtkBox.SetActive(false);
+                activateSpecial = false;
+                specialAttackActiveTimer = 0f;
             }
         }
     }
@@ -226,10 +258,19 @@ public class LightMelee : MonoBehaviour
         attackBox.SetActive(true);
         atkTimerActive = true;
     }
+    public void SpecialAttack()
+    {
+        if (specialGaugeTimerActive || counterActive)
+        {
+            return;
+        }
+        counterActive = true;
+        specialGaugeTimerActive = true;
+    }
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("attack"))
+        if (collider.gameObject.CompareTag("attack") && !counterActive)
         {
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
@@ -247,6 +288,293 @@ public class LightMelee : MonoBehaviour
             damagePercent += .1f;
             Debug.Log("Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("LightProjectile") && !counterActive)
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("HeavyProjectile") && !counterActive)
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("HRanged") && !counterActive)
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("HMelee") && !counterActive)
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("HMSpecial") && !counterActive)
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("LMSpecial") && !counterActive)
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("HRSpecial") && !counterActive)
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("LRSpecial") && !counterActive)
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if(collider.gameObject.CompareTag("attack") && counterActive)
+        {
+            if(collider.transform.position.x < transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[1];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+            if(collider.transform.position.x > transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[0];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+        }
+        else if(collider.gameObject.CompareTag("LightProjectile") && counterActive)
+        {
+            if(collider.transform.position.x < transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[1];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+            if(collider.transform.position.x > transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[0];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+        }
+        else if(collider.gameObject.CompareTag("HeavyProjectile") && counterActive)
+        {
+            if(collider.transform.position.x < transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[1];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+            if(collider.transform.position.x > transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[0];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+        }
+        else if(collider.gameObject.CompareTag("HRanged") && counterActive)
+        {
+            if(collider.transform.position.x < transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[1];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+            if(collider.transform.position.x > transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[0];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+        }
+        else if(collider.gameObject.CompareTag("HMelee") && counterActive)
+        {
+            if(collider.transform.position.x < transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[1];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+            if(collider.transform.position.x > transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[0];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+        }
+        else if(collider.gameObject.CompareTag("HMSpecial") && counterActive)
+        {
+            if(collider.transform.position.x < transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[1];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+            if(collider.transform.position.x > transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[0];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+        }
+        else if(collider.gameObject.CompareTag("HRSpecial") && counterActive)
+        {
+            if(collider.transform.position.x < transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[1];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+            if(collider.transform.position.x > transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[0];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+        }
+        else if(collider.gameObject.CompareTag("LMSpecial") && counterActive)
+        {
+            if(collider.transform.position.x < transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[1];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+            if(collider.transform.position.x > transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[0];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+        }
+        else if(collider.gameObject.CompareTag("LRSpecial") && counterActive)
+        {
+            if(collider.transform.position.x < transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[1];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
+            if(collider.transform.position.x > transform.position.x)
+            {
+                specialAtkBox.transform.localPosition = positions[0];
+                specialAtkBox.SetActive(true);
+                activateSpecial = true;
+            }
         }
     }
     public void OnMove(CallbackContext context)
