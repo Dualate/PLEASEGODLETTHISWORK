@@ -6,10 +6,13 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 using TMPro;
-public class Cube : MonoBehaviour
+public class Player : MonoBehaviour
 {
 
-
+    public Player()
+    {
+        
+    }
 
     public float moveSpeed;
     public float jumpForce;

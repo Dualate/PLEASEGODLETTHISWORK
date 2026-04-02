@@ -10,7 +10,6 @@ public class LightMelee : MonoBehaviour
 {
 
 
-
     public float moveSpeed;
     public float jumpForce;
     public bool grounded;

@@ -6,12 +6,11 @@ using static UnityEngine.InputSystem.InputAction;
 public class PlayerInputHandler : MonoBehaviour
 {
     [SerializeField]
-    private Cube cube;
+    private LightMelee cube;
 
     private PlayerConfiguration playerConfig;
 
     [SerializeField]
-    private MeshRenderer playerMesh;
     private PlayerControls controls;
     private void Awake()
     {
@@ -21,7 +20,6 @@ public class PlayerInputHandler : MonoBehaviour
     public void InitializePlayer(PlayerConfiguration pc)
     {
         playerConfig = pc;
-        playerMesh.material = pc.PlayerMaterial;
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
     }
 
