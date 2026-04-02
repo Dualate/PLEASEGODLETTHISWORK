@@ -33,7 +33,7 @@ public class HeavyMelee : MonoBehaviour
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
     private float specialGaugeTimer = 0f;
-    private bool specialGaugeTimerActive = true;
+    private bool specialGaugeTimerActive = false;
     public float specialGaugeDelay = 30f;
     private float specialAttackActiveTimer = 0f;
     public float specialAttackActiveTime = .5f;
@@ -263,6 +263,7 @@ public class HeavyMelee : MonoBehaviour
 
     public void SpecialAttack()
     {
+        Debug.Log("Special");
         if (specialGaugeTimerActive)
         {
             return;

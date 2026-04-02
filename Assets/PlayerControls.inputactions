@@ -41,6 +41,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Special",
+                    "type": "Button",
+                    "id": "baab5bbd-5f62-42a2-892a-d9edf932a1a0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -85,6 +94,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Ready",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9b3f7b3a-1a41-410d-a8db-befcaf90811d",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Special",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
