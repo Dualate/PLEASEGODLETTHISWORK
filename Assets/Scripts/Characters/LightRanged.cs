@@ -29,10 +29,18 @@ public class LightRanged : MonoBehaviour
     public float distToGround = .5f;
 
     private GameObject attackBox;
+    private GameObject specialAtkBox;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
+    private float specialGaugeTimer = 0f;
+    private bool specialGaugeTimerActive = true;
+    public float specialGaugeDelay = 30f;
+    private float specialAttackActiveTimer = 0f;
+    public float specialAttackActiveTime = .5f;
+    private bool activateSpecial = false;
     public float knockback; //base knockback taken by character
     public float atkKnockback; //base knockback dealt by attacks
+    public float specialKnockback;
     public float damagePercent;
     private float atkDelayTime = .5f;
     public Vector3[] positions;
@@ -52,6 +60,8 @@ public class LightRanged : MonoBehaviour
         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
+        specialAtkBox = GameObject.Find("specialAtkBox");
+        specialAtkBox.SetActive(false);
         rb = GetComponent<Rigidbody>();
     }
 
@@ -91,6 +101,7 @@ public class LightRanged : MonoBehaviour
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[0];
+                specialAtkBox.transform.localPosition = positions[0];
             }
             
         }
@@ -99,6 +110,7 @@ public class LightRanged : MonoBehaviour
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[1];
+                specialAtkBox.transform.localPosition = positions[1];
             }
         }
         xSpeed = moveVector.x * moveSpeed;
@@ -115,6 +127,25 @@ public class LightRanged : MonoBehaviour
                 atkTimerActive = false;
                 atkTimer = 0f;
                 attackBox.transform.localPosition = positions[0]; //reset position of attacks
+            }
+        }
+        if(specialGaugeTimerActive == true)
+        {
+            specialGaugeTimer +=  Time.deltaTime;
+            if (specialGaugeTimer >= specialGaugeDelay)
+            {
+                specialGaugeTimerActive = false;
+                specialGaugeTimer = 0f;
+            }
+        }
+        if(activateSpecial)
+        {
+            specialAttackActiveTimer += specialAttackActiveTime;
+            if(specialAttackActiveTimer >= specialAttackActiveTime)
+            {
+                specialAtkBox.SetActive(false);
+                activateSpecial = false;
+                specialAttackActiveTimer = 0f;
             }
         }
     }
@@ -226,10 +257,172 @@ public class LightRanged : MonoBehaviour
         attackBox.SetActive(true);
         atkTimerActive = true;
     }
+    public void SpecialAttack()
+    {
+        if (specialGaugeTimerActive)
+        {
+            return;
+        }
+        specialAtkBox.SetActive(true);
+        activateSpecial = true;
+        specialGaugeTimerActive = true;
+    }
 
     void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("attack"))
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("LightProjectile"))
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("HeavyProjectile"))
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("HRanged"))
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("HMelee"))
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("HMSpecial"))
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("LMSpecial"))
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("HRSpecial"))
+        {
+            ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
+            hitInstance.Play();
+            Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
+
+            Vector3 scalar = Vector3.zero;
+            if (collider.transform.position.x < transform.position.x)
+            {
+                scalar = Vector3.right;
+            }
+            else if (collider.transform.position.x > transform.position.x)
+            {
+                scalar = Vector3.left;
+            }
+            damagePercent += .1f;
+            Debug.Log("Hit");
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+        }
+        else if (collider.gameObject.CompareTag("LRSpecial"))
         {
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
