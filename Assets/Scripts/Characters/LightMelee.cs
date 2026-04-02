@@ -6,13 +6,34 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 using TMPro;
-public class LightMelee : MonoBehaviour
+public class LightMelee : Player
 {
 
+    public LightMelee(float movespeed, 
+        float jumpForce, 
+        float maxJumpHeight, 
+        float maxJumpTime, 
+        float specialGaugeDelay, 
+        float specialAttackActiveTime, 
+        float knockback, float atkKnockback, 
+        float specialKnockback) : base(movespeed, 
+            jumpForce, maxJumpHeight, maxJumpTime, 
+            specialGaugeDelay, specialAttackActiveTime, 
+            knockback, atkKnockback, 
+            specialKnockback)
+    {
+        this.moveSpeed = movespeed;
+        this.jumpForce = jumpForce;
+        this.maxJumpHeight = maxJumpHeight;
+        this.maxJumpTime = maxJumpTime;
+        this.specialGaugeDelay = specialGaugeDelay;
+        this.specialAttackActiveTime = specialAttackActiveTime;
+        this.knockback = knockback;
+        this.atkKnockback = atkKnockback;
+        this.specialKnockback = specialKnockback;
 
-    public float moveSpeed;
-    public float jumpForce;
-    public bool grounded;
+    }
+
     float xSpeed;
     float ySpeed;
     Vector2 moveVector;
@@ -20,41 +41,29 @@ public class LightMelee : MonoBehaviour
     //jump variables
     float initialJumpVelocity;
     float doubleJumpVelocity;
-    public float maxJumpHeight = 2f;
-    public float maxJumpTime = 1.5f;
     float jumpGravity;
 
     //isGrounded variables
-    public float distToGround = .5f;
 
-    private GameObject attackBox;
+    public GameObject attackBox;
     private GameObject specialAtkBox;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
     private float specialGaugeTimer = 0f;
     private bool specialGaugeTimerActive = true;
-    public float specialGaugeDelay = 15f;
+
     private float specialAttackActiveTimer = 0f;
-    public float specialAttackActiveTime = .5f;
     private bool activateSpecial = false;
     private float counterTimer = 0f;
     public float counterTimerTotal = 3f;
     private bool counterActive = false;
-    public float knockback; //base knockback taken by character
-    public float atkKnockback; //base knockback dealt by attacks
-    public float specialKnockback;
-    public float damagePercent;
+
     private float atkDelayTime = .5f;
-    public Vector3[] positions;
-    public Vector3 resetPosition;
-    public bool secondJump = false;
-    public float maxJumpDelay = 1f;
+
     float jumpDelay = 0;
 
     bool ready;
 
-    public ParticleSystem landingEffectPrefab;
-    public ParticleSystem hitEffectPrefab;
 
     private Rigidbody rb;
     void Start()
@@ -226,32 +235,43 @@ public class LightMelee : MonoBehaviour
 
     public void Attack()
     {
+        
         if (atkTimerActive)
         {
             return;
         }
         if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y > 0.5f) //up
         {
+            Debug.Log("Up");
             attackBox.transform.localPosition = positions[2];
         }
         else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.5f) //down
         {
+            Debug.Log("Down");
+
             attackBox.transform.localPosition = positions[3];
         }
         else if (moveVector.x > 0.5f && moveVector.y > 0.5f) //top right
         {
+            Debug.Log("Top Right");
+
             attackBox.transform.localPosition = positions[4];
         }
+
         else if (moveVector.x < -0.5f && moveVector.y > 0.5f) //top left
         {
+            Debug.Log("Top left");
             attackBox.transform.localPosition = positions[5];
         }
         else if (moveVector.x < -0.5f && moveVector.y < -0.5f) //bottom left
         {
+            Debug.Log("Bottom left");
             attackBox.transform.localPosition = positions[6];
         }
         else if (moveVector.x > 0.5f && moveVector.y < -0.5f) //bottom right
         {
+            Debug.Log("Bottom right");
+
             attackBox.transform.localPosition = positions[7];
         }
         attackBox.SetActive(true);

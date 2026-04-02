@@ -11,7 +11,7 @@ public class CameraBehavior : MonoBehaviour
     public Transform highest;
     public float smoothing;
     Transform arena;
-    Vector3 midpoint;
+    public Vector3 midpoint;
     void Start()
     { 
         

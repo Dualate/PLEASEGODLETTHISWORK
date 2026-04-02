@@ -6,7 +6,7 @@ using static UnityEngine.InputSystem.InputAction;
 public class PlayerInputHandler : MonoBehaviour
 {
     [SerializeField]
-    private LightMelee cube;
+    private Player cube;
 
     private PlayerConfiguration playerConfig;
 

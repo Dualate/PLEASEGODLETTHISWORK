@@ -9,9 +9,18 @@ using TMPro;
 public class Player : MonoBehaviour
 {
 
-    public Player()
+    public Player(float movespeed, float jumpForce, float maxJumpHeight, 
+        float maxJumpTime, float specialGaugeDelay, float specialAttackActiveTime, float knockback, float atkKnockback, float specialKnockback)
     {
-        
+        this.moveSpeed = movespeed;
+        this.jumpForce = jumpForce;
+        this.maxJumpHeight = maxJumpHeight;
+        this.maxJumpTime = maxJumpTime;
+        this.specialGaugeDelay = specialGaugeDelay;
+        this.specialAttackActiveTime = specialAttackActiveTime;
+        this.knockback = knockback;
+        this.atkKnockback = atkKnockback;
+        this.specialKnockback = specialKnockback;
     }
 
     public float moveSpeed;
@@ -32,10 +41,19 @@ public class Player : MonoBehaviour
     public float distToGround = .5f;
 
     private GameObject attackBox;
+    private GameObject specialAtkBox;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
+    private float specialGaugeTimer = 0f;
+    private bool specialGaugeTimerActive = true;
+    public float specialGaugeDelay = 15f;
+    private float specialAttackActiveTimer = 0f;
+    public float specialAttackActiveTime = .5f;
+    private bool activateSpecial = false;
+
     public float knockback; //base knockback taken by character
     public float atkKnockback; //base knockback dealt by attacks
+    public float specialKnockback;
     public float damagePercent;
     private float atkDelayTime = .5f;
     public Vector3[] positions;
@@ -178,9 +196,10 @@ public class Player : MonoBehaviour
             
         }
     }
-
+    
     public void Jump()
-    {   
+    {  
+        /*
         if (grounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
@@ -199,7 +218,9 @@ public class Player : MonoBehaviour
                 secondJump = false;
             }
         }
+        */
     }
+    
 
     void OnCollisionEnter(Collision collider)
     {
@@ -214,9 +235,10 @@ public class Player : MonoBehaviour
         }   
     }
 
-
+    
     public void Attack()
     {
+        /*
         if (atkTimerActive)
         {
             return;
@@ -245,10 +267,13 @@ public class Player : MonoBehaviour
         {
             attackBox.transform.localPosition = positions[7];
         }
+        Debug.Log("Test");
+
         attackBox.SetActive(true);
         atkTimerActive = true;
+        */
     }
-
+    
     void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("attack"))

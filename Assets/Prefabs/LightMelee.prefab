@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: -8888940642443089585}
   - component: {fileID: 1553446653892103366}
   - component: {fileID: 2044678195979496454}
-  - component: {fileID: 3111002869063619550}
   m_Layer: 0
   m_Name: LightMelee
   m_TagString: Player
@@ -131,7 +130,6 @@ MonoBehaviour:
   distToGround: 0.5
   specialGaugeDelay: 15
   specialAttackActiveTime: 0.5
-  counterTimerTotal: 3
   knockback: 150
   atkKnockback: 0
   specialKnockback: 0
@@ -144,6 +142,7 @@ MonoBehaviour:
   maxJumpDelay: 1
   landingEffectPrefab: {fileID: 2553654953159236003, guid: 5cd13d31c2675284c875d4d86e6e7fb6, type: 3}
   hitEffectPrefab: {fileID: 6395329100671518530, guid: 2596555950a94de489cb57282c949e60, type: 3}
+  counterTimerTotal: 3
 --- !u!114 &1553446653892103366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,20 +264,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &3111002869063619550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6463670925535389755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3826e568f9c3aaa44a9942a170dc0de1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cube: {fileID: 0}
-  playerMesh: {fileID: 0}
 --- !u!1 &7314403632516717258
 GameObject:
   m_ObjectHideFlags: 0
