@@ -1213,6 +1213,8 @@ MonoBehaviour:
   playerPrefabs:
   - {fileID: 4970969524930210213, guid: 3cbe936d28fba4e89896cf2ce56b246c, type: 3}
   - {fileID: 8274519800426310286, guid: de619124179714c49b68eff6f99d8380, type: 3}
+  - {fileID: 4721401268033644705, guid: a98e4c673f373e04d9b08c42af6a30a4, type: 3}
+  - {fileID: 8678411019834364871, guid: 8c0fb6d4b10602c42af435e4910bdf35, type: 3}
   camera: {fileID: 1861031886}
 --- !u!1 &1665428105
 GameObject:
