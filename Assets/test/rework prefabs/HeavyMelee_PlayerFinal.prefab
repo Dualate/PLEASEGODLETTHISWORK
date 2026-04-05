@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2838102250238934675}
   - component: {fileID: 4047296182751794211}
   m_Layer: 0
-  m_Name: PlayerInputShell
+  m_Name: HeavyMelee_PlayerFinal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
