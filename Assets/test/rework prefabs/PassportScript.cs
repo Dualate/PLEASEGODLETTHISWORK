@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using Microsoft.VisualBasic;
 
 public class PassportScript : MonoBehaviour
 {
@@ -30,6 +29,7 @@ public class PassportScript : MonoBehaviour
 
     public bool Ready()
     {
+        Debug.Log("Ready - Passport");
         foreach(var player in players)
         {
            // Instantiate(player.)

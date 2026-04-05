@@ -21,6 +21,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     private void Awake()
     {
+        
         if (Instance != null)
         {
             Debug.Log("Trying to create another instance of a singleton");
@@ -28,7 +29,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         else
         {
             Instance = this;
-            //DontDestroyOnLoad(Instance);
+            DontDestroyOnLoad(Instance);
             this.playerConfigs = new List<PlayerConfiguration>();
         }
         MaxPlayers = GameObject.Find("SceneReader").GetComponent<SceneReader>().GetMaxPlayers();
@@ -44,11 +45,20 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void ReadyPlayer(int index)
     {
+        Debug.Log(index);
         playerConfigs[index].IsReady = true;
         if (/*playerConfigs.Count == MaxPlayers &&*/playerConfigs.Count != 0 && playerConfigs.All(p => p.IsReady == true))
         {
             if (passport.Ready())
-                SceneManager.LoadScene(sceneIndex);
+            {
+                Debug.Log("PCM - Ready");
+                SceneManager.LoadScene(sceneIndex);                
+            }
+            else
+            {
+                Debug.Log("Not ready");
+
+            }            
         }
     }
 
