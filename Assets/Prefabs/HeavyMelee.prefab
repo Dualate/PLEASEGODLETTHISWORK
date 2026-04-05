@@ -233,8 +233,11 @@ MonoBehaviour:
   maxJumpHeight: 2
   maxJumpTime: 1.5
   distToGround: 0.5
+  specialGaugeDelay: 0
+  specialAttackActiveTime: 0
   knockback: 150
   atkKnockback: 0
+  specialKnockback: 0
   damagePercent: 0
   positions:
   - {x: 0.7558146, y: -0.04199982, z: -0.04986125}
@@ -271,9 +274,9 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Cube, Assembly-CSharp
-        m_MethodName: PLEASEGOTLETTHISWORK
+      - m_Target: {fileID: 5629466582516475221}
+        m_TargetAssemblyTypeName: HeavyMelee, Assembly-CSharp
+        m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -287,8 +290,8 @@ MonoBehaviour:
     m_ActionName: Gameplay/Move
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Cube, Assembly-CSharp
+      - m_Target: {fileID: 5629466582516475221}
+        m_TargetAssemblyTypeName: HeavyMelee, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 1
         m_Arguments:
@@ -303,8 +306,8 @@ MonoBehaviour:
     m_ActionName: Gameplay/Jump[/SwitchProControllerHID/buttonSouth]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Cube, Assembly-CSharp
+      - m_Target: {fileID: 5629466582516475221}
+        m_TargetAssemblyTypeName: HeavyMelee, Assembly-CSharp
         m_MethodName: Attack
         m_Mode: 1
         m_Arguments:

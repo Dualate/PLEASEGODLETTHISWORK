@@ -45,26 +45,19 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void ReadyPlayer(int index)
     {
-        Debug.Log(index);
         playerConfigs[index].IsReady = true;
         if (/*playerConfigs.Count == MaxPlayers &&*/playerConfigs.Count != 0 && playerConfigs.All(p => p.IsReady == true))
         {
             if (passport.Ready())
             {
-                Debug.Log("PCM - Ready");
                 SceneManager.LoadScene(sceneIndex);                
             }
-            else
-            {
-                Debug.Log("Not ready");
-
-            }            
+           
         }
     }
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
-        
         if (joinText.activeSelf == true)
             joinText.SetActive(false);
         
@@ -83,6 +76,8 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         return playerConfigs;
     }
+
+
 }
 
 public class PlayerConfiguration

@@ -41,14 +41,13 @@ public class PlayerSetupMenuController : MonoBehaviour
         readyButton.Select();
         menuPanel.SetActive(false);
         player = Instantiate(prefab, transform.position, transform.rotation, transform);
-        GameObject.Find("Passport").GetComponent<PassportScript>().Board(this.gameObject);
+        GameObject.Find("Passport").GetComponent<PassportScript>().Board(player);
     }
 
 
     public void ReadyPlayer()
     {
         PlayerConfigurationManager.Instance.ReadyPlayer(PlayerIndex);
-        Debug.Log("Ready");
         readyButton.gameObject.SetActive(false);
     }
 }

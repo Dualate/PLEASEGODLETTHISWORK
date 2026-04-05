@@ -24,12 +24,11 @@ public class PassportScript : MonoBehaviour
     public void Board(GameObject player)
     {
         players.Add(player);
-        player.transform.SetParent(player.transform, false);
+        player.transform.SetParent(transform);
     }
 
     public bool Ready()
     {
-        Debug.Log("Ready - Passport");
         foreach(var player in players)
         {
            // Instantiate(player.)
