@@ -14,6 +14,8 @@ public class Rework_PlayerInputHandler : MonoBehaviour
     void Start()
     {
         playerControls = new PlayerControls();
+        transform.SetParent(GameObject.Find("Passport").GetComponent<Transform>());
+        GameObject.Find("Passport").GetComponent<PassportScript>().Board(this.gameObject);
     }
 
     private void Input_onActionTriggered(CallbackContext obj)
