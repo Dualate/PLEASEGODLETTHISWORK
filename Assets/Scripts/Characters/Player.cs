@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
 
     }
 
-
+/*
     void Update()
     {
         GroundCheck();
@@ -140,7 +140,9 @@ public class Player : MonoBehaviour
             }
         }
     }
+    */
 
+/*
     void GroundCheck()
     {
         RaycastHit hit;
@@ -173,6 +175,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+    */
 
     public void FootstoolCheck()
     {
