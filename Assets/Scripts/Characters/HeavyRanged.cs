@@ -30,6 +30,10 @@ public class HeavyRanged : MonoBehaviour
 
     private GameObject attackBox;
     private GameObject specialAtkBox;
+    public GameObject projectilePrefab;
+    public float projectileSpeed;
+    public Vector3 projectileOffset = new Vector3(2,0,0);
+    private Vector3 setProjectileOffset;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
     private float specialGaugeTimer = 0f;
@@ -102,6 +106,7 @@ public class HeavyRanged : MonoBehaviour
             {
                 attackBox.transform.localPosition = positions[0];
                 specialAtkBox.transform.localPosition = positions[0];
+                setProjectileOffset = projectileOffset;
             }
             
         }
@@ -111,6 +116,7 @@ public class HeavyRanged : MonoBehaviour
             {
                 attackBox.transform.localPosition = positions[1];
                 specialAtkBox.transform.localPosition = positions[1];
+                setProjectileOffset = -projectileOffset;
             }
         }
         xSpeed = moveVector.x * moveSpeed;
@@ -254,6 +260,7 @@ public class HeavyRanged : MonoBehaviour
         {
             attackBox.transform.localPosition = positions[7];
         }
+        FireProjectile();
         attackBox.SetActive(true);
         atkTimerActive = true;
     }
@@ -446,5 +453,29 @@ public class HeavyRanged : MonoBehaviour
     {
         Vector2 moveVector = context.ReadValue<Vector2>();
         UpdateMoveVector(moveVector);
+    }
+    void FireProjectile()
+    {
+        if (attackBox.transform.localPosition == positions[0])
+        {
+            setProjectileOffset = projectileOffset;
+        }
+        else if(attackBox.transform.localPosition == positions[1])
+        {
+            setProjectileOffset = -projectileOffset;
+        }
+        GameObject projectile = Instantiate(projectilePrefab, attackBox.transform.position + setProjectileOffset, attackBox.transform.rotation);
+        Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
+        if (projectileRB != null)
+        {
+            if (attackBox.transform.localPosition == positions[0])
+            {
+                projectileRB.velocity = Vector3.right * projectileSpeed;
+            }
+            else if(attackBox.transform.localPosition == positions[1])
+            {
+                projectileRB.velocity = Vector3.left * projectileSpeed;
+            }
+        }
     }
 }

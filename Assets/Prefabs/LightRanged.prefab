@@ -233,8 +233,12 @@ MonoBehaviour:
   maxJumpHeight: 2
   maxJumpTime: 1.5
   distToGround: 0.5
+  projectilePrefab: {fileID: 2057495842931445320, guid: f66655efc2fdd3c4cb91297ce254a27e, type: 3}
+  specialGaugeDelay: 30
+  specialAttackActiveTime: 0.5
   knockback: 150
   atkKnockback: 0
+  specialKnockback: 0
   damagePercent: 0
   positions:
   - {x: 0.7558146, y: -0.04199982, z: -0.04986125}
@@ -333,6 +337,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: cf3cc170-ca76-43e6-a1fc-4ba3534bdd3f
     m_ActionName: Gameplay/Ready[/XInputControllerWindows1/buttonNorth,/XInputControllerWindows/buttonNorth,/SwitchProControllerHID/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: baab5bbd-5f62-42a2-892a-d9edf932a1a0
+    m_ActionName: Gameplay/Special[/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

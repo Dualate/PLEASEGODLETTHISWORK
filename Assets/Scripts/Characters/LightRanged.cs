@@ -30,6 +30,10 @@ public class LightRanged : MonoBehaviour
 
     private GameObject attackBox;
     private GameObject specialAtkBox;
+    public GameObject projectilePrefab;
+    public float projectileSpeed;
+    public Vector3 projectileOffset = new Vector3(0,5,0);
+    private Vector3 setProjectileOffset;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
     private float specialGaugeTimer = 0f;
@@ -102,6 +106,7 @@ public class LightRanged : MonoBehaviour
             {
                 attackBox.transform.localPosition = positions[0];
                 specialAtkBox.transform.localPosition = positions[0];
+                setProjectileOffset = projectileOffset;
             }
             
         }
@@ -111,6 +116,7 @@ public class LightRanged : MonoBehaviour
             {
                 attackBox.transform.localPosition = positions[1];
                 specialAtkBox.transform.localPosition = positions[1];
+                setProjectileOffset = -projectileOffset;
             }
         }
         xSpeed = moveVector.x * moveSpeed;
@@ -166,7 +172,7 @@ public class LightRanged : MonoBehaviour
             else if(hit.collider.CompareTag("Player"))
             {
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.VelocityChange);
+                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.Impulse);
             }
             if(hit.collider.CompareTag("BouncePlatform"))
             {
@@ -174,7 +180,7 @@ public class LightRanged : MonoBehaviour
                 grounded = true;
                 jumpDelay = 0;
                 secondJump = true;
-                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.VelocityChange);
+                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.Impulse);
             }
             
         }
@@ -193,7 +199,7 @@ public class LightRanged : MonoBehaviour
         if (grounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
+            rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
             return;
         }
         else if (secondJump && !grounded)
@@ -204,7 +210,7 @@ public class LightRanged : MonoBehaviour
                 {
                     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 }
-                rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
+                rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
                 secondJump = false;
             }
         }
@@ -256,6 +262,7 @@ public class LightRanged : MonoBehaviour
         }
         attackBox.SetActive(true);
         atkTimerActive = true;
+        FireProjectile();
     }
     public void SpecialAttack()
     {
@@ -446,5 +453,22 @@ public class LightRanged : MonoBehaviour
     {
         Vector2 moveVector = context.ReadValue<Vector2>();
         UpdateMoveVector(moveVector);
+    }
+    void FireProjectile()
+    {
+        Vector3 offset = attackBox.transform.position + setProjectileOffset;
+        GameObject projectile = Instantiate(projectilePrefab, offset, attackBox.transform.rotation);
+        Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
+        if (projectileRB != null)
+        {
+            if (attackBox.transform.localPosition == positions[0])
+            {
+                projectileRB.velocity = Vector3.right * projectileSpeed;
+            }
+            else if(attackBox.transform.localPosition == positions[1])
+            {
+                projectileRB.velocity = Vector3.left * projectileSpeed;
+            }
+        }
     }
 }
