@@ -9,7 +9,7 @@ public class GenericMover : MonoBehaviour
 
 
 
-
+    public float display_xSpeed;
 
     public float moveSpeed;
     public float jumpForce;
@@ -102,10 +102,11 @@ public class GenericMover : MonoBehaviour
                 attackBox.transform.localPosition = positions[1];
             }
         }
-        xSpeed = moveVector.x * moveSpeed;
+        xSpeed += moveVector.x * moveSpeed * Time.deltaTime;
+        //xSpeed = moveVector.x * moveSpeed * Time.deltaTime;
         //transform.Translate(xSpeed, ySpeed, 0, Space.World);
         rb.velocity = new Vector3(xSpeed, rb.velocity.y, 0);
-
+        display_xSpeed = xSpeed;
         if (atkTimerActive == true) //This section deactivates the attackbox after a timer
         {
             atkTimer += Time.deltaTime;

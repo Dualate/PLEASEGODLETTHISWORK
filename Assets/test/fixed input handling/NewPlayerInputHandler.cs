@@ -36,7 +36,6 @@ public class NewPlayerInputHandler : MonoBehaviour
 
     public void Input_onActionTriggered(CallbackContext obj)
     {
-        Debug.Log(obj);
         if (obj.action.name == controls.Gameplay.Move.name)
         {
             OnMove(obj);
@@ -50,18 +49,16 @@ public class NewPlayerInputHandler : MonoBehaviour
             mover.Attack();
         }
     }
-    public void UpdateMoveVector(Vector2 moveVector)
-    {
 
-        this.moveVector = moveVector;
+    void Update()
+    {
 
     }
 
-
     public void OnMove(CallbackContext context)
     {
-        Vector2 moveVector = context.ReadValue<Vector2>();
-        mover.UpdateMoveVector(moveVector);
+        mover.UpdateMoveVector(context.ReadValue<Vector2>());
+        
     }
 
 
