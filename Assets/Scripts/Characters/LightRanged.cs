@@ -41,6 +41,7 @@ public class LightRanged : Player
     private GameObject attackBox;
     private GameObject specialAtkBox;
     public GameObject projectilePrefab;
+    private CameraShake cameraShake;
     public float projectileSpeed;
     private Vector3 projectileOffset = new Vector3(1,0,0);
     private Vector3 setProjectileOffset;
@@ -70,6 +71,7 @@ public class LightRanged : Player
         specialAtkBox = GameObject.Find("specialAtkBox");
         specialAtkBox.SetActive(false);
         rb = GetComponent<Rigidbody>();
+        cameraShake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<CameraShake>();
     }
 
     void Awake()
@@ -281,6 +283,7 @@ public class LightRanged : Player
 
     void OnTriggerEnter(Collider collider)
     {
+        cameraShake.CamShake();
         if (collider.gameObject.CompareTag("attack"))
         {
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
