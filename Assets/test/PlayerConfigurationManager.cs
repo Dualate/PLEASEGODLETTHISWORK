@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem.Users;
+
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     [SerializeField]
     private int MaxPlayers = 1;
 
+    int players = 0;
     int sceneIndex;
     public static PlayerConfigurationManager Instance { get; private set; }
 
@@ -33,6 +36,10 @@ public class PlayerConfigurationManager : MonoBehaviour
         sceneIndex = GameObject.Find("SceneReader").GetComponent<SceneReader>().GetSceneIndex();
     }
 
+    private void Update()
+    {
+       
+    }
     public void SetPlayerColor(int index, GameObject animator)
     {
         playerConfigs[index].animator = animator;
@@ -50,7 +57,6 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
-        
         if (joinText.activeSelf == true)
             joinText.SetActive(false);
         
@@ -58,6 +64,8 @@ public class PlayerConfigurationManager : MonoBehaviour
         {
             playerConfigs.Add(new PlayerConfiguration(pi));
             pi.transform.SetParent(transform);
+            playerConfigs[players].deviceName = pi.devices[0].deviceId;
+            players += 1;
             if (playerConfigs.Count == MaxPlayers)
             {
                 GetComponent<PlayerInputManager>().DisableJoining();
@@ -79,6 +87,7 @@ public class PlayerConfiguration
         Input = pi;
     }
 
+    public int deviceName { get; set; }
     public PlayerInput Input { get; set; }
     public int PlayerIndex { get; set; }
     public bool IsReady { get; set; }

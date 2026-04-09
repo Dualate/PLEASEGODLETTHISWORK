@@ -199,7 +199,8 @@ public class HeavyRanged : Player
     }
 
     public void Jump()
-    {   
+    {
+        Debug.Log("JUMPING");
         if (grounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);

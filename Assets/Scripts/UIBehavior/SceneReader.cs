@@ -13,13 +13,7 @@ public class SceneReader : MonoBehaviour
         DontDestroyOnLoad(this);    
     }
 
-    private void Update()
-    {
-        if (SceneManager.GetActiveScene().name == "inputPermanenceTest")
-        {
-            Debug.Log(sceneIndex);
-        }
-    }
+
 
     public void LoadData(int index, int players)
     {

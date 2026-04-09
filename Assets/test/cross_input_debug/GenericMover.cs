@@ -1,27 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
-using TMPro;
-public class Player : MonoBehaviour
+
+public class GenericMover : MonoBehaviour
 {
 
-    public Player(float movespeed, float jumpForce, float maxJumpHeight, 
-        float maxJumpTime, float specialGaugeDelay, float specialAttackActiveTime, float knockback, float atkKnockback, float specialKnockback)
-    {
-        this.moveSpeed = movespeed;
-        this.jumpForce = jumpForce;
-        this.maxJumpHeight = maxJumpHeight;
-        this.maxJumpTime = maxJumpTime;
-        this.specialGaugeDelay = specialGaugeDelay;
-        this.specialAttackActiveTime = specialAttackActiveTime;
-        this.knockback = knockback;
-        this.atkKnockback = atkKnockback;
-        this.specialKnockback = specialKnockback;
-    }
+
+
+
+
 
     public float moveSpeed;
     public float jumpForce;
@@ -40,22 +28,15 @@ public class Player : MonoBehaviour
     //isGrounded variables
     public float distToGround = .5f;
 
-    private GameObject attackBox;
-    private GameObject specialAtkBox;
-    private float atkTimer = 0f;
-    private bool atkTimerActive = false;
-    private float specialGaugeTimer = 0f;
-    private bool specialGaugeTimerActive = true;
-    public float specialGaugeDelay = 15f;
-    private float specialAttackActiveTimer = 0f;
-    public float specialAttackActiveTime = .5f;
-    private bool activateSpecial = false;
+    public GameObject attackBox;
+    public float atkTimer = 0f;
+    public bool atkTimerActive = false;
+
 
     public float knockback; //base knockback taken by character
     public float atkKnockback; //base knockback dealt by attacks
-    public float specialKnockback;
     public float damagePercent;
-    private float atkDelayTime = .5f;
+    public float atkDelayTime = .5f;
     public Vector3[] positions;
     public Vector3 resetPosition;
     public bool secondJump = false;
@@ -67,7 +48,13 @@ public class Player : MonoBehaviour
     public ParticleSystem landingEffectPrefab;
     public ParticleSystem hitEffectPrefab;
 
-    private Rigidbody rb;
+    [SerializeField]
+    Rigidbody rb;
+    public void Awake()
+    {
+        SetJumpVariables();
+
+    }
     void Start()
     {
         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
@@ -76,29 +63,19 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void Awake()
+    public void UpdateMoveVector(Vector2 moveVector)
     {
-        SetJumpVariables();
+        this.moveVector = moveVector;
     }
-
 
     void SetJumpVariables()
     {
-        float timeToApex = maxJumpTime/2;
-        jumpGravity = (-2* maxJumpHeight)/Mathf.Pow(timeToApex, 2);
-        initialJumpVelocity = (2*maxJumpHeight)/timeToApex;
-        doubleJumpVelocity = initialJumpVelocity/2;
+        float timeToApex = maxJumpTime / 2;
+        jumpGravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+        initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+        doubleJumpVelocity = initialJumpVelocity / 2;
     }
 
-    
-    public void UpdateMoveVector(Vector2 moveVector)
-    {
-
-        this.moveVector = moveVector;
-
-    }
-    
-    
     void Update()
     {
         GroundCheck();
@@ -116,7 +93,7 @@ public class Player : MonoBehaviour
             {
                 attackBox.transform.localPosition = positions[0];
             }
-            
+
         }
         else if (moveVector.x < -0.5f && Mathf.Abs(moveVector.y) < 0.5f)
         {
@@ -134,7 +111,7 @@ public class Player : MonoBehaviour
             atkTimer += Time.deltaTime;
             //Debug.Log(atkTimer);
             if (atkTimer >= atkDelayTime)
-                {
+            {
                 attackBox.SetActive(false);
                 atkTimerActive = false;
                 atkTimer = 0f;
@@ -142,105 +119,9 @@ public class Player : MonoBehaviour
             }
         }
     }
-    
-    void GroundCheck()
-    {
-        RaycastHit hit;
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, distToGround + .1f))
-        {
-            if(hit.collider.CompareTag("Ground"))
-            {
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                grounded = true;
-                jumpDelay = 0;
-                secondJump = true;
-                resetPosition = transform.position;
-            }
-            if(hit.collider.CompareTag("BouncePlatform"))
-            {
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                grounded = true;
-                jumpDelay = 0;
-                secondJump = true;
-                rb.AddForce(initialJumpVelocity/2 * Vector3.up, ForceMode.VelocityChange);
-            }
-            
-        }
-        else
-        {
-            grounded = false;
-            if (jumpDelay < maxJumpDelay && secondJump)
-            {
-                jumpDelay += Time.deltaTime;
-            }
-        }
-    }
 
-    public void FootstoolCheck()
-    {
-        RaycastHit hit;
-        if(Physics.Raycast(transform.position, Vector3.down, out hit, distToGround + .1f))
-        {
-            if(hit.collider.CompareTag("Player"))
-            {
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity/3 * Vector3.up, ForceMode.VelocityChange);
-            }
-
-        }
-        if(Physics.Raycast(transform.position, Vector3.up, out hit, distToGround + .1f))
-        {
-            if(hit.collider.CompareTag("Player"))
-            {
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity/6 * Vector3.down, ForceMode.VelocityChange);
-            }
-            
-        }
-    }
-    
-    public void Jump()
-    {  
-        
-        if (grounded)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
-            return;
-        }
-        else if (secondJump && !grounded)
-        {
-            if (jumpDelay >= maxJumpDelay)
-            {
-                if (rb.velocity.y < 0)
-                {
-                    rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                }
-                rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
-                secondJump = false;
-            }
-        }
-        
-    }
-    
-
-    void OnCollisionEnter(Collision collider)
-    {
-        if (collider.gameObject.CompareTag("Ground"))
-        {
-            if (collider.transform.position.y < transform.position.y - 3.5)
-            {
-                ParticleSystem landingInstance = Instantiate(landingEffectPrefab, collider.contacts[0].point, Quaternion.identity);
-                landingInstance.Play();
-                Destroy(landingInstance.gameObject, landingEffectPrefab.main.duration);
-            }
-        }   
-    }
-
-    
     public void Attack()
     {
-        
         if (atkTimerActive)
         {
             return;
@@ -269,13 +150,147 @@ public class Player : MonoBehaviour
         {
             attackBox.transform.localPosition = positions[7];
         }
-        Debug.Log("Test");
 
         attackBox.SetActive(true);
         atkTimerActive = true;
-        
     }
-    
+
+
+    public void Jump()
+    {
+        if (grounded)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
+            return;
+        }
+        else if (secondJump && !grounded)
+        {
+            if (jumpDelay >= maxJumpDelay)
+            {
+                if (rb.velocity.y < 0)
+                {
+                    rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                }
+                rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
+                secondJump = false;
+            }
+        }
+    }
+    private void LateUpdate()
+    {
+        GroundCheck();
+
+        if (transform.position.y < -15)
+        {
+            transform.position = resetPosition;
+            rb.velocity = Vector3.zero;
+            damagePercent = 0f;
+        }
+        if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
+        {
+            if (atkTimerActive == false)
+            {
+                attackBox.transform.localPosition = positions[0];
+            }
+
+        }
+        else if (moveVector.x < -0.5f && Mathf.Abs(moveVector.y) < 0.5f)
+        {
+            if (atkTimerActive == false)
+            {
+                attackBox.transform.localPosition = positions[1];
+            }
+        }
+        xSpeed = moveVector.x * moveSpeed;
+        //transform.Translate(xSpeed, ySpeed, 0, Space.World);
+        rb.velocity = new Vector3(xSpeed, rb.velocity.y, 0);
+
+        if (atkTimerActive == true) //This section deactivates the attackbox after a timer
+        {
+            atkTimer += Time.deltaTime;
+            //Debug.Log(atkTimer);
+            if (atkTimer >= atkDelayTime)
+            {
+                attackBox.SetActive(false);
+                atkTimerActive = false;
+                atkTimer = 0f;
+                attackBox.transform.localPosition = positions[0]; //reset position of attacks
+            }
+        }
+
+
+    }
+
+    void GroundCheck()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, distToGround + .1f))
+        {
+            if (hit.collider.CompareTag("Ground"))
+            {
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                grounded = true;
+                jumpDelay = 0;
+                secondJump = true;
+                resetPosition = transform.position;
+            }
+            if (hit.collider.CompareTag("BouncePlatform"))
+            {
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                grounded = true;
+                jumpDelay = 0;
+                secondJump = true;
+                rb.AddForce(initialJumpVelocity / 2 * Vector3.up, ForceMode.VelocityChange);
+            }
+
+        }
+        else
+        {
+            grounded = false;
+            if (jumpDelay < maxJumpDelay && secondJump)
+            {
+                jumpDelay += Time.deltaTime;
+            }
+        }
+    }
+
+    public void FootstoolCheck()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, distToGround + .1f))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(initialJumpVelocity / 3 * Vector3.up, ForceMode.VelocityChange);
+            }
+
+        }
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, distToGround + .1f))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(initialJumpVelocity / 6 * Vector3.down, ForceMode.VelocityChange);
+            }
+
+        }
+    }
+
+    void OnCollisionEnter(Collision collider)
+    {
+        if (collider.gameObject.CompareTag("Ground"))
+        {
+            if (collider.transform.position.y < transform.position.y - 3.5)
+            {
+                ParticleSystem landingInstance = Instantiate(landingEffectPrefab, collider.contacts[0].point, Quaternion.identity);
+                landingInstance.Play();
+                Destroy(landingInstance.gameObject, landingEffectPrefab.main.duration);
+            }
+        }
+    }
+
     void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("attack"))
@@ -298,14 +313,4 @@ public class Player : MonoBehaviour
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
     }
-
-    
-    public void OnMove(CallbackContext context)
-    {
-        
-        Vector2 moveVector = context.ReadValue<Vector2>();
-        UpdateMoveVector(moveVector);
-        
-    }
-    
 }

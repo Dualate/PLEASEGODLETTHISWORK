@@ -9,7 +9,7 @@ public class PlayerInputHandler : MonoBehaviour
     private Player cube;
 
     private PlayerConfiguration playerConfig;
-
+    public int deviceId;
     [SerializeField]
     private PlayerControls controls;
     private void Awake()
@@ -21,28 +21,36 @@ public class PlayerInputHandler : MonoBehaviour
     {
         playerConfig = pc;
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
+        deviceId = playerConfig.deviceName;
     }
 
     private void Input_onActionTriggered(CallbackContext obj)
     {
-        if (obj.action.name == controls.Gameplay.Move.name)
+        Debug.Log(obj.ToString());
+        Debug.Log("Device #" + obj.control.device.deviceId + " told " + deviceId + " to move");
+        if (obj.control.device.deviceId == deviceId)
         {
-            OnMove(obj);
+            if (obj.action.name == controls.Gameplay.Move.name)
+            {
+                cube.OnMove(obj);
+            }
+            else if (obj.action.name == controls.Gameplay.Jump.name)
+            {
+                cube.Jump();
+            }
+            else if (obj.action.name == controls.Gameplay.Attack.name)
+            {
+                cube.Attack();
+            }
         }
-        else if (obj.action.name == controls.Gameplay.Jump.name)
-        {
-            cube.Jump();
-        }
-        else if (obj.action.name == controls.Gameplay.Attack.name)
-        {
-            cube.Attack();
-        }
+        
     }
 
     public int GetIndex()
     {
         return playerConfig.PlayerIndex;
     }
+
 
     public void OnMove(CallbackContext context)
     {
