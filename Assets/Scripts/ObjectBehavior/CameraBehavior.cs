@@ -57,11 +57,31 @@ public class CameraBehavior : MonoBehaviour
     {
         float midx = 0;
         float midy = 0;
-        if (players.Count == 2)
-        {
-            midx = (players[0].transform.position.x + players[1].transform.position.x) / 2;
-            midy = (players[0].transform.position.y + players[1].transform.position.y) / 2;
+        float[] coordinates = new float[2];
+        float[] firstMid = new float[2];
+        float[] secondMid = new float[2];
+        switch (players.Count) {
+            case 2:
+                coordinates = midPoint(players[0].transform.position, players[1].transform.position);
+                break;
+            case 3:
+                firstMid = midPoint(players[0].transform.position, players[1].transform.position);
+                coordinates = midPoint(new Vector3(firstMid[0], firstMid[1], 0), players[2].transform.position);
+                break;
+            case 4:
+                firstMid = midPoint(players[0].transform.position, players[1].transform.position);
+                secondMid = midPoint(players[2].transform.position, players[3].transform.position);
+                coordinates = midPoint(new Vector3(firstMid[0], firstMid[1], 0), new Vector3(secondMid[0], secondMid[1], 0));
+                break;
+
         }
+        midx = coordinates[0];
+        midy = coordinates[1];
+
+
+
+
+
         midpoint = new Vector3(midx, midy, 0);
     }
 
@@ -78,5 +98,13 @@ public class CameraBehavior : MonoBehaviour
     public void climb()
     {
         state = STATE.platform;
+    }
+
+    public float[] midPoint(Vector3 firstPoint, Vector3 second_point)
+    {
+        float[] coordinates = new float[2];
+        coordinates[0] = (firstPoint.x + second_point.x) / 2;
+        coordinates[1] = (firstPoint.y + second_point.y) / 2;
+        return coordinates;
     }
 }
