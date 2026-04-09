@@ -17,7 +17,6 @@ public class SceneReader : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "inputPermanenceTest")
         {
-            Debug.Log(sceneIndex);
         }
     }
 

@@ -9,6 +9,8 @@ public class PlayerConfigurationManager : MonoBehaviour
 {
     [SerializeField]
     GameObject joinText;
+    [SerializeField]
+    PassportScript passport;
     private List<PlayerConfiguration> playerConfigs;
 
     [SerializeField]
@@ -19,6 +21,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     private void Awake()
     {
+        
         if (Instance != null)
         {
             Debug.Log("Trying to create another instance of a singleton");
@@ -36,6 +39,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void SetPlayerColor(int index, GameObject animator)
     {
         playerConfigs[index].animator = animator;
+        Debug.Log(passport);
     }
 
 
@@ -44,13 +48,16 @@ public class PlayerConfigurationManager : MonoBehaviour
         playerConfigs[index].IsReady = true;
         if (/*playerConfigs.Count == MaxPlayers &&*/playerConfigs.Count != 0 && playerConfigs.All(p => p.IsReady == true))
         {
-            SceneManager.LoadScene(sceneIndex);
+            if (passport.Ready())
+            {
+                SceneManager.LoadScene(sceneIndex);                
+            }
+           
         }
     }
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
-        
         if (joinText.activeSelf == true)
             joinText.SetActive(false);
         
@@ -69,6 +76,8 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         return playerConfigs;
     }
+
+
 }
 
 public class PlayerConfiguration

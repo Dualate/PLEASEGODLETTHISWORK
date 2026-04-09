@@ -11,6 +11,7 @@ public class PlayerSetupMenuController : MonoBehaviour
     private TextMeshProUGUI titleText;
     [SerializeField]
     private GameObject readyPanel;
+    public GameObject player;
     [SerializeField]
     private GameObject menuPanel;
     [SerializeField]
@@ -32,13 +33,15 @@ public class PlayerSetupMenuController : MonoBehaviour
             inputEnabled = true;
         }
     }
-    public void SetColor(GameObject animator)
+    public void SetColor(GameObject prefab)
     {
         if (!inputEnabled) { return; }
-        PlayerConfigurationManager.Instance.SetPlayerColor(PlayerIndex, animator);
+        PlayerConfigurationManager.Instance.SetPlayerColor(PlayerIndex, prefab);
         readyPanel.SetActive(true);
         readyButton.Select();
         menuPanel.SetActive(false);
+        player = Instantiate(prefab, transform.position, transform.rotation, transform);
+        GameObject.Find("Passport").GetComponent<PassportScript>().Board(player);
     }
 
 

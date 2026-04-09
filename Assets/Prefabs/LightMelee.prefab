@@ -143,6 +143,7 @@ MonoBehaviour:
   maxJumpDelay: 0.25
   landingEffectPrefab: {fileID: 2553654953159236003, guid: 5cd13d31c2675284c875d4d86e6e7fb6, type: 3}
   hitEffectPrefab: {fileID: 6395329100671518530, guid: 2596555950a94de489cb57282c949e60, type: 3}
+  counterTimerTotal: 3
 --- !u!114 &1553446653892103366
 MonoBehaviour:
   m_ObjectHideFlags: 0

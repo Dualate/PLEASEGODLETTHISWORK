@@ -11,7 +11,7 @@ public class CameraBehavior : MonoBehaviour
     public Transform highest;
     public float smoothing;
     Transform arena;
-    Vector3 midpoint;
+    public Vector3 midpoint;
     void Start()
     { 
         
@@ -21,7 +21,7 @@ public class CameraBehavior : MonoBehaviour
     }
     public void Add(Transform player)
     {
-        players.Add(player);
+        players.Add(player.GetChild(0).GetComponent<Transform>());
     }
     // Update is called once per frame
     void LateUpdate()

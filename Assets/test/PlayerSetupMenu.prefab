@@ -344,8 +344,8 @@ MonoBehaviour:
         m_MethodName: SetColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 874aebbd09da07e49930821c84e6dcfa, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_ObjectArgument: {fileID: 8841355190166232378, guid: 574e0f3109858d642921b0f9a8eba0e1, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -613,8 +613,8 @@ MonoBehaviour:
         m_MethodName: SetColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: f358d54885b298f40b0aad2d331169bb, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_ObjectArgument: {fileID: 6463670925535389755, guid: c7c0c85bd82412c46bfa4480f3127176, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1154,8 +1154,8 @@ MonoBehaviour:
         m_MethodName: SetColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: ea99f5bfcaa50d7468bcd34c82f30eae, type: 2}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
+          m_ObjectArgument: {fileID: 7065567989441447424, guid: b32807d421e2b814eab0a55e66f3201b, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1659,6 +1659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: {fileID: 623296399179223526}
   readyPanel: {fileID: 7870720227160207936}
+  player: {fileID: 0}
   menuPanel: {fileID: 6930044419167842642}
   readyButton: {fileID: 1714989798975467942}
 --- !u!1 &6930044419167842642
@@ -1960,7 +1961,7 @@ MonoBehaviour:
         m_MethodName: SetColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 6934895723980398555, guid: 6d5c9028b52747248a7f98ffd695f3c6, type: 3}
+          m_ObjectArgument: {fileID: 6563839678686156797, guid: 951501e91ff290b4ab7d6c1f61e7ab86, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
