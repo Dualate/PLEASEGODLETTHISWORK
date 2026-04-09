@@ -6,16 +6,20 @@ public class InitializeLevel : MonoBehaviour
 {
     [SerializeField]
     private Transform[] playerSpawns;
+
     [SerializeField]
-    private GameObject[] playerPrefabs;
+    public GameObject[] playerPrefabs;
+    [SerializeField]
     GameObject playerModel;
     [SerializeField]
     CameraBehavior camera;
     void Start()
     {
         var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
+        
         for (int i = 0; i < playerConfigs.Length; i++)
         {
+            /*
             switch (playerConfigs[i].animator.name)
             {
                 case "anabeth_animator":
@@ -31,9 +35,10 @@ public class InitializeLevel : MonoBehaviour
                     playerModel = playerPrefabs[3];
                     break;
             }
+            */
             var player = Instantiate(playerModel, playerSpawns[i].position, playerSpawns[i].rotation);
             var animator = Instantiate(playerConfigs[i].animator, player.transform.position + new Vector3(0, 1.15f, -1f), transform.rotation, player.transform.GetChild(0).GetComponent<Transform>());             
-            player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
+            player.GetComponent<NewPlayerInputHandler>().InitializePlayer(playerConfigs[i]);
             camera.Add(player.transform);
         }
     }

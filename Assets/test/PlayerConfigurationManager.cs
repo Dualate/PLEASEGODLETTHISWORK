@@ -4,24 +4,24 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem.Users;
+
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
     [SerializeField]
     GameObject joinText;
-    [SerializeField]
-    PassportScript passport;
     private List<PlayerConfiguration> playerConfigs;
 
     [SerializeField]
     private int MaxPlayers = 1;
 
+    int players = 0;
     int sceneIndex;
     public static PlayerConfigurationManager Instance { get; private set; }
 
     private void Awake()
     {
-        
         if (Instance != null)
         {
             Debug.Log("Trying to create another instance of a singleton");
@@ -36,10 +36,13 @@ public class PlayerConfigurationManager : MonoBehaviour
         sceneIndex = GameObject.Find("SceneReader").GetComponent<SceneReader>().GetSceneIndex();
     }
 
+    private void Update()
+    {
+       
+    }
     public void SetPlayerColor(int index, GameObject animator)
     {
         playerConfigs[index].animator = animator;
-        Debug.Log(passport);
     }
 
 
@@ -48,11 +51,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         playerConfigs[index].IsReady = true;
         if (/*playerConfigs.Count == MaxPlayers &&*/playerConfigs.Count != 0 && playerConfigs.All(p => p.IsReady == true))
         {
-            if (passport.Ready())
-            {
-                SceneManager.LoadScene(sceneIndex);                
-            }
-           
+            SceneManager.LoadScene(sceneIndex);
         }
     }
 
@@ -65,6 +64,8 @@ public class PlayerConfigurationManager : MonoBehaviour
         {
             playerConfigs.Add(new PlayerConfiguration(pi));
             pi.transform.SetParent(transform);
+            playerConfigs[players].deviceName = pi.devices[0].deviceId;
+            players += 1;
             if (playerConfigs.Count == MaxPlayers)
             {
                 GetComponent<PlayerInputManager>().DisableJoining();
@@ -76,8 +77,6 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         return playerConfigs;
     }
-
-
 }
 
 public class PlayerConfiguration
@@ -88,6 +87,7 @@ public class PlayerConfiguration
         Input = pi;
     }
 
+    public int deviceName { get; set; }
     public PlayerInput Input { get; set; }
     public int PlayerIndex { get; set; }
     public bool IsReady { get; set; }
