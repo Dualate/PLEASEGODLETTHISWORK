@@ -311,7 +311,63 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8002977363411408762}
+        m_TargetAssemblyTypeName: NewPlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4bb72ec2-e2f1-434e-8c59-5bcfdde8b0ee
+    m_ActionName: Gameplay/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8002977363411408762}
+        m_TargetAssemblyTypeName: NewPlayerInputHandler, Assembly-CSharp
+        m_MethodName: Input_onActionTriggered
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fc81039b-0235-4e75-8244-bfd01bdec849
+    m_ActionName: Gameplay/Jump[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8002977363411408762}
+        m_TargetAssemblyTypeName: NewPlayerInputHandler, Assembly-CSharp
+        m_MethodName: Input_onActionTriggered
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6a9136d7-18c8-4cfb-96e4-5bc6220fcdba
+    m_ActionName: Gameplay/Attack[/XInputControllerWindows/buttonWest,/XInputControllerWindows1/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cf3cc170-ca76-43e6-a1fc-4ba3534bdd3f
+    m_ActionName: Gameplay/Ready[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: baab5bbd-5f62-42a2-892a-d9edf932a1a0
+    m_ActionName: Gameplay/Special[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -332,8 +388,8 @@ MonoBehaviour:
   moveSpeed: 15
   jumpForce: 125
   grounded: 0
-  maxJumpHeight: 2
-  maxJumpTime: 1.5
+  maxJumpHeight: 25
+  maxJumpTime: 2
   distToGround: 0.5
   attackBox: {fileID: 2194363905655999204}
   atkTimer: 0
@@ -345,7 +401,7 @@ MonoBehaviour:
   positions: []
   resetPosition: {x: 0, y: 0, z: 0}
   secondJump: 0
-  maxJumpDelay: 1
+  maxJumpDelay: 0.25
   landingEffectPrefab: {fileID: 2553654953159236003, guid: 5cd13d31c2675284c875d4d86e6e7fb6, type: 3}
   hitEffectPrefab: {fileID: 6395329100671518530, guid: 2596555950a94de489cb57282c949e60, type: 3}
   rb: {fileID: 4586931987197244384}

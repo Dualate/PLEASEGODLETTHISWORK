@@ -79,7 +79,7 @@ public class Spawner : MonoBehaviour
 
     void SpawnChunk()
     {
-        int[] chunk_x = { -2, 0, 2 };
+        float[] chunk_x = { -1.5f, 0, 1.5f };
         float repeatRate = 0;
         chunk = Random.Range(1, 4);
         xScal = chunk_x[Random.Range(0, chunk_x.Length)];

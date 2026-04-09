@@ -23,7 +23,10 @@ public class NewPlayerInputHandler : MonoBehaviour
 
     }
 
-
+    public int GetIndex()
+    {
+        return playerConfig.PlayerIndex;
+    }
 
     public void InitializePlayer(PlayerConfiguration pc)
     {
