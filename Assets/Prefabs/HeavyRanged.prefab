@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &692024303671355627
+--- !u!1 &3439190031868993299
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,10 +8,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1609415889696931495}
-  - component: {fileID: 6666778732817014628}
-  - component: {fileID: 5556279667350533609}
-  - component: {fileID: 3524234921813423483}
+  - component: {fileID: 3687205888232195005}
+  - component: {fileID: 4693176932226628029}
+  - component: {fileID: 439427511165522283}
+  - component: {fileID: 1044500295084764703}
   m_Layer: 0
   m_Name: specialAtkBox
   m_TagString: HRSpecial
@@ -19,36 +19,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1609415889696931495
+--- !u!4 &3687205888232195005
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692024303671355627}
+  m_GameObject: {fileID: 3439190031868993299}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7558146, y: -0.041999817, z: -0.049861252}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2764234061202533578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6666778732817014628
+--- !u!33 &4693176932226628029
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692024303671355627}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &5556279667350533609
+  m_GameObject: {fileID: 3439190031868993299}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &439427511165522283
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692024303671355627}
+  m_GameObject: {fileID: 3439190031868993299}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ed24a9476dcf7234796641712cf84687, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,13 +84,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3524234921813423483
-BoxCollider:
+--- !u!135 &1044500295084764703
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692024303671355627}
+  m_GameObject: {fileID: 3439190031868993299}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -103,7 +103,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6463670925535389755
 GameObject:
@@ -141,7 +141,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4740980884968325655}
-  - {fileID: 1609415889696931495}
+  - {fileID: 3687205888232195005}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7738911790740373858
@@ -230,18 +230,23 @@ MonoBehaviour:
   moveSpeed: 15
   jumpForce: 125
   grounded: 0
-  maxJumpHeight: 2
-  maxJumpTime: 1.5
+  maxJumpHeight: 25
+  maxJumpTime: 2
   distToGround: 0.5
+  projectilePrefab: {fileID: 2057495842931445320, guid: f2ebe4952275817418be631e0d40fa18, type: 3}
+  projectileSpeed: 10
+  specialGaugeDelay: 30
+  specialAttackActiveTime: 0.5
   knockback: 150
   atkKnockback: 0
+  specialKnockback: 0
   damagePercent: 0
   positions:
   - {x: 0.7558146, y: -0.04199982, z: -0.04986125}
   - {x: -0.7558146, y: -0.04199982, z: -0.04986125}
   resetPosition: {x: 0, y: 10, z: 0}
   secondJump: 0
-  maxJumpDelay: 1
+  maxJumpDelay: 0.25
   landingEffectPrefab: {fileID: 2553654953159236003, guid: 5cd13d31c2675284c875d4d86e6e7fb6, type: 3}
   hitEffectPrefab: {fileID: 6395329100671518530, guid: 2596555950a94de489cb57282c949e60, type: 3}
 --- !u!114 &1553446653892103366
@@ -333,6 +338,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: cf3cc170-ca76-43e6-a1fc-4ba3534bdd3f
     m_ActionName: Gameplay/Ready[/XInputControllerWindows1/buttonNorth,/XInputControllerWindows/buttonNorth,/SwitchProControllerHID/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: baab5bbd-5f62-42a2-892a-d9edf932a1a0
+    m_ActionName: Gameplay/Special[/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

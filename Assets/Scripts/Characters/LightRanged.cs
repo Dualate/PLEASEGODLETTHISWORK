@@ -40,10 +40,15 @@ public class LightRanged : Player
 
     private GameObject attackBox;
     private GameObject specialAtkBox;
+    public GameObject projectilePrefab;
+    public float projectileSpeed;
+    private Vector3 projectileOffset = new Vector3(1,0,0);
+    private Vector3 setProjectileOffset;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
     private float specialGaugeTimer = 0f;
-    private bool specialGaugeTimerActive = true;
+    private bool specialGaugeTimerActive = false;
+    public float specialGaugeDelay = 30f;
     private float specialAttackActiveTimer = 0f;
 
     private bool activateSpecial = false;
@@ -77,7 +82,7 @@ public class LightRanged : Player
         float timeToApex = maxJumpTime/2;
         jumpGravity = (-2* maxJumpHeight)/Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2*maxJumpHeight)/timeToApex;
-        doubleJumpVelocity = initialJumpVelocity/2;
+        doubleJumpVelocity = initialJumpVelocity*1.5f;
     }
 
     public void UpdateMoveVector(Vector2 moveVector)
@@ -104,6 +109,7 @@ public class LightRanged : Player
             {
                 attackBox.transform.localPosition = positions[0];
                 specialAtkBox.transform.localPosition = positions[0];
+                setProjectileOffset = projectileOffset;
             }
             
         }
@@ -113,6 +119,7 @@ public class LightRanged : Player
             {
                 attackBox.transform.localPosition = positions[1];
                 specialAtkBox.transform.localPosition = positions[1];
+                setProjectileOffset = -projectileOffset;
             }
         }
         xSpeed = moveVector.x * moveSpeed;
@@ -142,7 +149,7 @@ public class LightRanged : Player
         }
         if(activateSpecial)
         {
-            specialAttackActiveTimer += specialAttackActiveTime;
+            specialAttackActiveTimer += Time.deltaTime;
             if(specialAttackActiveTimer >= specialAttackActiveTime)
             {
                 specialAtkBox.SetActive(false);
@@ -168,7 +175,7 @@ public class LightRanged : Player
             else if(hit.collider.CompareTag("Player"))
             {
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.VelocityChange);
+                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.Impulse);
             }
             if(hit.collider.CompareTag("BouncePlatform"))
             {
@@ -176,7 +183,7 @@ public class LightRanged : Player
                 grounded = true;
                 jumpDelay = 0;
                 secondJump = true;
-                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.VelocityChange);
+                rb.AddForce(initialJumpVelocity/3 * Vector3.up, ForceMode.Impulse);
             }
             
         }
@@ -195,18 +202,19 @@ public class LightRanged : Player
         if (grounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
+            rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
             return;
         }
         else if (secondJump && !grounded)
         {
             if (jumpDelay >= maxJumpDelay)
             {
-                if (rb.velocity.y < 0)
-                {
-                    rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                }
-                rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
+                // if (rb.velocity.y < 0)
+                // {
+                //     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                // }
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(doubleJumpVelocity * Vector3.up, ForceMode.Impulse);
                 secondJump = false;
             }
         }
@@ -258,6 +266,7 @@ public class LightRanged : Player
         }
         attackBox.SetActive(true);
         atkTimerActive = true;
+        FireProjectile();
     }
     public void SpecialAttack()
     {
@@ -448,5 +457,29 @@ public class LightRanged : Player
     {
         Vector2 moveVector = context.ReadValue<Vector2>();
         UpdateMoveVector(moveVector);
+    }
+    void FireProjectile()
+    {
+        if (attackBox.transform.localPosition == positions[0])
+        {
+            setProjectileOffset = projectileOffset;
+        }
+        else if(attackBox.transform.localPosition == positions[1])
+        {
+            setProjectileOffset = -projectileOffset;
+        }
+        GameObject projectile = Instantiate(projectilePrefab, attackBox.transform.position + setProjectileOffset, attackBox.transform.rotation);
+        Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
+        if (projectileRB != null)
+        {
+            if (attackBox.transform.localPosition == positions[0])
+            {
+                projectileRB.velocity = Vector3.right * projectileSpeed;
+            }
+            else if(attackBox.transform.localPosition == positions[1])
+            {
+                projectileRB.velocity = Vector3.left * projectileSpeed;
+            }
+        }
     }
 }

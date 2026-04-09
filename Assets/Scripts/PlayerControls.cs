@@ -127,6 +127,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Special"",
+                    ""type"": ""Button"",
+                    ""id"": ""baab5bbd-5f62-42a2-892a-d9edf932a1a0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -173,6 +182,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Ready"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b3f7b3a-1a41-410d-a8db-befcaf90811d"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Special"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +205,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Ready = m_Gameplay.FindAction("Ready", throwIfNotFound: true);
+        m_Gameplay_Special = m_Gameplay.FindAction("Special", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -269,6 +290,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Ready;
+    private readonly InputAction m_Gameplay_Special;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -296,6 +318,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Ready".
         /// </summary>
         public InputAction @Ready => m_Wrapper.m_Gameplay_Ready;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/Special".
+        /// </summary>
+        public InputAction @Special => m_Wrapper.m_Gameplay_Special;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -334,6 +360,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Ready.started += instance.OnReady;
             @Ready.performed += instance.OnReady;
             @Ready.canceled += instance.OnReady;
+            @Special.started += instance.OnSpecial;
+            @Special.performed += instance.OnSpecial;
+            @Special.canceled += instance.OnSpecial;
         }
 
         /// <summary>
@@ -357,6 +386,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Ready.started -= instance.OnReady;
             @Ready.performed -= instance.OnReady;
             @Ready.canceled -= instance.OnReady;
+            @Special.started -= instance.OnSpecial;
+            @Special.performed -= instance.OnSpecial;
+            @Special.canceled -= instance.OnSpecial;
         }
 
         /// <summary>
@@ -425,5 +457,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnReady(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Special" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpecial(InputAction.CallbackContext context);
     }
 }

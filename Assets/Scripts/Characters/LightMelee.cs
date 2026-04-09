@@ -50,8 +50,8 @@ public class LightMelee : Player
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
     private float specialGaugeTimer = 0f;
-    private bool specialGaugeTimerActive = true;
-
+    private bool specialGaugeTimerActive = false;
+    public float specialGaugeDelay = 15f;
     private float specialAttackActiveTimer = 0f;
     private bool activateSpecial = false;
     private float counterTimer = 0f;
@@ -86,7 +86,7 @@ public class LightMelee : Player
         float timeToApex = maxJumpTime/2;
         jumpGravity = (-2* maxJumpHeight)/Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2*maxJumpHeight)/timeToApex;
-        doubleJumpVelocity = initialJumpVelocity/2;
+        doubleJumpVelocity = initialJumpVelocity*1.5f;
     }
 
     public void UpdateMoveVector(Vector2 moveVector)
@@ -149,7 +149,7 @@ public class LightMelee : Player
         }
         if(activateSpecial)
         {
-            specialAttackActiveTimer += specialAttackActiveTime;
+            specialAttackActiveTimer += Time.deltaTime;
             if(specialAttackActiveTimer >= specialAttackActiveTime)
             {
                 specialAtkBox.SetActive(false);
@@ -175,7 +175,7 @@ public class LightMelee : Player
             else if(hit.collider.CompareTag("Player"))
             {
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.VelocityChange);
+                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.Impulse);
             }
             if(hit.collider.CompareTag("BouncePlatform"))
             {
@@ -183,7 +183,7 @@ public class LightMelee : Player
                 grounded = true;
                 jumpDelay = 0;
                 secondJump = true;
-                rb.AddForce(initialJumpVelocity/6 * Vector3.up, ForceMode.VelocityChange);
+                rb.AddForce(initialJumpVelocity/3 * Vector3.up, ForceMode.Impulse);
             }
             
         }
@@ -202,18 +202,19 @@ public class LightMelee : Player
         if (grounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
+            rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
             return;
         }
         else if (secondJump && !grounded)
         {
             if (jumpDelay >= maxJumpDelay)
             {
-                if (rb.velocity.y < 0)
-                {
-                    rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                }
-                rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.VelocityChange);
+                // if (rb.velocity.y < 0)
+                // {
+                //     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                // }
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(doubleJumpVelocity * Vector3.up, ForceMode.Impulse);
                 secondJump = false;
             }
         }
