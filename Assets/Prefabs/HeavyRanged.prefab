@@ -230,10 +230,11 @@ MonoBehaviour:
   moveSpeed: 15
   jumpForce: 125
   grounded: 0
-  maxJumpHeight: 2
-  maxJumpTime: 1.5
+  maxJumpHeight: 25
+  maxJumpTime: 2
   distToGround: 0.5
   projectilePrefab: {fileID: 2057495842931445320, guid: f2ebe4952275817418be631e0d40fa18, type: 3}
+  projectileSpeed: 10
   specialGaugeDelay: 30
   specialAttackActiveTime: 0.5
   knockback: 150
@@ -245,7 +246,7 @@ MonoBehaviour:
   - {x: -0.7558146, y: -0.04199982, z: -0.04986125}
   resetPosition: {x: 0, y: 10, z: 0}
   secondJump: 0
-  maxJumpDelay: 1
+  maxJumpDelay: 0.25
   landingEffectPrefab: {fileID: 2553654953159236003, guid: 5cd13d31c2675284c875d4d86e6e7fb6, type: 3}
   hitEffectPrefab: {fileID: 6395329100671518530, guid: 2596555950a94de489cb57282c949e60, type: 3}
 --- !u!114 &1553446653892103366
