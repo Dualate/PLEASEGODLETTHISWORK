@@ -339,7 +339,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d13a55bc7e90a5546aa121598a119f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  display_xSpeed: 0
+  moveSpeed: 7
   jumpForce: 125
   grounded: 0
   maxJumpHeight: 50
@@ -352,7 +353,15 @@ MonoBehaviour:
   atkKnockback: 0
   damagePercent: 0
   atkDelayTime: 0.5
-  positions: []
+  positions:
+  - {x: -0.7558146, y: -0.041999817, z: -0.049861252}
+  - {x: 0.7558146, y: -0.041999817, z: -0.049861252}
+  - {x: 0, y: 0.7558146, z: -0.049861252}
+  - {x: 0, y: -0.7558146, z: 0}
+  - {x: 0.7558146, y: 0.7558146, z: 0}
+  - {x: -0.7558146, y: 0.7558146, z: 0}
+  - {x: -0.7558146, y: -0.7558146, z: 0}
+  - {x: 0.7558146, y: -0.7558146, z: 0}
   resetPosition: {x: 0, y: 0, z: 0}
   secondJump: 0
   maxJumpDelay: 0.25

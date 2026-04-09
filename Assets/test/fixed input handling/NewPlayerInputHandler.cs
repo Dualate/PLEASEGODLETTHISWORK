@@ -23,6 +23,10 @@ public class NewPlayerInputHandler : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        mover.SetIndex(playerConfig.PlayerIndex);
+    }
     public int GetIndex()
     {
         return playerConfig.PlayerIndex;
@@ -50,10 +54,7 @@ public class NewPlayerInputHandler : MonoBehaviour
         }
     }
 
-    void Update()
-    {
 
-    }
 
     public void OnMove(CallbackContext context)
     {

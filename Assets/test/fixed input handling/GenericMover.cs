@@ -10,7 +10,7 @@ public class GenericMover : MonoBehaviour
 
 
     public float display_xSpeed;
-
+    int playerIndex;
     public float moveSpeed;
     public float jumpForce;
     public bool grounded;
@@ -61,6 +61,12 @@ public class GenericMover : MonoBehaviour
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
         rb = GetComponent<Rigidbody>();
+
+    }
+
+    public void SetIndex(int index)
+    {
+        playerIndex = index;
     }
 
     public void UpdateMoveVector(Vector2 moveVector)
@@ -102,8 +108,8 @@ public class GenericMover : MonoBehaviour
                 attackBox.transform.localPosition = positions[1];
             }
         }
-        xSpeed += moveVector.x * moveSpeed * Time.deltaTime;
-        //xSpeed = moveVector.x * moveSpeed * Time.deltaTime;
+        //xSpeed += moveVector.x * moveSpeed * Time.deltaTime;
+        xSpeed = moveVector.x * moveSpeed;
         //transform.Translate(xSpeed, ySpeed, 0, Space.World);
         rb.velocity = new Vector3(xSpeed, rb.velocity.y, 0);
         display_xSpeed = xSpeed;
@@ -193,7 +199,7 @@ public class GenericMover : MonoBehaviour
         {
             if (atkTimerActive == false)
             {
-                attackBox.transform.localPosition = positions[0];
+                attackBox.transform.localPosition = positions[1];
             }
 
         }
@@ -201,7 +207,7 @@ public class GenericMover : MonoBehaviour
         {
             if (atkTimerActive == false)
             {
-                attackBox.transform.localPosition = positions[1];
+                attackBox.transform.localPosition = positions[0];
             }
         }
         xSpeed = moveVector.x * moveSpeed;
@@ -471,5 +477,10 @@ public class GenericMover : MonoBehaviour
             Debug.Log("Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
+    }
+
+    public int GetIndex()
+    {
+        return playerIndex;
     }
 }
