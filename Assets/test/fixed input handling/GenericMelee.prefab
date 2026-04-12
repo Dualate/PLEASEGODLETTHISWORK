@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 5138471045466918782}
   - component: {fileID: 1348301122930805809}
   m_Layer: 0
-  m_Name: GenericMover
+  m_Name: GenericMelee
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

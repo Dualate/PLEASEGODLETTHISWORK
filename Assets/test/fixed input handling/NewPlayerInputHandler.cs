@@ -16,7 +16,7 @@ public class NewPlayerInputHandler : MonoBehaviour
     Vector2 moveVector;
 
     [SerializeField]
-    GenericMover mover;
+    GenericMelee mover;
     public void Awake()
     {
         controls = new PlayerControls();
