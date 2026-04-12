@@ -26,7 +26,7 @@ public class FinishLine : MonoBehaviour
         }
         if (collider.gameObject.CompareTag("Player"))
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(collider.gameObject.GetComponent<GenericMover>().GetIndex() + 1);
+            GameObject.Find("GameManager").GetComponent<GameManager>().EndGame(collider.gameObject.GetComponent<GenericMelee>().GetIndex() + 1);
         }
     }
 }
