@@ -54,6 +54,9 @@ public class NewPlayerInputHandler : MonoBehaviour
         }
     }
 
+    public PlayerConfiguration connectInput(){
+        return playerConfig;
+    }
 
 
     public void OnMove(CallbackContext context)
