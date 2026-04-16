@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
-public class GenericMelee : MonoBehaviour
+public class GenericRanged : MonoBehaviour
 {
-
-
-
-
-    int playerIndex;
     public float moveSpeed;
     public float jumpForce;
     public bool grounded;
@@ -27,19 +22,26 @@ public class GenericMelee : MonoBehaviour
     //isGrounded variables
     public float distToGround = .5f;
 
-    public GameObject attackBox;
-    public float atkTimer = 0f;
-    public bool atkTimerActive = false;
-
+    private GameObject attackBox;
+    private GameObject specialAtkBox;
+    private float atkTimer = 0f;
+    private bool atkTimerActive = false;
+    private float specialGaugeTimer = 0f;
+    private bool specialGaugeTimerActive = true;
+    public float specialGaugeDelay = 15f;
+    private float specialAttackActiveTimer = 0f;
+    public float specialAttackActiveTime = .5f;
+    private bool activateSpecial = false;
 
     public float knockback; //base knockback taken by character
     public float atkKnockback; //base knockback dealt by attacks
+    public float specialKnockback;
     public float damagePercent;
-    public float atkDelayTime = .5f;
+    private float atkDelayTime = .5f;
     public Vector3[] positions;
     public Vector3 resetPosition;
     public bool secondJump = false;
-    public float maxJumpDelay = .25f;
+    public float maxJumpDelay = 1f;
     float jumpDelay = 0;
 
     bool ready;
@@ -47,30 +49,25 @@ public class GenericMelee : MonoBehaviour
     public ParticleSystem landingEffectPrefab;
     public ParticleSystem hitEffectPrefab;
 
-    [SerializeField]
-    Rigidbody rb;
-    public void Awake()
-    {
-        SetJumpVariables();
+    private Rigidbody rb;
 
-    }
+    private Vector3 projectileOffset = new Vector3(1, 0, 0);
+    private Vector3 setProjectileOffset;
+    public GameObject projectilePrefab;
+    public float projectileSpeed;
     void Start()
     {
         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
+        specialAtkBox = GameObject.Find("specialAtkBox");
+        specialAtkBox.SetActive(false);
         rb = GetComponent<Rigidbody>();
-
     }
 
-    public void SetIndex(int index)
+    void Awake()
     {
-        playerIndex = index;
-    }
-
-    public void UpdateMoveVector(Vector2 moveVector)
-    {
-        this.moveVector = moveVector;
+        SetJumpVariables();
     }
 
     void SetJumpVariables()
@@ -81,10 +78,17 @@ public class GenericMelee : MonoBehaviour
         doubleJumpVelocity = initialJumpVelocity * 1.5f;
     }
 
+    public void UpdateMoveVector(Vector2 moveVector)
+    {
+
+        this.moveVector = moveVector;
+
+    }
+
+
     void Update()
     {
         GroundCheck();
-        FootstoolCheck();
 
         if (transform.position.y < -15)
         {
@@ -97,6 +101,8 @@ public class GenericMelee : MonoBehaviour
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[0];
+                specialAtkBox.transform.localPosition = positions[0];
+                setProjectileOffset = projectileOffset;
             }
 
         }
@@ -105,107 +111,8 @@ public class GenericMelee : MonoBehaviour
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[1];
-            }
-        }
-        //xSpeed += moveVector.x * moveSpeed * Time.deltaTime;
-        xSpeed = moveVector.x * moveSpeed;
-        //transform.Translate(xSpeed, ySpeed, 0, Space.World);
-        rb.velocity = new Vector3(xSpeed, rb.velocity.y, 0);
-        if (atkTimerActive == true) //This section deactivates the attackbox after a timer
-        {
-            atkTimer += Time.deltaTime;
-            //Debug.Log(atkTimer);
-            if (atkTimer >= atkDelayTime)
-            {
-                attackBox.SetActive(false);
-                atkTimerActive = false;
-                atkTimer = 0f;
-                attackBox.transform.localPosition = positions[0]; //reset position of attacks
-            }
-        }
-    }
-
-    public void Attack()
-    {
-        if (atkTimerActive)
-        {
-            return;
-        }
-        if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y > 0.5f) //up
-        {
-            attackBox.transform.localPosition = positions[2];
-        }
-        else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.5f) //down
-        {
-            attackBox.transform.localPosition = positions[3];
-        }
-        else if (moveVector.x > 0.5f && moveVector.y > 0.5f) //top right
-        {
-            attackBox.transform.localPosition = positions[4];
-        }
-        else if (moveVector.x < -0.5f && moveVector.y > 0.5f) //top left
-        {
-            attackBox.transform.localPosition = positions[5];
-        }
-        else if (moveVector.x < -0.5f && moveVector.y < -0.5f) //bottom left
-        {
-            attackBox.transform.localPosition = positions[6];
-        }
-        else if (moveVector.x > 0.5f && moveVector.y < -0.5f) //bottom right
-        {
-            attackBox.transform.localPosition = positions[7];
-        }
-
-        attackBox.SetActive(true);
-        atkTimerActive = true;
-    }
-
-
-    public void Jump()
-    {
-        if (grounded)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
-            return;
-        }
-        else if (secondJump && !grounded)
-        {
-            if (jumpDelay >= maxJumpDelay)
-            {
-                // if (rb.velocity.y < 0)
-                // {
-                //     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                // }
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
-                secondJump = false;
-            }
-        }
-    }
-    private void LateUpdate()
-    {
-        GroundCheck();
-
-        if (transform.position.y < -15)
-        {
-            transform.position = resetPosition;
-            rb.velocity = Vector3.zero;
-            damagePercent = 0f;
-        }
-        if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
-        {
-            if (atkTimerActive == false)
-            {
-                attackBox.transform.localPosition = positions[1];
-            }
-
-        }
-        else if (moveVector.x < -0.5f && Mathf.Abs(moveVector.y) < 0.5f)
-        {
-            if (atkTimerActive == false)
-            {
-                attackBox.transform.localPosition = positions[0];
+                specialAtkBox.transform.localPosition = positions[1];
+                setProjectileOffset = -projectileOffset;
             }
         }
         xSpeed = moveVector.x * moveSpeed;
@@ -224,8 +131,25 @@ public class GenericMelee : MonoBehaviour
                 attackBox.transform.localPosition = positions[0]; //reset position of attacks
             }
         }
-
-
+        if (specialGaugeTimerActive == true)
+        {
+            specialGaugeTimer += Time.deltaTime;
+            if (specialGaugeTimer >= specialGaugeDelay)
+            {
+                specialGaugeTimerActive = false;
+                specialGaugeTimer = 0f;
+            }
+        }
+        if (activateSpecial)
+        {
+            specialAttackActiveTimer += Time.deltaTime;
+            if (specialAttackActiveTimer >= specialAttackActiveTime)
+            {
+                specialAtkBox.SetActive(false);
+                activateSpecial = false;
+                specialAttackActiveTimer = 0f;
+            }
+        }
     }
 
     void GroundCheck()
@@ -266,26 +190,26 @@ public class GenericMelee : MonoBehaviour
         }
     }
 
-    public void FootstoolCheck()
+    public void Jump()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, distToGround + .1f))
+        if (grounded)
         {
-            if (hit.collider.CompareTag("Player"))
-            {
-                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity / 3 * Vector3.up, ForceMode.VelocityChange);
-            }
-
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
+            return;
         }
-        if (Physics.Raycast(transform.position, Vector3.up, out hit, distToGround + .1f))
+        else if (secondJump && !grounded)
         {
-            if (hit.collider.CompareTag("Player"))
+            if (jumpDelay >= maxJumpDelay)
             {
+                // if (rb.velocity.y < 0)
+                // {
+                //     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                // }
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity / 6 * Vector3.down, ForceMode.VelocityChange);
+                rb.AddForce(doubleJumpVelocity * Vector3.up, ForceMode.Impulse);
+                secondJump = false;
             }
-
         }
     }
 
@@ -300,6 +224,52 @@ public class GenericMelee : MonoBehaviour
                 Destroy(landingInstance.gameObject, landingEffectPrefab.main.duration);
             }
         }
+    }
+
+
+    public void Attack()
+    {
+        if (atkTimerActive)
+        {
+            return;
+        }
+        if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y > 0.5f) //up
+        {
+            attackBox.transform.localPosition = positions[2];
+        }
+        else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.5f) //down
+        {
+            attackBox.transform.localPosition = positions[3];
+        }
+        else if (moveVector.x > 0.5f && moveVector.y > 0.5f) //top right
+        {
+            attackBox.transform.localPosition = positions[4];
+        }
+        else if (moveVector.x < -0.5f && moveVector.y > 0.5f) //top left
+        {
+            attackBox.transform.localPosition = positions[5];
+        }
+        else if (moveVector.x < -0.5f && moveVector.y < -0.5f) //bottom left
+        {
+            attackBox.transform.localPosition = positions[6];
+        }
+        else if (moveVector.x > 0.5f && moveVector.y < -0.5f) //bottom right
+        {
+            attackBox.transform.localPosition = positions[7];
+        }
+        attackBox.SetActive(true);
+        atkTimerActive = true;
+        FireProjectile();
+    }
+    public void SpecialAttack()
+    {
+        if (specialGaugeTimerActive)
+        {
+            return;
+        }
+        specialAtkBox.SetActive(true);
+        activateSpecial = true;
+        specialGaugeTimerActive = true;
     }
 
     void OnTriggerEnter(Collider collider)
@@ -476,9 +446,33 @@ public class GenericMelee : MonoBehaviour
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
     }
-
-    public int GetIndex()
+    public void OnMove(CallbackContext context)
     {
-        return playerIndex;
+        Vector2 moveVector = context.ReadValue<Vector2>();
+        UpdateMoveVector(moveVector);
+    }
+    void FireProjectile()
+    {
+        if (attackBox.transform.localPosition == positions[0])
+        {
+            setProjectileOffset = projectileOffset;
+        }
+        else if (attackBox.transform.localPosition == positions[1])
+        {
+            setProjectileOffset = -projectileOffset;
+        }
+        GameObject projectile = Instantiate(projectilePrefab, attackBox.transform.position + setProjectileOffset, attackBox.transform.rotation);
+        Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
+        if (projectileRB != null)
+        {
+            if (attackBox.transform.localPosition == positions[0])
+            {
+                projectileRB.velocity = Vector3.right * projectileSpeed;
+            }
+            else if (attackBox.transform.localPosition == positions[1])
+            {
+                projectileRB.velocity = Vector3.left * projectileSpeed;
+            }
+        }
     }
 }
