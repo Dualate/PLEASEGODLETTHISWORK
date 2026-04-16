@@ -9,20 +9,20 @@ public class GenericMelee : MonoBehaviour
 
 
 
-    int playerIndex;
+    public int playerIndex;
     public float moveSpeed;
     public float jumpForce;
     public bool grounded;
-    float xSpeed;
-    float ySpeed;
-    Vector2 moveVector;
+    public float xSpeed;
+    public float ySpeed;
+    public Vector2 moveVector;
 
     //jump variables
-    float initialJumpVelocity;
-    float doubleJumpVelocity;
+    public float initialJumpVelocity;
+    public float doubleJumpVelocity;
     public float maxJumpHeight = 2f;
     public float maxJumpTime = 1.5f;
-    float jumpGravity;
+    public float jumpGravity;
 
     //isGrounded variables
     public float distToGround = .5f;
@@ -40,9 +40,9 @@ public class GenericMelee : MonoBehaviour
     public Vector3 resetPosition;
     public bool secondJump = false;
     public float maxJumpDelay = .25f;
-    float jumpDelay = 0;
+    public float jumpDelay = 0;
 
-    bool ready;
+    public bool ready;
 
     public ParticleSystem landingEffectPrefab;
     public ParticleSystem hitEffectPrefab;
