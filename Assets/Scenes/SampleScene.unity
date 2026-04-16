@@ -1210,7 +1210,9 @@ MonoBehaviour:
   - {fileID: 460454666}
   - {fileID: 1338311875}
   - {fileID: 1795309348}
-  playerPrefabs: []
+  playerPrefabs:
+  - {fileID: 5666323581663875270, guid: 9ca1b40e4c157554eb5ffef9c367d765, type: 3}
+  - {fileID: 695936872144487996, guid: 6f91376390509924692abed06684a11b, type: 3}
   playerModel: {fileID: 695936872144487996, guid: 6f91376390509924692abed06684a11b, type: 3}
   camera: {fileID: 1861031886}
 --- !u!1 &1665428105

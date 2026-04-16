@@ -5,6 +5,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class GenericRanged : MonoBehaviour
 {
+    int playerIndex;
     public float moveSpeed;
     public float jumpForce;
     public bool grounded;
@@ -60,14 +61,19 @@ public class GenericRanged : MonoBehaviour
         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
-        specialAtkBox = GameObject.Find("specialAtkBox");
-        specialAtkBox.SetActive(false);
+        //specialAtkBox = GameObject.Find("specialAtkBox");
+        //specialAtkBox.SetActive(false);
         rb = GetComponent<Rigidbody>();
     }
 
     void Awake()
     {
         SetJumpVariables();
+    }
+
+    public void SetIndex(int index)
+    {
+        playerIndex = index;
     }
 
     void SetJumpVariables()
@@ -101,7 +107,7 @@ public class GenericRanged : MonoBehaviour
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[0];
-                specialAtkBox.transform.localPosition = positions[0];
+              //  specialAtkBox.transform.localPosition = positions[0];
                 setProjectileOffset = projectileOffset;
             }
 
@@ -111,7 +117,7 @@ public class GenericRanged : MonoBehaviour
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[1];
-                specialAtkBox.transform.localPosition = positions[1];
+         //       specialAtkBox.transform.localPosition = positions[1];
                 setProjectileOffset = -projectileOffset;
             }
         }
