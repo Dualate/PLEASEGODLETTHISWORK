@@ -123,6 +123,7 @@ public class HeavyMelee : Player
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[1];
+                specialSignals[1] = true;
                 specialAtkBox.transform.localPosition = positions[1];
             }
         }

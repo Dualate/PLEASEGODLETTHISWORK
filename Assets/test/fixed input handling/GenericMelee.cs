@@ -47,11 +47,14 @@ public class GenericMelee : MonoBehaviour
     public ParticleSystem landingEffectPrefab;
     public ParticleSystem hitEffectPrefab;
 
+    public bool[] specialSignals;
+
     [SerializeField]
     Rigidbody rb;
     public void Awake()
     {
         SetJumpVariables();
+        specialSignals = new bool[10];
 
     }
     void Start()
@@ -60,7 +63,6 @@ public class GenericMelee : MonoBehaviour
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
         rb = GetComponent<Rigidbody>();
-
     }
 
     public void SetIndex(int index)
@@ -83,6 +85,7 @@ public class GenericMelee : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(specialSignals);
         GroundCheck();
         FootstoolCheck();
 
@@ -97,6 +100,8 @@ public class GenericMelee : MonoBehaviour
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[0];
+                specialSignals[1] = true;
+                specialSignals[0] = false;
             }
 
         }
@@ -104,6 +109,8 @@ public class GenericMelee : MonoBehaviour
         {
             if (atkTimerActive == false)
             {
+                specialSignals[0] = true;
+                specialSignals[1] = false;
                 attackBox.transform.localPosition = positions[1];
             }
         }
