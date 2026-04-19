@@ -56,6 +56,11 @@ public class GenericRanged : MonoBehaviour
     private Vector3 setProjectileOffset;
     public GameObject projectilePrefab;
     public float projectileSpeed;
+
+    public bool[] specialSignals;
+
+
+
     void Start()
     {
         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
@@ -68,6 +73,8 @@ public class GenericRanged : MonoBehaviour
 
     void Awake()
     {
+        specialSignals = new bool[2];
+
         SetJumpVariables();
     }
 
@@ -106,7 +113,8 @@ public class GenericRanged : MonoBehaviour
         {
             if (atkTimerActive == false)
             {
-                attackBox.transform.localPosition = positions[0];
+                attackBox.transform.localPosition = positions[1];
+                specialSignals[0] = true;
               //  specialAtkBox.transform.localPosition = positions[0];
                 setProjectileOffset = projectileOffset;
             }
@@ -116,7 +124,7 @@ public class GenericRanged : MonoBehaviour
         {
             if (atkTimerActive == false)
             {
-                attackBox.transform.localPosition = positions[1];
+                attackBox.transform.localPosition = positions[0];
          //       specialAtkBox.transform.localPosition = positions[1];
                 setProjectileOffset = -projectileOffset;
             }
