@@ -15,6 +15,7 @@ public class Projectiles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(GetComponent<Rigidbody>().velocity);
         lifetimeCounter += Time.deltaTime;
         if(lifetimeCounter >= lifetime)
         {

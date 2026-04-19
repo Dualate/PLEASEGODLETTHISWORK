@@ -52,8 +52,8 @@ public class GenericRanged : MonoBehaviour
 
     private Rigidbody rb;
 
-    private Vector3 projectileOffset = new Vector3(1, 0, 0);
-    private Vector3 setProjectileOffset;
+    private Vector3 projectileOffset = new Vector3(1.5f, 0, 0);
+    public Vector3 setProjectileOffset;
     public GameObject projectilePrefab;
     public float projectileSpeed;
 
@@ -467,6 +467,7 @@ public class GenericRanged : MonoBehaviour
     }
     void FireProjectile()
     {
+        /*
         if (attackBox.transform.localPosition == positions[0])
         {
             setProjectileOffset = projectileOffset;
@@ -475,15 +476,17 @@ public class GenericRanged : MonoBehaviour
         {
             setProjectileOffset = -projectileOffset;
         }
+        */
+        
         GameObject projectile = Instantiate(projectilePrefab, attackBox.transform.position + setProjectileOffset, attackBox.transform.rotation);
         Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
         if (projectileRB != null)
         {
-            if (attackBox.transform.localPosition == positions[0])
+            if (attackBox.transform.localPosition == positions[1])
             {
                 projectileRB.velocity = Vector3.right * projectileSpeed;
             }
-            else if (attackBox.transform.localPosition == positions[1])
+            else if (attackBox.transform.localPosition == positions[0])
             {
                 projectileRB.velocity = Vector3.left * projectileSpeed;
             }

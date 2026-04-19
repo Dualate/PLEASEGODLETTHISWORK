@@ -23,12 +23,16 @@ public class InitializeLevel : MonoBehaviour
             switch (playerConfigs[i].animator.name)
             {
                 case "anabeth_animator":
+                    playerModel = playerPrefabs[0];
+                    break;
                 case "alicia_animator":
                     playerModel = playerPrefabs[1];
                     break;
                 case "nori_animator":
+                    playerModel = playerPrefabs[2];
+                    break;
                 case "jimena_animator":
-                    playerModel = playerPrefabs[0];
+                    playerModel = playerPrefabs[3];
                     break;
             }
             
@@ -37,11 +41,12 @@ public class InitializeLevel : MonoBehaviour
             
             switch (playerModel.name)
             {
-                case "GenericPlayerModel":
+                case "Alicia":
+                case "Anabeth":
                     player.GetComponent<NewPlayerInputHandler>().InitializePlayer(playerConfigs[i]);
 
                     break;
-                case "GenericRangedModel":
+                case "Nori":
                     player.GetComponent<RangedPlayerInputHandler>().InitializePlayer(playerConfigs[i]);
 
                     break;
