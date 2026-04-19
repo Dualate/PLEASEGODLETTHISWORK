@@ -1,0 +1,74 @@
+{
+    "name": "MenuNav",
+    "maps": [
+        {
+            "name": "SelectorLocomotion",
+            "id": "c32e3237-0aaa-41e8-8528-91a23be3b76d",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "735c0d54-5b5f-40e0-84b5-36bec5e0a0e2",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "6d1f8b58-63df-409d-801e-05f0ad0b6b92",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Deselect",
+                    "type": "Button",
+                    "id": "c57f0e97-f433-40aa-b2be-c6d279d65943",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5a86dc28-7df5-4a6c-84fa-45a1972b4568",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e8b8008-1b40-4c4b-bb68-ea25ae99daee",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a47a2e98-feac-40cd-8cf9-5e518fb3ed9f",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Deselect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

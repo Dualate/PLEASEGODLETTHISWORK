@@ -5,6 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - attack
+  - LightProjectile
+  - HeavyProjectile
+  - BouncePlatform
+  - HRanged
+  - HMelee
+  - HMSpecial
+  - LMSpecial
+  - HRSpecial
+  - LRSpecial
   layers:
   - Default
   - TransparentFX
