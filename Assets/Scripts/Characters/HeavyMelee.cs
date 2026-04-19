@@ -34,7 +34,7 @@ public class HeavyMelee : Player
         this.specialGaugeDelay = 30f;
         this.specialAttackActiveTime = .5f;
     }
-
+    public bool[] specialSignals;
     float xSpeed;
     float ySpeed;
     Vector2 moveVector;
@@ -74,6 +74,7 @@ public class HeavyMelee : Player
         specialAtkBox = GameObject.Find("specialAtkBox");
         specialAtkBox.SetActive(false);
         rb = GetComponent<Rigidbody>();
+        specialSignals = new bool[10];
     }
 
     void Awake()
@@ -112,6 +113,7 @@ public class HeavyMelee : Player
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[0];
+                specialSignals[0] = true;
                 specialAtkBox.transform.localPosition = positions[0];
             }
             
@@ -121,6 +123,7 @@ public class HeavyMelee : Player
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[1];
+                specialSignals[1] = true;
                 specialAtkBox.transform.localPosition = positions[1];
             }
         }

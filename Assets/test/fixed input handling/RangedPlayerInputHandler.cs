@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
-public class NewPlayerInputHandler : MonoBehaviour
+public class RangedPlayerInputHandler : MonoBehaviour
 {
 
 
@@ -12,11 +12,11 @@ public class NewPlayerInputHandler : MonoBehaviour
     [SerializeField]
     public PlayerControls controls;
 
-    
+
     Vector2 moveVector;
 
     [SerializeField]
-    GenericMelee mover;
+    GenericRanged mover;
     public void Awake()
     {
         controls = new PlayerControls();
@@ -54,7 +54,8 @@ public class NewPlayerInputHandler : MonoBehaviour
         }
     }
 
-    public PlayerConfiguration connectInput(){
+    public PlayerConfiguration connectInput()
+    {
         return playerConfig;
     }
 
@@ -62,7 +63,7 @@ public class NewPlayerInputHandler : MonoBehaviour
     public void OnMove(CallbackContext context)
     {
         mover.UpdateMoveVector(context.ReadValue<Vector2>());
-        
+
     }
 
 

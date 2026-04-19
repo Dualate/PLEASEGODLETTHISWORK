@@ -1211,7 +1211,7 @@ MonoBehaviour:
   - {fileID: 1338311875}
   - {fileID: 1795309348}
   playerPrefabs: []
-  playerModel: {fileID: 695936872144487996, guid: 6f91376390509924692abed06684a11b, type: 3}
+  playerModel: {fileID: 600482579720465305, guid: ee14c0d3160b3c04daf58cb993fabe94, type: 3}
   camera: {fileID: 1861031886}
 --- !u!1 &1665428105
 GameObject:
