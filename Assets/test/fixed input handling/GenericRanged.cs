@@ -95,7 +95,7 @@ public class GenericRanged : MonoBehaviour
         float timeToApex = maxJumpTime / 2;
         jumpGravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
-        doubleJumpVelocity = initialJumpVelocity * 1.5f;
+        doubleJumpVelocity = initialJumpVelocity * 2f;
     }
 
     public void UpdateMoveVector(Vector2 moveVector)

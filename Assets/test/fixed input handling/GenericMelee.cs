@@ -80,7 +80,7 @@ public class GenericMelee : MonoBehaviour
         float timeToApex = maxJumpTime / 2;
         jumpGravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
-        doubleJumpVelocity = initialJumpVelocity * 1.5f;
+        doubleJumpVelocity = initialJumpVelocity * 2f;
     }
 
     void Update()
@@ -185,7 +185,7 @@ public class GenericMelee : MonoBehaviour
                 //     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 // }
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
+                rb.AddForce(doubleJumpVelocity * Vector3.up, ForceMode.Impulse);
                 secondJump = false;
             }
         }

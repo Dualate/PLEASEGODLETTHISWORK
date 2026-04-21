@@ -188,6 +188,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: maxJumpDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: maxJumpHeight
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 2057495842931445320, guid: f66655efc2fdd3c4cb91297ce254a27e, type: 3}
