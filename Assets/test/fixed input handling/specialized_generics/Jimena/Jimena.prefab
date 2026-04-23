@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3454001763776230219}
   - component: {fileID: 6165499580943052513}
   - component: {fileID: 4031851748685434963}
+  - component: {fileID: 3013505017988508614}
   m_Layer: 0
   m_Name: Jimena
   m_TagString: Player
@@ -61,6 +62,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialGaugeDelay: 30
   specialAttackActiveTime: 0.5
+--- !u!114 &3013505017988508614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2491632269177507422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d436e32afc60c4fa1c03655894bace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  returnTimer: 0
 --- !u!1 &6072612863446034649
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -51,6 +53,9 @@ public class GenericMelee : MonoBehaviour
 
     [SerializeField]
     Rigidbody rb;
+
+    Animator animator;
+    SpriteRenderer sprite;
     public void Awake()
     {
         SetJumpVariables();
@@ -59,6 +64,15 @@ public class GenericMelee : MonoBehaviour
     }
     void Start()
     {
+        try
+        {
+            animator = GetComponentInChildren<Animator>();
+            sprite = GetComponentInChildren<SpriteRenderer>();
+        }
+        catch (NullReferenceException exception)
+        {
+            Debug.Log("Failed");
+        }
         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
         attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
@@ -91,6 +105,7 @@ public class GenericMelee : MonoBehaviour
         
         if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
         {
+            sprite.flipX = false;
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[0];
@@ -101,6 +116,8 @@ public class GenericMelee : MonoBehaviour
         }
         else if (moveVector.x < -0.5f && Mathf.Abs(moveVector.y) < 0.5f)
         {
+            sprite.flipX = true;
+
             if (atkTimerActive == false)
             {
                 specialSignals[0] = true;
@@ -134,28 +151,40 @@ public class GenericMelee : MonoBehaviour
         }
         if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y > 0.5f) //up
         {
+            animator.SetBool("posY", true);
             attackBox.transform.localPosition = positions[2];
         }
         else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.5f) //down
         {
+            animator.SetBool("posY", false);
+
             attackBox.transform.localPosition = positions[3];
         }
         else if (moveVector.x > 0.5f && moveVector.y > 0.5f) //top right
         {
+            animator.SetBool("posY", true);
+
             attackBox.transform.localPosition = positions[4];
         }
         else if (moveVector.x < -0.5f && moveVector.y > 0.5f) //top left
         {
+            animator.SetBool("posY", true);
+
             attackBox.transform.localPosition = positions[5];
         }
         else if (moveVector.x < -0.5f && moveVector.y < -0.5f) //bottom left
         {
+            animator.SetBool("posY", false);
+
             attackBox.transform.localPosition = positions[6];
         }
         else if (moveVector.x > 0.5f && moveVector.y < -0.5f) //bottom right
         {
+            animator.SetBool("posY", false);
+
             attackBox.transform.localPosition = positions[7];
         }
+        animator.SetTrigger("attack");
 
         attackBox.SetActive(true);
         atkTimerActive = true;
@@ -241,6 +270,8 @@ public class GenericMelee : MonoBehaviour
                 jumpDelay = 0;
                 secondJump = true;
                 resetPosition = transform.position;
+                animator.SetBool("grounded", true);
+                Debug.Log("grounded");
             }
             else if (hit.collider.CompareTag("Player"))
             {
@@ -260,6 +291,8 @@ public class GenericMelee : MonoBehaviour
         else
         {
             grounded = false;
+            animator.SetBool("grounded", false);
+
             if (jumpDelay < maxJumpDelay && secondJump)
             {
                 jumpDelay += Time.deltaTime;

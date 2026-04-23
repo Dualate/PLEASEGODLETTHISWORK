@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7934033108407929985}
   - component: {fileID: 4944309714178825428}
   - component: {fileID: 779465253164900138}
+  - component: {fileID: 8230342322770639089}
   m_Layer: 0
   m_Name: Nori
   m_TagString: Player
@@ -62,6 +63,19 @@ MonoBehaviour:
   specialGaugeDelay: 15
   specialAttackActiveTime: 0.5
   specialKnockback: 0
+--- !u!114 &8230342322770639089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600482579720465305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d436e32afc60c4fa1c03655894bace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  returnTimer: 0
 --- !u!1 &5355036772806655307
 GameObject:
   m_ObjectHideFlags: 0

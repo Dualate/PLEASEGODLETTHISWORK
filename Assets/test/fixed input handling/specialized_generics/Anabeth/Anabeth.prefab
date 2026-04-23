@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 8764608020255551538}
   - component: {fileID: 6147348400229879326}
   - component: {fileID: 2497885414715010891}
+  - component: {fileID: 3512887179958203633}
   m_Layer: 0
   m_Name: Anabeth
   m_TagString: Player
@@ -132,7 +133,7 @@ Transform:
   m_GameObject: {fileID: 2152250276037373103}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9880228, y: 0.5, z: 2.195516}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -169,6 +170,19 @@ MonoBehaviour:
   damagePercent: 0
   knockback: 0
   hitEffectPrefab: {fileID: 6395329100671518530, guid: 2596555950a94de489cb57282c949e60, type: 3}
+--- !u!114 &3512887179958203633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2152250276037373103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d436e32afc60c4fa1c03655894bace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  returnTimer: 4
 --- !u!1001 &2237100608790914095
 PrefabInstance:
   m_ObjectHideFlags: 0
