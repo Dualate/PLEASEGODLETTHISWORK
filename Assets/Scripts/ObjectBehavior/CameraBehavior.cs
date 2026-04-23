@@ -1,3 +1,4 @@
+using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class CameraBehavior : MonoBehaviour
     public float smoothing;
     Transform arena;
     public Vector3 midpoint;
+    public float avgDistance = 0;
+    int activePlayers;
     void Start()
     { 
         
@@ -26,10 +29,11 @@ public class CameraBehavior : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+
         if (state == STATE.platform)
         {
 
-            if (players.Count > 0)
+            if (activePlayers > 0)
             {
                 foreach (Transform t in players)
                 {
@@ -38,7 +42,7 @@ public class CameraBehavior : MonoBehaviour
                         highest = t;
                     }
                 }
-                if (players.Count == 2)
+                if (activePlayers == 2)
                 {
                     transform.position = Vector3.Lerp(transform.position, midpoint + offset, smoothing * Time.deltaTime);
                 }
@@ -55,22 +59,35 @@ public class CameraBehavior : MonoBehaviour
 
     void Update()
     {
+        activePlayers = 0;
+        foreach (var player in players)
+        {
+            if (player.parent.gameObject.GetComponent<GameHandler>().GetStatus())
+            {
+                activePlayers++;
+            }
+        }
+        Transform[] active = new Transform[activePlayers];
+        for (int i = 0; i < activePlayers; i++)
+        {
+            active[i] = players[i];
+        }
         float midx = 0;
         float midy = 0;
         float[] coordinates = new float[2];
         float[] firstMid = new float[2];
         float[] secondMid = new float[2];
-        switch (players.Count) {
+        switch (active.Length) {
             case 2:
-                coordinates = midPoint(players[0].transform.position, players[1].transform.position);
+                coordinates = midPoint(active[0].transform.position, active[1].transform.position);
                 break;
             case 3:
-                firstMid = midPoint(players[0].transform.position, players[1].transform.position);
-                coordinates = midPoint(new Vector3(firstMid[0], firstMid[1], 0), players[2].transform.position);
+                firstMid = midPoint(active[0].transform.position, active[1].transform.position);
+                coordinates = midPoint(new Vector3(firstMid[0], firstMid[1], 0), active[2].transform.position);
                 break;
             case 4:
-                firstMid = midPoint(players[0].transform.position, players[1].transform.position);
-                secondMid = midPoint(players[2].transform.position, players[3].transform.position);
+                firstMid = midPoint(active[0].transform.position, active[1].transform.position);
+                secondMid = midPoint(active[2].transform.position, active[3].transform.position);
                 coordinates = midPoint(new Vector3(firstMid[0], firstMid[1], 0), new Vector3(secondMid[0], secondMid[1], 0));
                 break;
 
@@ -81,8 +98,16 @@ public class CameraBehavior : MonoBehaviour
 
 
 
+        float zoomDist = 0.308684f * avgDistance + 0.00000666667f;
+        midpoint = new Vector3(midx, midy, -zoomDist);
 
-        midpoint = new Vector3(midx, midy, 0);
+        foreach (var player in players)
+        {
+            if (Vector3.Distance(player.position, highest.position) > 25f)
+            {
+                player.parent.gameObject.GetComponent<GameHandler>().Fall();
+            }
+        }
     }
 
     public void fight()
@@ -102,6 +127,7 @@ public class CameraBehavior : MonoBehaviour
 
     public float[] midPoint(Vector3 firstPoint, Vector3 second_point)
     {
+        avgDistance = Vector3.Distance(firstPoint, second_point);
         float[] coordinates = new float[2];
         coordinates[0] = (firstPoint.x + second_point.x) / 2;
         coordinates[1] = (firstPoint.y + second_point.y) / 2;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2605561893576062742}
   - component: {fileID: 8709239479552797026}
   - component: {fileID: 2360709463191859766}
+  - component: {fileID: 6116616581782722482}
   m_Layer: 0
   m_Name: Alicia
   m_TagString: Player
@@ -61,6 +62,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialGaugeDelay: 30
   specialAttackActiveTime: 0.5
+--- !u!114 &6116616581782722482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348970289003461555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d436e32afc60c4fa1c03655894bace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &634924314059321066
 GameObject:
   m_ObjectHideFlags: 0

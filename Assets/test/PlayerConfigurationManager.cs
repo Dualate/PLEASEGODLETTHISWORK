@@ -18,6 +18,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     int players = 0;
     int sceneIndex;
+
     public static PlayerConfigurationManager Instance { get; private set; }
 
     private void Awake()
@@ -38,7 +39,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     private void Update()
     {
-       
+
     }
     public void SetPlayerColor(int index, GameObject animator)
     {
@@ -57,6 +58,8 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
+        if (!(SceneManager.GetActiveScene().name == "inputPermanenceTest"))
+            return;
         if (joinText.activeSelf == true)
             joinText.SetActive(false);
         
