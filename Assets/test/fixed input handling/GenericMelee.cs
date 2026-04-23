@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -271,7 +271,6 @@ public class GenericMelee : MonoBehaviour
                 secondJump = true;
                 resetPosition = transform.position;
                 animator.SetBool("grounded", true);
-                Debug.Log("grounded");
             }
             else if (hit.collider.CompareTag("Player"))
             {
