@@ -110,7 +110,7 @@ public class GenericRanged : MonoBehaviour
     {
         GroundCheck();
 
-        if (transform.position.y < -15)
+        if (transform.position.y < resetPosition.y - 10)
         {
             transform.position = resetPosition;
             rb.velocity = Vector3.zero;

@@ -88,12 +88,7 @@ public class GenericMelee : MonoBehaviour
         GroundCheck();
         FootstoolCheck();
 
-        if (transform.position.y < -15)
-        {
-            transform.position = resetPosition;
-            rb.velocity = Vector3.zero;
-            damagePercent = 0f;
-        }
+        
         if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
         {
             if (atkTimerActive == false)
@@ -193,7 +188,7 @@ public class GenericMelee : MonoBehaviour
     {
         GroundCheck();
 
-        if (transform.position.y < -15)
+        if (transform.position.y < resetPosition.y - 10)
         {
             transform.position = resetPosition;
             rb.velocity = Vector3.zero;

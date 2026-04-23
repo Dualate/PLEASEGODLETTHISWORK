@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArenaBehavior : MonoBehaviour
 {
-    List<GameObject> players = new List<GameObject>();
+    public List<GameObject> players = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +14,7 @@ public class ArenaBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player") && !players.Contains(collision.gameObject))
         {
             players.Add(collision.gameObject);
         }
