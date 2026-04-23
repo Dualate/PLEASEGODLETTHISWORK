@@ -506,8 +506,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11e8847568923c4c990e67d3d63d55d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  xMoveSpeed: 5
+  moveSpeed: 45
+  xMoveSpeed: 7.5
   platform:
   - {fileID: 554192916837868908, guid: c1bbb234101bfa545b80fd91258d30ac, type: 3}
   finishLine: {fileID: 5319693299969381292, guid: 382fe98301eae4049b32f7712d1d9a21, type: 3}
@@ -1214,7 +1214,8 @@ MonoBehaviour:
   - {fileID: 2152250276037373103, guid: a4456bb9741a04c479ee95c79c330cd8, type: 3}
   - {fileID: 348970289003461555, guid: 6497ba49b174e7f41a90c0636afb9ae1, type: 3}
   - {fileID: 600482579720465305, guid: ee14c0d3160b3c04daf58cb993fabe94, type: 3}
-  playerModel: {fileID: 600482579720465305, guid: ee14c0d3160b3c04daf58cb993fabe94, type: 3}
+  - {fileID: 2491632269177507422, guid: e771b0b20ca9ea84490d0f26ea51844a, type: 3}
+  playerModel: {fileID: 2491632269177507422, guid: e771b0b20ca9ea84490d0f26ea51844a, type: 3}
   camera: {fileID: 1861031886}
 --- !u!1 &1665428105
 GameObject:

@@ -46,6 +46,7 @@ public class InitializeLevel : MonoBehaviour
 
                     break;
                 case "Nori":
+                case "Jimena":
                     player.GetComponent<RangedPlayerInputHandler>().InitializePlayer(playerConfigs[i]);
 
                     break;

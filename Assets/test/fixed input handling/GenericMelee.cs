@@ -85,7 +85,6 @@ public class GenericMelee : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(specialSignals);
         GroundCheck();
         FootstoolCheck();
 

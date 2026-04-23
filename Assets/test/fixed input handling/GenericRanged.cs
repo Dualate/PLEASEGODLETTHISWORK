@@ -133,6 +133,7 @@ public class GenericRanged : MonoBehaviour
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[0];
+                specialSignals[1] = true;
          //       specialAtkBox.transform.localPosition = positions[1];
                 setProjectileOffsetX = -projectileOffsetX;
                 setProjectileOffsetY = Vector3.zero;

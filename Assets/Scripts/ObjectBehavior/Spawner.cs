@@ -57,9 +57,9 @@ public class Spawner : MonoBehaviour
                     if (Random.Range(1, 4) == 2)
                     {
                         // these lines spawn the fight pause arena
-                        //GameObject temp = Instantiate(arena, transform.position + new Vector3(0, 7, 0), Quaternion.identity) as GameObject;
-                        //spawning = false;
-                        //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().arenaLanded(temp.GetComponent<Transform>());
+                        GameObject temp = Instantiate(arena, transform.position + new Vector3(0, 7, 0), Quaternion.identity) as GameObject;
+                        spawning = false;
+                        GameObject.Find("Main Camera").GetComponent<CameraBehavior>().arenaLanded(temp.GetComponent<Transform>());
                     }
                     else
                     {
@@ -79,11 +79,11 @@ public class Spawner : MonoBehaviour
 
     void SpawnChunk()
     {
-        float[] chunk_x = { -2f, 0, 2f };
-        float repeatRate = 0;
+        float[] chunk_x = { -3f, 0, 3f };
+        float repeatRate = .1f;
         chunk = Random.Range(1, 4);
         xScal = chunk_x[Random.Range(0, chunk_x.Length)];
-        Debug.Log(xScal);
+       /*
         if (xScal < 0)
         {
             moveSpeed = 15;
@@ -100,7 +100,7 @@ public class Spawner : MonoBehaviour
             moveSpeed = 15;
             repeatRate = .3f;
         }
-
+        */
         InvokeRepeating("SpawnPlatform", .15f, repeatRate);
     }
 
