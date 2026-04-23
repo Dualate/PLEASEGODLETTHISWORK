@@ -1494,6 +1494,8 @@ MonoBehaviour:
   highest: {fileID: 0}
   smoothing: 5
   midpoint: {x: 0, y: 0, z: 0}
+  avgDistance: 0
+  respawnOffset: {x: 3, y: 0, z: 0}
 --- !u!1001 &1984870916
 PrefabInstance:
   m_ObjectHideFlags: 0

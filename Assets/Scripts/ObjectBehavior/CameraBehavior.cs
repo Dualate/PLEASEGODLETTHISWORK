@@ -1,4 +1,3 @@
-using Palmmedia.ReportGenerator.Core.CodeAnalysis;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +14,9 @@ public class CameraBehavior : MonoBehaviour
     public Vector3 midpoint;
     public float avgDistance = 0;
     int activePlayers;
+    Transform[] active;
+
+    public Vector3 respawnOffset;
     void Start()
     { 
         
@@ -35,7 +37,7 @@ public class CameraBehavior : MonoBehaviour
 
             if (activePlayers > 0)
             {
-                foreach (Transform t in players)
+                foreach (Transform t in active)
                 {
                     if (t.position.y > highest.position.y && t.position.x >= -20 && t.position.x <= 30) //camera follows highest position player unless they are too far to the left or right
                     {
@@ -67,7 +69,7 @@ public class CameraBehavior : MonoBehaviour
                 activePlayers++;
             }
         }
-        Transform[] active = new Transform[activePlayers];
+        active = new Transform[activePlayers];
         for (int i = 0; i < activePlayers; i++)
         {
             active[i] = players[i];
@@ -132,5 +134,10 @@ public class CameraBehavior : MonoBehaviour
         coordinates[0] = (firstPoint.x + second_point.x) / 2;
         coordinates[1] = (firstPoint.y + second_point.y) / 2;
         return coordinates;
+    }
+
+    public void ReturnPlayer(Transform player)
+    {
+        player.position = highest.position + respawnOffset;
     }
 }
