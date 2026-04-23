@@ -47,6 +47,7 @@ public class LightMelee : Player
 
     public GameObject attackBox;
     private GameObject specialAtkBox;
+    private CameraShake cameraShake;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
     private float specialGaugeTimer = 0f;
@@ -74,6 +75,7 @@ public class LightMelee : Player
         specialAtkBox = GameObject.Find("specialAtkBox");
         specialAtkBox.SetActive(false);
         rb = GetComponent<Rigidbody>();
+        cameraShake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<CameraShake>();
     }
 
     void Awake()
@@ -290,6 +292,7 @@ public class LightMelee : Player
 
     void OnTriggerEnter(Collider collider)
     {
+        cameraShake.CamShake();
         if (collider.gameObject.CompareTag("attack") && !counterActive)
         {
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);

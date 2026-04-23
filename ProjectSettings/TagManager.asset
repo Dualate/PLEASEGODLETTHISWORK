@@ -15,6 +15,7 @@ TagManager:
   - LMSpecial
   - HRSpecial
   - LRSpecial
+  - ScreenShake
   layers:
   - Default
   - TransparentFX

@@ -52,14 +52,18 @@ public class GenericRanged : MonoBehaviour
 
     private Rigidbody rb;
 
-    private Vector3 projectileOffset = new Vector3(1.5f, 0, 0);
-    public Vector3 setProjectileOffset;
+    public Vector3 projectileOffsetX = new Vector3(1.5f, 0, 0);
+    private Vector3 setProjectileOffsetX;
+    public Vector3 projectileOffsetY = new Vector3(0, 1.5f, 0);
+    private Vector3 setProjectileOffsetY;
     public GameObject projectilePrefab;
     public float projectileSpeed;
 
     public bool[] specialSignals;
 
-
+    public float iFrameTime = .6f;
+    private float iFrameTimer = 0;
+    public bool iFrameActive = false;
 
     void Start()
     {
@@ -69,6 +73,9 @@ public class GenericRanged : MonoBehaviour
         //specialAtkBox = GameObject.Find("specialAtkBox");
         //specialAtkBox.SetActive(false);
         rb = GetComponent<Rigidbody>();
+        attackBox.transform.localPosition = positions[1];
+        setProjectileOffsetX = projectileOffsetX;
+        setProjectileOffsetY = Vector3.zero;
     }
 
     void Awake()
@@ -88,7 +95,7 @@ public class GenericRanged : MonoBehaviour
         float timeToApex = maxJumpTime / 2;
         jumpGravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
-        doubleJumpVelocity = initialJumpVelocity * 1.5f;
+        doubleJumpVelocity = initialJumpVelocity * 2f;
     }
 
     public void UpdateMoveVector(Vector2 moveVector)
@@ -116,7 +123,8 @@ public class GenericRanged : MonoBehaviour
                 attackBox.transform.localPosition = positions[1];
                 specialSignals[0] = true;
               //  specialAtkBox.transform.localPosition = positions[0];
-                setProjectileOffset = projectileOffset;
+                setProjectileOffsetX = projectileOffsetX;
+                setProjectileOffsetY = Vector3.zero;
             }
 
         }
@@ -126,7 +134,8 @@ public class GenericRanged : MonoBehaviour
             {
                 attackBox.transform.localPosition = positions[0];
          //       specialAtkBox.transform.localPosition = positions[1];
-                setProjectileOffset = -projectileOffset;
+                setProjectileOffsetX = -projectileOffsetX;
+                setProjectileOffsetY = Vector3.zero;
             }
         }
         xSpeed = moveVector.x * moveSpeed;
@@ -142,7 +151,7 @@ public class GenericRanged : MonoBehaviour
                 attackBox.SetActive(false);
                 atkTimerActive = false;
                 atkTimer = 0f;
-                attackBox.transform.localPosition = positions[0]; //reset position of attacks
+                //attackBox.transform.localPosition = positions[0]; //reset position of attacks
             }
         }
         if (specialGaugeTimerActive == true)
@@ -162,6 +171,15 @@ public class GenericRanged : MonoBehaviour
                 specialAtkBox.SetActive(false);
                 activateSpecial = false;
                 specialAttackActiveTimer = 0f;
+            }
+        }
+        if(iFrameActive)
+        {
+            iFrameTimer += Time.deltaTime;
+            if(iFrameTimer >= iFrameTime)
+            {
+                iFrameActive = false;
+                iFrameTimer = 0;
             }
         }
     }
@@ -250,26 +268,38 @@ public class GenericRanged : MonoBehaviour
         if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y > 0.5f) //up
         {
             attackBox.transform.localPosition = positions[2];
+            setProjectileOffsetX = Vector3.zero;
+            setProjectileOffsetY = projectileOffsetY;
         }
         else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.5f) //down
         {
             attackBox.transform.localPosition = positions[3];
+            setProjectileOffsetX = Vector3.zero;
+            setProjectileOffsetY = -projectileOffsetY;
         }
         else if (moveVector.x > 0.5f && moveVector.y > 0.5f) //top right
         {
             attackBox.transform.localPosition = positions[4];
+            setProjectileOffsetX = projectileOffsetX;
+            setProjectileOffsetY = projectileOffsetY;
         }
         else if (moveVector.x < -0.5f && moveVector.y > 0.5f) //top left
         {
             attackBox.transform.localPosition = positions[5];
+            setProjectileOffsetX = -projectileOffsetX;
+            setProjectileOffsetY = projectileOffsetY;
         }
         else if (moveVector.x < -0.5f && moveVector.y < -0.5f) //bottom left
         {
             attackBox.transform.localPosition = positions[6];
+            setProjectileOffsetX = -projectileOffsetX;
+            setProjectileOffsetY = -projectileOffsetY;
         }
         else if (moveVector.x > 0.5f && moveVector.y < -0.5f) //bottom right
         {
             attackBox.transform.localPosition = positions[7];
+            setProjectileOffsetX = projectileOffsetX;
+            setProjectileOffsetY = -projectileOffsetY;
         }
         attackBox.SetActive(true);
         atkTimerActive = true;
@@ -290,6 +320,10 @@ public class GenericRanged : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("attack"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -309,6 +343,10 @@ public class GenericRanged : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("LightProjectile"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -328,6 +366,10 @@ public class GenericRanged : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("HeavyProjectile"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -347,6 +389,10 @@ public class GenericRanged : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("HRanged"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -366,6 +412,10 @@ public class GenericRanged : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("HMelee"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -385,6 +435,10 @@ public class GenericRanged : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("HMSpecial"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -404,6 +458,10 @@ public class GenericRanged : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("LMSpecial"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -423,6 +481,10 @@ public class GenericRanged : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("HRSpecial"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -442,6 +504,10 @@ public class GenericRanged : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("LRSpecial"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -470,15 +536,15 @@ public class GenericRanged : MonoBehaviour
         /*
         if (attackBox.transform.localPosition == positions[0])
         {
-            setProjectileOffset = projectileOffset;
+            setProjectileOffsetX = projectileOffsetX;
         }
         else if (attackBox.transform.localPosition == positions[1])
         {
-            setProjectileOffset = -projectileOffset;
+            setProjectileOffsetX = -projectileOffsetX;
         }
         */
         
-        GameObject projectile = Instantiate(projectilePrefab, attackBox.transform.position + setProjectileOffset, attackBox.transform.rotation);
+        GameObject projectile = Instantiate(projectilePrefab, attackBox.transform.position + setProjectileOffsetX + setProjectileOffsetY, attackBox.transform.rotation);
         Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
         if (projectileRB != null)
         {
@@ -489,6 +555,30 @@ public class GenericRanged : MonoBehaviour
             else if (attackBox.transform.localPosition == positions[0])
             {
                 projectileRB.velocity = Vector3.left * projectileSpeed;
+            }
+            else if (attackBox.transform.localPosition == positions[2])
+            {
+                projectileRB.velocity = Vector3.up * projectileSpeed;
+            }
+            else if (attackBox.transform.localPosition == positions[3])
+            {
+                projectileRB.velocity = Vector3.down * projectileSpeed;
+            }
+            else if (attackBox.transform.localPosition == positions[4])
+            {
+                projectileRB.velocity = (Vector3.up + Vector3.right) * projectileSpeed;
+            }
+            else if (attackBox.transform.localPosition == positions[5])
+            {
+                projectileRB.velocity = (Vector3.up + Vector3.left) * projectileSpeed;
+            }
+            else if (attackBox.transform.localPosition == positions[6])
+            {
+                projectileRB.velocity = (Vector3.down + Vector3.left) * projectileSpeed;
+            }
+            else if (attackBox.transform.localPosition == positions[7])
+            {
+                projectileRB.velocity = (Vector3.down + Vector3.right) * projectileSpeed;
             }
         }
     }

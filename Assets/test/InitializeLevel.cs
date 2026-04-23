@@ -38,7 +38,6 @@ public class InitializeLevel : MonoBehaviour
             
             var player = Instantiate(playerModel, playerSpawns[i].position, playerSpawns[i].rotation);
             var animator = Instantiate(playerConfigs[i].animator, player.transform.position + new Vector3(0, 1.15f, -1f), transform.rotation, player.transform.GetChild(0).GetComponent<Transform>());
-            
             switch (playerModel.name)
             {
                 case "Alicia":
