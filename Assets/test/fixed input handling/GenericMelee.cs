@@ -56,6 +56,9 @@ public class GenericMelee : MonoBehaviour
 
     Animator animator;
     SpriteRenderer sprite;
+    //Variables for Jimena's special
+    bool grabbed = false;
+    Vector3 targetPosition;
     public void Awake()
     {
         SetJumpVariables();
@@ -139,6 +142,19 @@ public class GenericMelee : MonoBehaviour
                 atkTimerActive = false;
                 atkTimer = 0f;
                 attackBox.transform.localPosition = positions[0]; //reset position of attacks
+            }
+        }
+        if(grabbed)
+        {
+            float step = moveSpeed * Time.deltaTime;
+            rb.isKinematic = true;
+            rb.detectCollisions = false;
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+            if(Vector3.Distance(transform.position, targetPosition) < .001f)
+            {
+                rb.isKinematic = false;
+                rb.detectCollisions = true;
+                grabbed = false;
             }
         }
     }
@@ -491,22 +507,17 @@ public class GenericMelee : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("LRSpecial"))
         {
+            if(grabbed)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
-
-            Vector3 scalar = Vector3.zero;
-            if (collider.transform.position.x < transform.position.x)
-            {
-                scalar = Vector3.right;
-            }
-            else if (collider.transform.position.x > transform.position.x)
-            {
-                scalar = Vector3.left;
-            }
             damagePercent += .1f;
-            Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            targetPosition = Vector3.Lerp(transform.position, collider.transform.parent.gameObject.transform.position, .75f);
+            collider.GetComponentInParent<JimenaSIH>().GetTargetPosition(transform.position);
+            grabbed = true;
         }
     }
 

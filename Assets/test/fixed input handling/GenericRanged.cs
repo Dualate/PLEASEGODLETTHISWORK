@@ -154,6 +154,7 @@ public class GenericRanged : MonoBehaviour
             {
                 attackBox.transform.localPosition = positions[1];
                 specialSignals[0] = true;
+                specialSignals[1] = false;
               //  specialAtkBox.transform.localPosition = positions[0];
                 setProjectileOffsetX = projectileOffsetX;
                 setProjectileOffsetY = Vector3.zero;
@@ -166,6 +167,7 @@ public class GenericRanged : MonoBehaviour
             {
                 attackBox.transform.localPosition = positions[0];
                 specialSignals[1] = true;
+                specialSignals[0] = false;
          //       specialAtkBox.transform.localPosition = positions[1];
                 setProjectileOffsetX = -projectileOffsetX;
                 setProjectileOffsetY = Vector3.zero;

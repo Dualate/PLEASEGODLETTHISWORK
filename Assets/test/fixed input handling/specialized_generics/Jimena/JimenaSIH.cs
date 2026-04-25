@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.InputSystem.InputAction;
 
 public class JimenaSIH : MonoBehaviour
 {
@@ -14,14 +15,33 @@ public class JimenaSIH : MonoBehaviour
     private bool activateSpecial = false;
 
     bool[] specialSignals;
-    Vector3[] positions;
+    public Vector3[] positions;
+
+    //variables for special grab movement
+    bool grabbing;
+    Vector3 newTargetPos;
+    Rigidbody rb; 
+
+    PlayerConfiguration playerConfig;
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponentInChildren<Rigidbody>();
+        playerConfig = GetComponent<RangedPlayerInputHandler>().playerConfig;
+        playerConfig.Input.onActionTriggered += Input_onActionTriggered;
         specialSignals = GetComponentInChildren<GenericRanged>().specialSignals;
-        positions = GetComponentInChildren<GenericRanged>().positions;
+        //positions = GetComponentInChildren<GenericRanged>().positions;
         specialAtkBox = GameObject.Find("specialAtkBox");
         specialAtkBox.SetActive(false);
+    }
+
+    private void Input_onActionTriggered(CallbackContext obj)
+    {
+        if (obj.action.name == "Special")
+        {
+            Debug.Log("Special input");
+            SpecialAttack();
+        }
     }
 
     // Update is called once per frame
@@ -29,13 +49,15 @@ public class JimenaSIH : MonoBehaviour
     {
         if (specialSignals[0])
         {
-            specialAtkBox.transform.localPosition = positions[0];
-            specialSignals[1] = false;
+            specialAtkBox.transform.rotation = Quaternion.Euler(0,180,0);
+            specialAtkBox.transform.localPosition = positions[1];
+            //specialSignals[1] = false;
         }
         if (specialSignals[1])
         {
-            specialAtkBox.transform.localPosition = positions[1];
-            specialSignals[0] = false;
+            specialAtkBox.transform.rotation = Quaternion.Euler(0,0,0);
+            specialAtkBox.transform.localPosition = positions[0];
+            //specialSignals[0] = false;
         }
 
         if (specialGaugeTimerActive == true)
@@ -57,6 +79,23 @@ public class JimenaSIH : MonoBehaviour
                 specialAttackActiveTimer = 0f;
             }
         }
+        if(grabbing)
+        {
+            float step = GetComponentInChildren<GenericRanged>().moveSpeed * 2 * Time.deltaTime;
+            rb.isKinematic = true;
+            rb.detectCollisions = false;
+            transform.position = Vector3.MoveTowards(transform.position, newTargetPos, step);
+        }
+    }
+
+    void LateUpdate()
+    {
+        if(Vector3.Distance(transform.position, newTargetPos) < .001f)
+        {
+            rb.isKinematic = false;
+            rb.detectCollisions = true;
+            grabbing = false;
+        }
     }
 
     public void SpecialAttack()
@@ -68,5 +107,16 @@ public class JimenaSIH : MonoBehaviour
         specialAtkBox.SetActive(true);
         activateSpecial = true;
         specialGaugeTimerActive = true;
+    }
+
+    public void GetTargetPosition(Vector3 targetPosition)
+    {
+        if(grabbing)
+        {
+            return;
+        }
+        newTargetPos = Vector3.Lerp(transform.position, targetPosition + Vector3.up, .75f);
+        //newTargetPos = targetPosition + Vector3.up *2;
+        grabbing = true;
     }
 }
