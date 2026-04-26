@@ -516,7 +516,8 @@ public class GenericMelee : MonoBehaviour
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
             damagePercent += .1f;
             targetPosition = Vector3.Lerp(transform.position, collider.transform.parent.gameObject.transform.position, .75f);
-            collider.GetComponentInParent<JimenaSIH>().GetTargetPosition(transform.position);
+            //collider.GetComponentInParent<JimenaSIH>().GetTargetPosition(transform.position);
+            collider.GetComponentInParent<GenericRanged>().JimenaGrab(transform.position);
             grabbed = true;
         }
     }

@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10a4bcf610e488343a20960fc5c06d6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialGaugeDelay: 15
+  specialGaugeDelay: 0.5
   specialAttackActiveTime: 0.1
   positions:
   - {x: -3, y: 1.13, z: 0.039}
