@@ -124,7 +124,6 @@ public class GenericRanged : MonoBehaviour
     {
 
         this.moveVector = moveVector;
-        Debug.Log(moveVector.x);
         if (moveVector.x == 0)
         {
             animator.SetBool("walking", false);
@@ -670,5 +669,10 @@ public class GenericRanged : MonoBehaviour
     public void Pause()
     {
         GameObject.Find("GameManager").GetComponent<GameManager>().Pause();
+    }
+
+    public int GetIndex()
+    {
+        return playerIndex;
     }
 }

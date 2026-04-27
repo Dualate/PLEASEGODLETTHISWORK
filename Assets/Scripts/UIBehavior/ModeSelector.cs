@@ -20,4 +20,9 @@ public class ModeSelector : MonoBehaviour
         GameObject.Find("SceneReader").GetComponent<SceneReader>().LoadData(sceneIndex, players);
         SceneManager.LoadScene(3);
     }
+
+    public void Back()
+    {
+        SceneManager.LoadScene(1);
+    }
 }

@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     GameObject winScreen;
     [SerializeField]
     TextMeshProUGUI winnerText;
+
+    [SerializeField]
+    GameObject passport;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,14 +30,10 @@ public class GameManager : MonoBehaviour
 
     public void EndGame(int index)
     {
-
-        Debug.Log("Player " + index + " wins!");
+        passport.GetComponent<WinnerPassport>().winnerIndex = index;
+        SceneManager.LoadScene(7);
     }
 
-    public void PlayAgain()
-    {
-        Debug.Log("Feature not implemented");
-    }
 
     public void Quit()
     {
