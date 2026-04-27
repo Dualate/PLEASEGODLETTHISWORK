@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 2198944170736889072}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 3.7599998, y: 3.7599998, z: 3.7599998}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2801385256524232}
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 6471829426765645801}
   - component: {fileID: 985762400819852484}
   - component: {fileID: 1744035415608095768}
-  - component: {fileID: 1746632873555623307}
+  - component: {fileID: 3789403949190460162}
   m_Layer: 0
   m_Name: Nori
   m_TagString: Player
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   returnTimer: 4
---- !u!114 &1746632873555623307
+--- !u!114 &3789403949190460162
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,14 +175,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2838658023840333664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8bad1803f7958c4ea31122881b4992e, type: 3}
+  m_Script: {fileID: 11500000, guid: a055a9c78de4a2448b0e825e4330f85d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   specialGaugeDelay: 15
-  counterTimerTotal: 3
-  damagePercent: 0
-  knockback: 0
-  hitEffectPrefab: {fileID: 0}
+  specialAttackActiveTime: 1
+  specialKnockback: 0
 --- !u!1001 &7828322563091909303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -199,6 +197,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: GenericRanged
       objectReference: {fileID: 0}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: maxJumpDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: maxJumpHeight
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 2057495842931445320, guid: f2ebe4952275817418be631e0d40fa18, type: 3}
     - target: {fileID: 7830134937102373759, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

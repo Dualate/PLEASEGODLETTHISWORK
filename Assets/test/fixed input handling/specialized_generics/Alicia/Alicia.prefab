@@ -60,8 +60,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a110ddcc6034f4e9dff975433d9825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialGaugeDelay: 30
-  specialAttackActiveTime: 0.5
+  specialGaugeDelay: 20
+  specialAttackActiveTime: 0.7
 --- !u!114 &6116616581782722482
 MonoBehaviour:
   m_ObjectHideFlags: 0
