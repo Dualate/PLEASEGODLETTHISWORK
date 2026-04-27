@@ -8,6 +8,7 @@ public class GameHandler : MonoBehaviour
     float timer = 0;
     // Start is called before the first frame update
     bool active;
+    GameObject playerIcon;
     void Start()
     {
         active = true;
@@ -43,5 +44,10 @@ public class GameHandler : MonoBehaviour
     public bool GetStatus()
     {
         return active;
+    }
+
+    public void InitializeUI(GameObject icon)
+    {
+
     }
 }

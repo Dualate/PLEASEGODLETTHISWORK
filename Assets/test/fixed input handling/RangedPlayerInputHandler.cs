@@ -32,9 +32,11 @@ public class RangedPlayerInputHandler : MonoBehaviour
         return playerConfig.PlayerIndex;
     }
 
-    public void InitializePlayer(PlayerConfiguration pc)
+    public void InitializePlayer(PlayerConfiguration pc, GameObject icon)
     {
         playerConfig = pc;
+        mover.SetIndex(pc.PlayerIndex);
+        mover.SetIcon(icon);
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
     }
 

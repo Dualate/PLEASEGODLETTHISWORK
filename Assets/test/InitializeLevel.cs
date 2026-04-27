@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class InitializeLevel : MonoBehaviour
@@ -9,7 +10,15 @@ public class InitializeLevel : MonoBehaviour
 
     [SerializeField]
     public GameObject[] playerPrefabs;
+
     [SerializeField]
+    GameObject[] icons;
+
+    [SerializeField]
+    Transform[] iconSpots;
+
+    GameObject playerIcon;
+
     GameObject playerModel;
     [SerializeField]
     CameraBehavior camera;
@@ -19,20 +28,24 @@ public class InitializeLevel : MonoBehaviour
 
         for (int i = 0; i < playerConfigs.Length; i++)
         {
-            
+            GameObject icon;
             switch (playerConfigs[i].animator.name)
             {
                 case "anabeth_animator":
                     playerModel = playerPrefabs[0];
+                    playerIcon = icons[0];
                     break;
                 case "alicia_animator":
                     playerModel = playerPrefabs[1];
+                    playerIcon = icons[1];
                     break;
                 case "nori_animator":
                     playerModel = playerPrefabs[2];
+                    playerIcon = icons[2];
                     break;
                 case "jimena_animator":
                     playerModel = playerPrefabs[3];
+                    playerIcon = icons[3];
                     break;
             }
             
@@ -41,18 +54,20 @@ public class InitializeLevel : MonoBehaviour
             switch (playerModel.name)
             {
                 case "Alicia":
-                case "Anabeth":
-                    player.GetComponent<NewPlayerInputHandler>().InitializePlayer(playerConfigs[i]);
 
+                case "Anabeth":
+                    icon = Instantiate(playerIcon, iconSpots[i]);
+                    player.GetComponent<NewPlayerInputHandler>().InitializePlayer(playerConfigs[i], icon);
                     break;
+
                 case "Nori":
                 case "Jimena":
-                    player.GetComponent<RangedPlayerInputHandler>().InitializePlayer(playerConfigs[i]);
-
+                    icon = Instantiate(playerIcon, iconSpots[i]);
+                    player.GetComponent<RangedPlayerInputHandler>().InitializePlayer(playerConfigs[i], icon);
                     break;
 
             }
-            
+
             camera.Add(player.transform);
 
         }

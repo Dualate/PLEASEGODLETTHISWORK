@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 
 public class GenericRanged : MonoBehaviour
 {
-    int playerIndex;
+    public int playerIndex;
     public float moveSpeed;
     public float jumpForce;
     public bool grounded;
@@ -72,6 +74,8 @@ public class GenericRanged : MonoBehaviour
     bool grabbed = false;
     Vector3 targetPosition;
     bool grabbing;//this is for jimena
+
+    GameObject icon;
     void Start()
     {
 
@@ -144,7 +148,7 @@ public class GenericRanged : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(transform.position);
+        icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = damagePercent + "%";
         GroundCheck();
 
         if (transform.position.y < resetPosition.y - 10)
@@ -655,5 +659,11 @@ public class GenericRanged : MonoBehaviour
         }
         targetPosition = Vector3.Lerp(transform.position, grabbedPosition, .75f);
         grabbed = true;
+    }
+
+    public void SetIcon(GameObject icon)
+    {
+        this.icon = icon;
+        icon.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Player #" + (playerIndex + 1);
     }
 }

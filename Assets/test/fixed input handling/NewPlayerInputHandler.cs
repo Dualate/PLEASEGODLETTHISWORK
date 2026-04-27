@@ -20,21 +20,23 @@ public class NewPlayerInputHandler : MonoBehaviour
     public void Awake()
     {
         controls = new PlayerControls();
-
+       
     }
 
     private void Start()
     {
-        mover.SetIndex(playerConfig.PlayerIndex);
+
     }
     public int GetIndex()
     {
         return playerConfig.PlayerIndex;
     }
 
-    public void InitializePlayer(PlayerConfiguration pc)
+    public void InitializePlayer(PlayerConfiguration pc, GameObject icon)
     {
         playerConfig = pc;
+        mover.SetIndex(playerConfig.PlayerIndex);
+        mover.SetIcon(icon);
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
     }
 

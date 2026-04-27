@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+
 //using UnityEditor.Animations;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
@@ -11,7 +13,7 @@ public class GenericMelee : MonoBehaviour
 
 
 
-    public int playerIndex;
+    int playerIndex;
     public float moveSpeed;
     public float jumpForce;
     public bool grounded;
@@ -59,6 +61,9 @@ public class GenericMelee : MonoBehaviour
     //Variables for Jimena's special
     bool grabbed = false;
     Vector3 targetPosition;
+
+    GameObject icon;
+
     public void Awake()
     {
         SetJumpVariables();
@@ -104,11 +109,19 @@ public class GenericMelee : MonoBehaviour
     {
         GroundCheck();
         FootstoolCheck();
-
+        icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = damagePercent + "%";
         
-        if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
+        if (moveVector.x > 0)
         {
             sprite.flipX = false;
+        }
+        else if (moveVector.x < 0)
+        {
+            sprite.flipX = true;
+        }
+        if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
+        {
+
             if (atkTimerActive == false)
             {
                 attackBox.transform.localPosition = positions[0];
@@ -525,5 +538,10 @@ public class GenericMelee : MonoBehaviour
     public int GetIndex()
     {
         return playerIndex;
+    }
+    public void SetIcon(GameObject icon)
+    {
+        this.icon = icon;
+        icon.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Player #" + (playerIndex + 1);
     }
 }
