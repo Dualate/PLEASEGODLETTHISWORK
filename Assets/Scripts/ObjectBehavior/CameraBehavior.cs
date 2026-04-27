@@ -34,22 +34,14 @@ public class CameraBehavior : MonoBehaviour
 
         if (state == STATE.platform)
         {
-
-            if (activePlayers > 0)
+            if (activePlayers == 1)
             {
-                foreach (Transform t in active)
-                {
-                    if (t.position.y > highest.position.y && t.position.x >= -20 && t.position.x <= 30) //camera follows highest position player unless they are too far to the left or right
-                    {
-                        highest = t;
-                    }
-                }
-                if (activePlayers == 2)
-                {
-                    transform.position = Vector3.Lerp(transform.position, midpoint + offset, smoothing * Time.deltaTime);
-                }
-                else
-                    transform.position = Vector3.Lerp(transform.position, highest.position + offset, smoothing * Time.deltaTime);
+                
+                transform.position = Vector3.Lerp(transform.position, highest.position + offset, smoothing * Time.deltaTime);
+            }
+            else if (activePlayers > 1)
+            {
+                transform.position = Vector3.Lerp(transform.position, midpoint + offset, smoothing * Time.deltaTime);
             }
         }
         if (state == STATE.fight)
@@ -102,6 +94,16 @@ public class CameraBehavior : MonoBehaviour
 
         float zoomDist = 0.308684f * avgDistance + 0.00000666667f;
         midpoint = new Vector3(midx, midy, -zoomDist);
+
+        foreach (Transform t in active)
+        {
+            if (t.position.y > highest.position.y)
+            {
+                highest = t;
+            }
+
+        }
+
 
         foreach (var player in players)
         {

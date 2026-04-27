@@ -140,6 +140,7 @@ public class GenericRanged : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(transform.position);
         GroundCheck();
 
         if (transform.position.y < resetPosition.y - 10)
