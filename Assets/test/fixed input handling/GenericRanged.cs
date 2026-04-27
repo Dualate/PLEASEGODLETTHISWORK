@@ -68,6 +68,10 @@ public class GenericRanged : MonoBehaviour
 
     Animator animator;
     SpriteRenderer sprite;
+    //Variables for Jimena's special
+    bool grabbed = false;
+    Vector3 targetPosition;
+    bool grabbing;//this is for jimena
     void Start()
     {
 
@@ -155,6 +159,7 @@ public class GenericRanged : MonoBehaviour
             {
                 attackBox.transform.localPosition = positions[1];
                 specialSignals[0] = true;
+                specialSignals[1] = false;
               //  specialAtkBox.transform.localPosition = positions[0];
                 setProjectileOffsetX = projectileOffsetX;
                 setProjectileOffsetY = Vector3.zero;
@@ -167,6 +172,7 @@ public class GenericRanged : MonoBehaviour
             {
                 attackBox.transform.localPosition = positions[0];
                 specialSignals[1] = true;
+                specialSignals[0] = false;
          //       specialAtkBox.transform.localPosition = positions[1];
                 setProjectileOffsetX = -projectileOffsetX;
                 setProjectileOffsetY = Vector3.zero;
@@ -214,6 +220,19 @@ public class GenericRanged : MonoBehaviour
             {
                 iFrameActive = false;
                 iFrameTimer = 0;
+            }
+        }
+        if(grabbed)
+        {
+            float step = moveSpeed * Time.deltaTime;
+            rb.isKinematic = true;
+            rb.detectCollisions = false;
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+            if(Vector3.Distance(transform.position, targetPosition) < .001f)
+            {
+                rb.isKinematic = false;
+                rb.detectCollisions = true;
+                grabbed = false;
             }
         }
     }
@@ -557,26 +576,18 @@ public class GenericRanged : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("LRSpecial"))
         {
-            if(iFrameActive)
+            if(iFrameActive )
             {
                 return;
             }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
-
-            Vector3 scalar = Vector3.zero;
-            if (collider.transform.position.x < transform.position.x)
-            {
-                scalar = Vector3.right;
-            }
-            else if (collider.transform.position.x > transform.position.x)
-            {
-                scalar = Vector3.left;
-            }
             damagePercent += .1f;
-            Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            targetPosition = Vector3.Lerp(transform.position, collider.transform.parent.gameObject.transform.position, .75f);
+            //collider.GetComponentInParent<JimenaSIH>().GetTargetPosition(transform.position);
+            collider.GetComponentInParent<GenericRanged>().JimenaGrab(transform.position);
+            grabbed = true;
         }
     }
     public void OnMove(CallbackContext context)
@@ -635,5 +646,14 @@ public class GenericRanged : MonoBehaviour
                 projectileRB.velocity = (Vector3.down + Vector3.right) * projectileSpeed;
             }
         }
+    }
+    public void JimenaGrab(Vector3 grabbedPosition)
+    {
+        if (grabbed)
+        {
+            return;
+        }
+        targetPosition = Vector3.Lerp(transform.position, grabbedPosition, .75f);
+        grabbed = true;
     }
 }
