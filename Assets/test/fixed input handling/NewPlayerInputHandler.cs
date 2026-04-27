@@ -54,6 +54,10 @@ public class NewPlayerInputHandler : MonoBehaviour
         {
             mover.Attack();
         }
+        else if (obj.action.name == controls.Gameplay.Pause.name)
+        {
+            mover.Pause();
+        }
     }
 
     public PlayerConfiguration connectInput(){

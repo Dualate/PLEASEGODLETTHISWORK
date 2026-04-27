@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,9 +28,7 @@ public class GameManager : MonoBehaviour
     public void EndGame(int index)
     {
 
-        winScreen.SetActive(true);
-
-        winnerText.text = "Player " + index + " wins!";
+        Debug.Log("Player " + index + " wins!");
     }
 
     public void PlayAgain()
@@ -39,6 +38,18 @@ public class GameManager : MonoBehaviour
 
     public void Quit()
     {
-        Application.Quit();
+        SceneManager.LoadScene(4);
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        winScreen.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        winScreen.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
