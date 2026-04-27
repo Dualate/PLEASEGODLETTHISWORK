@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
     GameObject winScreen;
     [SerializeField]
     TextMeshProUGUI winnerText;
+
+    [SerializeField]
+    GameObject passport;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,19 +30,28 @@ public class GameManager : MonoBehaviour
 
     public void EndGame(int index)
     {
-
-        winScreen.SetActive(true);
-
-        winnerText.text = "Player " + index + " wins!";
+        passport.GetComponent<WinnerPassport>().winnerIndex = index;
+        SceneManager.LoadScene(7);
     }
 
-    public void PlayAgain()
-    {
-        Debug.Log("Feature not implemented");
-    }
 
     public void Quit()
     {
-        Application.Quit();
+        Destroy(GameObject.Find("PlayerConfigurationManager"));
+        //Destroy(GameObject.Find("SceneReader"));
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(4);
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        winScreen.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        winScreen.SetActive(false);
+        Time.timeScale = 1f;
     }
 }

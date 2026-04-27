@@ -124,7 +124,6 @@ public class GenericRanged : MonoBehaviour
     {
 
         this.moveVector = moveVector;
-        Debug.Log(moveVector.x);
         if (moveVector.x == 0)
         {
             animator.SetBool("walking", false);
@@ -665,5 +664,15 @@ public class GenericRanged : MonoBehaviour
     {
         this.icon = icon;
         icon.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Player #" + (playerIndex + 1);
+    }
+
+    public void Pause()
+    {
+        GameObject.Find("GameManager").GetComponent<GameManager>().Pause();
+    }
+
+    public int GetIndex()
+    {
+        return playerIndex;
     }
 }

@@ -544,4 +544,8 @@ public class GenericMelee : MonoBehaviour
         this.icon = icon;
         icon.transform.GetChild(3).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Player #" + (playerIndex + 1);
     }
+    public void Pause()
+    {
+        GameObject.Find("GameManager").GetComponent<GameManager>().Pause();
+    }
 }

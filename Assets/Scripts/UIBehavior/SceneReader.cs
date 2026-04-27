@@ -8,16 +8,16 @@ public class SceneReader : MonoBehaviour
     int sceneIndex;
     int players;
     // Start is called before the first frame update
-    void Start()
+
+    public static SceneReader Instance { get; private set; }
+    private void Awake()
     {
-        DontDestroyOnLoad(this);    
+        DontDestroyOnLoad(this);
     }
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "inputPermanenceTest")
-        {
-        }
+        
     }
 
     public void LoadData(int index, int players)
