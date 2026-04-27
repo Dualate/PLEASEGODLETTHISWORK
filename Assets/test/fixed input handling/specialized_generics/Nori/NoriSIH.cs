@@ -23,7 +23,7 @@ public class NoriSIH : MonoBehaviour
         playerConfig = GetComponent<RangedPlayerInputHandler>().playerConfig;
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
         specialSignals = GetComponentInChildren<GenericRanged>().specialSignals;
-        //positions = GetComponentInChildren<GenericRanged>().positions;
+        positions = GetComponentInChildren<GenericRanged>().positions;
         specialAtkBox = GameObject.Find("specialAtkBox");
         specialAtkBox.SetActive(false);
     }
@@ -81,7 +81,7 @@ public class NoriSIH : MonoBehaviour
         specialAtkBox.SetActive(true);
         activateSpecial = true;
         specialGaugeTimerActive = true;
-        GetComponentInChildren<GenericRanged>().iFrameActive = true;
+        //GetComponentInChildren<GenericRanged>().iFrameActive = true;
     }
 
 }

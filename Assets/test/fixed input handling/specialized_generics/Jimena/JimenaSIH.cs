@@ -79,23 +79,6 @@ public class JimenaSIH : MonoBehaviour
                 specialAttackActiveTimer = 0f;
             }
         }
-        if(grabbing)
-        {
-            float step = GetComponentInChildren<GenericRanged>().moveSpeed * 2 * Time.deltaTime;
-            rb.isKinematic = true;
-            rb.detectCollisions = false;
-            transform.position = Vector3.MoveTowards(transform.position, newTargetPos, step);
-        }
-    }
-
-    void LateUpdate()
-    {
-        if(Vector3.Distance(transform.position, newTargetPos) < .001f)
-        {
-            rb.isKinematic = false;
-            rb.detectCollisions = true;
-            grabbing = false;
-        }
     }
 
     public void SpecialAttack()
@@ -107,16 +90,5 @@ public class JimenaSIH : MonoBehaviour
         specialAtkBox.SetActive(true);
         activateSpecial = true;
         specialGaugeTimerActive = true;
-    }
-
-    public void GetTargetPosition(Vector3 targetPosition)
-    {
-        if(grabbing)
-        {
-            return;
-        }
-        newTargetPos = Vector3.Lerp(transform.position, targetPosition + Vector3.up, .75f);
-        //newTargetPos = targetPosition + Vector3.up *2;
-        grabbing = true;
     }
 }
