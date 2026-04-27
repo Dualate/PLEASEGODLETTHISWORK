@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specialGaugeDelay: 10
-  specialAttackActiveTime: 0.1
+  specialAttackActiveTime: 0.2
   positions:
   - {x: -3, y: 1.13, z: 0.039}
   - {x: 3, y: 1.13, z: 0.039}
@@ -322,9 +322,13 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: projectileSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
       propertyPath: projectilePrefab
       value: 
-      objectReference: {fileID: 2057495842931445320, guid: f2ebe4952275817418be631e0d40fa18, type: 3}
+      objectReference: {fileID: 2057495842931445320, guid: f66655efc2fdd3c4cb91297ce254a27e, type: 3}
     - target: {fileID: 7830134937102373759, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

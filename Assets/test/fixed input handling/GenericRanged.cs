@@ -401,11 +401,11 @@ public class GenericRanged : MonoBehaviour
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
 
             Vector3 scalar = Vector3.zero;
-            if (collider.transform.position.x < transform.position.x)
+            if (collider.transform.parent.gameObject.transform.position.x < transform.position.x)
             {
                 scalar = Vector3.right;
             }
-            else if (collider.transform.position.x > transform.position.x)
+            else if (collider.transform.parent.gameObject.transform.position.x > transform.position.x)
             {
                 scalar = Vector3.left;
             }
@@ -424,11 +424,11 @@ public class GenericRanged : MonoBehaviour
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
 
             Vector3 scalar = Vector3.zero;
-            if (collider.transform.position.x < transform.position.x)
+            if (collider.transform.parent.gameObject.transform.position.x < transform.position.x)
             {
                 scalar = Vector3.right;
             }
-            else if (collider.transform.position.x > transform.position.x)
+            else if (collider.transform.parent.gameObject.transform.position.x > transform.position.x)
             {
                 scalar = Vector3.left;
             }
@@ -447,11 +447,11 @@ public class GenericRanged : MonoBehaviour
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
 
             Vector3 scalar = Vector3.zero;
-            if (collider.transform.position.x < transform.position.x)
+            if (collider.transform.parent.gameObject.transform.position.x < transform.position.x)
             {
                 scalar = Vector3.right;
             }
-            else if (collider.transform.position.x > transform.position.x)
+            else if (collider.transform.parent.gameObject.transform.position.x > transform.position.x)
             {
                 scalar = Vector3.left;
             }
@@ -470,11 +470,11 @@ public class GenericRanged : MonoBehaviour
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
 
             Vector3 scalar = Vector3.zero;
-            if (collider.transform.position.x < transform.position.x)
+            if (collider.transform.parent.gameObject.transform.position.x < transform.position.x)
             {
                 scalar = Vector3.right;
             }
-            else if (collider.transform.position.x > transform.position.x)
+            else if (collider.transform.parent.gameObject.transform.position.x > transform.position.x)
             {
                 scalar = Vector3.left;
             }
@@ -493,11 +493,11 @@ public class GenericRanged : MonoBehaviour
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
 
             Vector3 scalar = Vector3.zero;
-            if (collider.transform.position.x < transform.position.x)
+            if (collider.transform.parent.gameObject.transform.position.x < transform.position.x)
             {
                 scalar = Vector3.right;
             }
-            else if (collider.transform.position.x > transform.position.x)
+            else if (collider.transform.parent.gameObject.transform.position.x > transform.position.x)
             {
                 scalar = Vector3.left;
             }
@@ -516,11 +516,11 @@ public class GenericRanged : MonoBehaviour
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
 
             Vector3 scalar = Vector3.zero;
-            if (collider.transform.position.x < transform.position.x)
+            if (collider.transform.parent.gameObject.transform.position.x < transform.position.x)
             {
                 scalar = Vector3.right;
             }
-            else if (collider.transform.position.x > transform.position.x)
+            else if (collider.transform.parent.gameObject.transform.position.x > transform.position.x)
             {
                 scalar = Vector3.left;
             }
@@ -539,11 +539,11 @@ public class GenericRanged : MonoBehaviour
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
 
             Vector3 scalar = Vector3.zero;
-            if (collider.transform.position.x < transform.position.x)
+            if (collider.transform.parent.gameObject.transform.position.x < transform.position.x)
             {
                 scalar = Vector3.right;
             }
-            else if (collider.transform.position.x > transform.position.x)
+            else if (collider.transform.parent.gameObject.transform.position.x > transform.position.x)
             {
                 scalar = Vector3.left;
             }
@@ -562,11 +562,11 @@ public class GenericRanged : MonoBehaviour
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
 
             Vector3 scalar = Vector3.zero;
-            if (collider.transform.position.x < transform.position.x)
+            if (collider.transform.parent.gameObject.transform.position.x < transform.position.x)
             {
                 scalar = Vector3.right;
             }
-            else if (collider.transform.position.x > transform.position.x)
+            else if (collider.transform.parent.gameObject.transform.position.x > transform.position.x)
             {
                 scalar = Vector3.left;
             }
@@ -576,7 +576,7 @@ public class GenericRanged : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("LRSpecial"))
         {
-            if(iFrameActive )
+            if(grabbed || iFrameActive)
             {
                 return;
             }

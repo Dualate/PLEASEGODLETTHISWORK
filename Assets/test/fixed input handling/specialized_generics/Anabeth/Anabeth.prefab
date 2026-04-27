@@ -165,8 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8bad1803f7958c4ea31122881b4992e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialGaugeDelay: 15
-  counterTimerTotal: 3
+  specialGaugeDelay: 10
+  counterTimerTotal: 2
   damagePercent: 0
   knockback: 0
   hitEffectPrefab: {fileID: 6395329100671518530, guid: 2596555950a94de489cb57282c949e60, type: 3}
