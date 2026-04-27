@@ -150,7 +150,7 @@ RectTransform:
   m_GameObject: {fileID: 47730866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.49792212, y: 0.49792212, z: 0.49792212}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.49792212}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 959710347}
@@ -176,10 +176,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1180016101}
-    m_SelectOnDown: {fileID: 130120492}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 282577844}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 1180016101}
+    m_SelectOnRight: {fileID: 130120492}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -204,19 +204,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 47730869}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 586530234}
-        m_TargetAssemblyTypeName: ModeSelector, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 51
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &47730869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +271,7 @@ RectTransform:
   m_GameObject: {fileID: 130120490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.49792212, y: 0.49792212, z: 0.49792212}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.49792212}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1827557913}
@@ -309,10 +297,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 47730868}
-    m_SelectOnDown: {fileID: 1180016101}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 282577844}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 47730868}
+    m_SelectOnRight: {fileID: 1180016101}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -347,7 +335,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 23
+          m_StringArgument: 24
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &130120493
@@ -436,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1182,7 +1170,7 @@ RectTransform:
   m_GameObject: {fileID: 1180016099}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.49792212, y: 0.49792212, z: 0.49792212}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.49792212}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 276351924}
@@ -1208,10 +1196,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 130120492}
-    m_SelectOnDown: {fileID: 47730868}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 282577844}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 130120492}
+    m_SelectOnRight: {fileID: 47730868}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1236,19 +1224,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1180016102}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 586530234}
-        m_TargetAssemblyTypeName: ModeSelector, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 61
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1180016102
 MonoBehaviour:
   m_ObjectHideFlags: 0
