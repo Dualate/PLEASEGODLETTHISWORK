@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
 
     public void Quit()
     {
+        Destroy(GameObject.Find("PlayerConfigurationManager"));
+        //Destroy(GameObject.Find("SceneReader"));
+        Time.timeScale = 1f;
         SceneManager.LoadScene(4);
     }
 

@@ -22,7 +22,7 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         SpawnChunk();
-        chunks = 1; //Random.Range(10, 15);
+        chunks = Random.Range(10, 15);
     }
 
     // Update is called once per frame

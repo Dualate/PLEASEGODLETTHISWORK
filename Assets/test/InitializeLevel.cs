@@ -71,6 +71,7 @@ public class InitializeLevel : MonoBehaviour
             camera.Add(player.transform);
 
         }
+
     }
 
 }

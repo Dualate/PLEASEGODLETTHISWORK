@@ -12,15 +12,7 @@ public class SceneReader : MonoBehaviour
     public static SceneReader Instance { get; private set; }
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Debug.Log("Trying to create another instance of a singleton");
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
-        }
+        DontDestroyOnLoad(this);
     }
 
     private void Update()
