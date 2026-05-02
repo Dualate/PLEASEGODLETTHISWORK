@@ -34,7 +34,7 @@ public class PlayerSetupMenuController : MonoBehaviour
     }
     public void SetColor(GameObject animator)
     {
-        if (!inputEnabled) { return; }
+        //if (!inputEnabled) { return; }
         PlayerConfigurationManager.Instance.SetPlayerColor(PlayerIndex, animator);
         readyPanel.SetActive(true);
         readyButton.Select();
