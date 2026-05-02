@@ -56,6 +56,10 @@ public class GenericMelee : MonoBehaviour
     [SerializeField]
     Rigidbody rb;
 
+    public float iFrameTime = .6f;
+    private float iFrameTimer = 0;
+    public bool iFrameActive = false;
+
     Animator animator;
     SpriteRenderer sprite;
     //Variables for Jimena's special
@@ -83,6 +87,7 @@ public class GenericMelee : MonoBehaviour
         }
         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
         attackBox = GameObject.Find("attackBox"); //find attackBox
+        attackBox.transform.localPosition = positions[1];
         attackBox.SetActive(false); //deactivate attackbox
         rb = GetComponent<Rigidbody>();
     }
@@ -109,7 +114,7 @@ public class GenericMelee : MonoBehaviour
     {
         GroundCheck();
         FootstoolCheck();
-        icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = damagePercent + "%";
+        icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = "%" + damagePercent*100;
         
         if (moveVector.x > 0)
         {
@@ -154,7 +159,16 @@ public class GenericMelee : MonoBehaviour
                 attackBox.SetActive(false);
                 atkTimerActive = false;
                 atkTimer = 0f;
-                attackBox.transform.localPosition = positions[0]; //reset position of attacks
+                //attackBox.transform.localPosition = positions[0]; //reset position of attacks
+            }
+        }
+        if(iFrameActive)
+        {
+            iFrameTimer += Time.deltaTime;
+            if(iFrameTimer >= iFrameTime)
+            {
+                iFrameActive = false;
+                iFrameTimer = 0;
             }
         }
         if(grabbed)
@@ -368,6 +382,10 @@ public class GenericMelee : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("attack"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -387,44 +405,57 @@ public class GenericMelee : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("LightProjectile"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
 
             Vector3 scalar = Vector3.zero;
-            if (collider.transform.parent.gameObject.transform.position.x < transform.position.x)
+            if (collider.transform.position.x < transform.position.x)
             {
+                Debug.Log("Hit right");
                 scalar = Vector3.right;
             }
-            else if (collider.transform.parent.gameObject.transform.position.x > transform.position.x)
+            else if (collider.transform.position.x > transform.position.x)
             {
                 scalar = Vector3.left;
             }
-            damagePercent += .1f;
+            damagePercent += .05f;
             Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * knockback/3 * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HeavyProjectile"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
 
             Vector3 scalar = Vector3.zero;
-            if (collider.transform.parent.gameObject.transform.position.x < transform.position.x)
+            if (collider.transform.position.x < transform.position.x)
             {
                 scalar = Vector3.right;
             }
-            else if (collider.transform.parent.gameObject.transform.position.x > transform.position.x)
+            else if (collider.transform.position.x > transform.position.x)
             {
                 scalar = Vector3.left;
             }
-            damagePercent += .1f;
+            damagePercent += .075f;
             Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * knockback/2 * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HRanged"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -444,6 +475,10 @@ public class GenericMelee : MonoBehaviour
         }
         else if (collider.gameObject.CompareTag("HMelee"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -457,12 +492,16 @@ public class GenericMelee : MonoBehaviour
             {
                 scalar = Vector3.left;
             }
-            damagePercent += .1f;
+            damagePercent += .15f;
             Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * (knockback + knockback/3) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HMSpecial"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -476,9 +515,9 @@ public class GenericMelee : MonoBehaviour
             {
                 scalar = Vector3.left;
             }
-            damagePercent += .1f;
+            damagePercent += .25f;
             Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * (knockback + knockback*3/4) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LMSpecial"))
         {
@@ -495,12 +534,16 @@ public class GenericMelee : MonoBehaviour
             {
                 scalar = Vector3.left;
             }
-            damagePercent += .1f;
+            damagePercent += .3f;
             Debug.Log("Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HRSpecial"))
         {
+            if(iFrameActive)
+            {
+                return;
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -514,13 +557,13 @@ public class GenericMelee : MonoBehaviour
             {
                 scalar = Vector3.left;
             }
-            damagePercent += .1f;
+            damagePercent += .2f;
             Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * (knockback + knockback/2) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LRSpecial"))
         {
-            if(grabbed)
+            if(grabbed || iFrameActive)
             {
                 return;
             }

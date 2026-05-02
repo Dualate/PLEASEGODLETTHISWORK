@@ -32,6 +32,7 @@ public class JimenaSIH : MonoBehaviour
         specialSignals = GetComponentInChildren<GenericRanged>().specialSignals;
         //positions = GetComponentInChildren<GenericRanged>().positions;
         specialAtkBox = GameObject.Find("specialAtkBox");
+        specialAtkBox.transform.localPosition = positions[1];
         specialAtkBox.SetActive(false);
     }
 

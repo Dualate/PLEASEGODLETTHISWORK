@@ -24,6 +24,7 @@ public class AliciaSIH : MonoBehaviour
         specialSignals = GetComponentInChildren<GenericMelee>().specialSignals;
         positions = GetComponentInChildren<GenericMelee>().positions;
         specialAtkBox = GameObject.Find("specialBox");
+        specialAtkBox.transform.localPosition = positions[1];
         specialAtkBox.SetActive(false);
 
     }

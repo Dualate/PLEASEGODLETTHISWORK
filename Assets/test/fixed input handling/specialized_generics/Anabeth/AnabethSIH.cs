@@ -103,7 +103,7 @@ public class AnabethSIH : MonoBehaviour
                 scalar = Vector3.left;
             }
             damagePercent += .1f;
-            Debug.Log("Hit");
+            Debug.Log("No Counter Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LightProjectile") && !counterActive)
@@ -122,7 +122,7 @@ public class AnabethSIH : MonoBehaviour
                 scalar = Vector3.left;
             }
             damagePercent += .1f;
-            Debug.Log("Hit");
+            Debug.Log("No Counter Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HeavyProjectile") && !counterActive)
@@ -141,7 +141,7 @@ public class AnabethSIH : MonoBehaviour
                 scalar = Vector3.left;
             }
             damagePercent += .1f;
-            Debug.Log("Hit");
+            Debug.Log("No Counter Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HRanged") && !counterActive)
@@ -160,7 +160,7 @@ public class AnabethSIH : MonoBehaviour
                 scalar = Vector3.left;
             }
             damagePercent += .1f;
-            Debug.Log("Hit");
+            Debug.Log("No Counter Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HMelee") && !counterActive)
@@ -179,7 +179,7 @@ public class AnabethSIH : MonoBehaviour
                 scalar = Vector3.left;
             }
             damagePercent += .1f;
-            Debug.Log("Hit");
+            Debug.Log("No Counter Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HMSpecial") && !counterActive)
@@ -198,7 +198,7 @@ public class AnabethSIH : MonoBehaviour
                 scalar = Vector3.left;
             }
             damagePercent += .1f;
-            Debug.Log("Hit");
+            Debug.Log("No Counter Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LMSpecial") && !counterActive)
@@ -217,7 +217,7 @@ public class AnabethSIH : MonoBehaviour
                 scalar = Vector3.left;
             }
             damagePercent += .1f;
-            Debug.Log("Hit");
+            Debug.Log("No Counter Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HRSpecial") && !counterActive)
@@ -236,7 +236,7 @@ public class AnabethSIH : MonoBehaviour
                 scalar = Vector3.left;
             }
             damagePercent += .1f;
-            Debug.Log("Hit");
+            Debug.Log("No Counter Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LRSpecial") && !counterActive)
@@ -255,7 +255,7 @@ public class AnabethSIH : MonoBehaviour
                 scalar = Vector3.left;
             }
             damagePercent += .1f;
-            Debug.Log("Hit");
+            Debug.Log("No Counter Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("attack") && counterActive)
@@ -265,12 +265,14 @@ public class AnabethSIH : MonoBehaviour
                 specialAtkBox.transform.localPosition = positions[1];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
             if (collider.transform.position.x > transform.position.x)
             {
                 specialAtkBox.transform.localPosition = positions[0];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
         }
         else if (collider.gameObject.CompareTag("LightProjectile") && counterActive)
@@ -280,12 +282,14 @@ public class AnabethSIH : MonoBehaviour
                 specialAtkBox.transform.localPosition = positions[1];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
             if (collider.transform.position.x > transform.position.x)
             {
                 specialAtkBox.transform.localPosition = positions[0];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
         }
         else if (collider.gameObject.CompareTag("HeavyProjectile") && counterActive)
@@ -295,12 +299,14 @@ public class AnabethSIH : MonoBehaviour
                 specialAtkBox.transform.localPosition = positions[1];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
             if (collider.transform.position.x > transform.position.x)
             {
                 specialAtkBox.transform.localPosition = positions[0];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
         }
         else if (collider.gameObject.CompareTag("HRanged") && counterActive)
@@ -310,12 +316,14 @@ public class AnabethSIH : MonoBehaviour
                 specialAtkBox.transform.localPosition = positions[1];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
             if (collider.transform.position.x > transform.position.x)
             {
                 specialAtkBox.transform.localPosition = positions[0];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
         }
         else if (collider.gameObject.CompareTag("HMelee") && counterActive)
@@ -325,12 +333,14 @@ public class AnabethSIH : MonoBehaviour
                 specialAtkBox.transform.localPosition = positions[1];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
             if (collider.transform.position.x > transform.position.x)
             {
                 specialAtkBox.transform.localPosition = positions[0];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
         }
         else if (collider.gameObject.CompareTag("HMSpecial") && counterActive)
@@ -340,12 +350,14 @@ public class AnabethSIH : MonoBehaviour
                 specialAtkBox.transform.localPosition = positions[1];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
             if (collider.transform.position.x > transform.position.x)
             {
                 specialAtkBox.transform.localPosition = positions[0];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
         }
         else if (collider.gameObject.CompareTag("HRSpecial") && counterActive)
@@ -355,12 +367,14 @@ public class AnabethSIH : MonoBehaviour
                 specialAtkBox.transform.localPosition = positions[1];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
             if (collider.transform.position.x > transform.position.x)
             {
                 specialAtkBox.transform.localPosition = positions[0];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
         }
         else if (collider.gameObject.CompareTag("LMSpecial") && counterActive)
@@ -370,12 +384,14 @@ public class AnabethSIH : MonoBehaviour
                 specialAtkBox.transform.localPosition = positions[1];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
             if (collider.transform.position.x > transform.position.x)
             {
                 specialAtkBox.transform.localPosition = positions[0];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
         }
         else if (collider.gameObject.CompareTag("LRSpecial") && counterActive)
@@ -385,12 +401,14 @@ public class AnabethSIH : MonoBehaviour
                 specialAtkBox.transform.localPosition = positions[1];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
             if (collider.transform.position.x > transform.position.x)
             {
                 specialAtkBox.transform.localPosition = positions[0];
                 specialAtkBox.SetActive(true);
                 activateSpecial = true;
+                Debug.Log("Counter Hit");
             }
         }
     }
