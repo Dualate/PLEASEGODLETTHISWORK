@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialGaugeDelay: 10
   counterTimerTotal: 2
+  counterActive: 0
   damagePercent: 0
   knockback: 0
   hitEffectPrefab: {fileID: 6395329100671518530, guid: 2596555950a94de489cb57282c949e60, type: 3}

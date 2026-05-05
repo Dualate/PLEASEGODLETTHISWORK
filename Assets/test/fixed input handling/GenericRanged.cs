@@ -147,7 +147,7 @@ public class GenericRanged : MonoBehaviour
 
     void Update()
     {
-        icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = "%" + damagePercent*100;
+        icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = damagePercent*100 + "%";
         GroundCheck();
 
         if (transform.position.y < resetPosition.y - 10)

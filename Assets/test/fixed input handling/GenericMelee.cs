@@ -65,7 +65,7 @@ public class GenericMelee : MonoBehaviour
     //Variables for Jimena's special
     bool grabbed = false;
     Vector3 targetPosition;
-
+    public bool isThisAnabeth = false;
     GameObject icon;
 
     public void Awake()
@@ -114,7 +114,7 @@ public class GenericMelee : MonoBehaviour
     {
         GroundCheck();
         FootstoolCheck();
-        icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = "%" + damagePercent*100;
+        icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = damagePercent*100 + "%";
         
         if (moveVector.x > 0)
         {
@@ -380,11 +380,22 @@ public class GenericMelee : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+        if(isThisAnabeth)
+        {
+            if (!collider.gameObject.CompareTag("Ground"))
+            {
+                CounterCheck(collider.transform.parent.gameObject.transform.position);
+            }
+        }
         if (collider.gameObject.CompareTag("attack"))
         {
             if(iFrameActive)
             {
                 return;
+            }
+            if(isThisAnabeth)
+            {
+                CounterCheck(collider.transform.parent.gameObject.transform.position);
             }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
@@ -575,6 +586,30 @@ public class GenericMelee : MonoBehaviour
             //collider.GetComponentInParent<JimenaSIH>().GetTargetPosition(transform.position);
             collider.GetComponentInParent<GenericRanged>().JimenaGrab(transform.position);
             grabbed = true;
+        }
+    }
+
+    void CounterCheck(Vector3 position)
+    {
+        Debug.Log("Running Counter Check");
+        AnabethSIH anabethSIH;
+        anabethSIH = GetComponentInParent<AnabethSIH>();
+        if(anabethSIH.counterActive)
+        {
+            if(position.x < transform.position.x)
+            {
+                Debug.Log("Counter Check Left");
+                anabethSIH.ActivateCounter(0);
+            }
+            else
+            {
+                Debug.Log("Counter Check Right");
+                anabethSIH.ActivateCounter(1);
+            }
+        }
+        else
+        {
+            Debug.Log("No Counter");
         }
     }
 
