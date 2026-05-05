@@ -147,7 +147,7 @@ public class GenericRanged : MonoBehaviour
 
     void Update()
     {
-        icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = damagePercent + "%";
+        icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = damagePercent*100 + "%";
         GroundCheck();
 
         if (transform.position.y < resetPosition.y - 10)
@@ -427,17 +427,18 @@ public class GenericRanged : MonoBehaviour
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
 
             Vector3 scalar = Vector3.zero;
-            if (collider.transform.parent.gameObject.transform.position.x < transform.position.x)
+            if (collider.transform.position.x < transform.position.x)
             {
+                Debug.Log("Hit right");
                 scalar = Vector3.right;
             }
-            else if (collider.transform.parent.gameObject.transform.position.x > transform.position.x)
+            else if (collider.transform.position.x > transform.position.x)
             {
                 scalar = Vector3.left;
             }
-            damagePercent += .1f;
+            damagePercent += .05f;
             Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * knockback/3 * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HeavyProjectile"))
         {
@@ -450,17 +451,17 @@ public class GenericRanged : MonoBehaviour
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
 
             Vector3 scalar = Vector3.zero;
-            if (collider.transform.parent.gameObject.transform.position.x < transform.position.x)
+            if (collider.transform.position.x < transform.position.x)
             {
                 scalar = Vector3.right;
             }
-            else if (collider.transform.parent.gameObject.transform.position.x > transform.position.x)
+            else if (collider.transform.position.x > transform.position.x)
             {
                 scalar = Vector3.left;
             }
-            damagePercent += .1f;
+            damagePercent += .075f;
             Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * knockback/2 * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HRanged"))
         {
@@ -504,9 +505,9 @@ public class GenericRanged : MonoBehaviour
             {
                 scalar = Vector3.left;
             }
-            damagePercent += .1f;
+            damagePercent += .15f;
             Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * (knockback + knockback/3) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HMSpecial"))
         {
@@ -527,16 +528,12 @@ public class GenericRanged : MonoBehaviour
             {
                 scalar = Vector3.left;
             }
-            damagePercent += .1f;
+            damagePercent += .25f;
             Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * (knockback + knockback*3/4) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LMSpecial"))
         {
-            if(iFrameActive)
-            {
-                return;
-            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -550,7 +547,7 @@ public class GenericRanged : MonoBehaviour
             {
                 scalar = Vector3.left;
             }
-            damagePercent += .1f;
+            damagePercent += .3f;
             Debug.Log("Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
@@ -573,9 +570,9 @@ public class GenericRanged : MonoBehaviour
             {
                 scalar = Vector3.left;
             }
-            damagePercent += .1f;
+            damagePercent += .2f;
             Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * (knockback + knockback/2) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LRSpecial"))
         {
