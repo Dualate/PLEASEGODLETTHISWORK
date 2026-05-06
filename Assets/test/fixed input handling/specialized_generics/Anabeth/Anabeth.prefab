@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specialGaugeDelay: 10
-  counterTimerTotal: 2
+  counterTimerTotal: 1.5
   counterActive: 0
   damagePercent: 0
   knockback: 0
