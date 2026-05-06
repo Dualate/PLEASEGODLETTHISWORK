@@ -211,7 +211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
       propertyPath: maxJumpDelay
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
       propertyPath: maxJumpHeight

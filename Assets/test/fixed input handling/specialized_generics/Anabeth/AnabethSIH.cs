@@ -113,4 +113,12 @@ public class AnabethSIH : MonoBehaviour
         counterTimer = 0;
         Debug.Log("Special is active");
     }
+    public void CounterHit()
+    {
+        specialAtkBox.SetActive(false);
+        counterActive = false;
+        counterTimer = 0;
+        activateSpecial = false;
+        specialAttackActiveTimer = 0;
+    }
 }

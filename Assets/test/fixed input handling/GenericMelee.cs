@@ -548,6 +548,7 @@ public class GenericMelee : MonoBehaviour
             damagePercent += .3f;
             Debug.Log("Hit");
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            collider.GetComponentInParent<AnabethSIH>().CounterHit();
         }
         else if (collider.gameObject.CompareTag("HRSpecial"))
         {
