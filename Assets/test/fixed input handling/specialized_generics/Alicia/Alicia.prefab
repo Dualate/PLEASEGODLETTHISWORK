@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   returnTimer: 4
+  colliderTimer: 3
 --- !u!1 &634924314059321066
 GameObject:
   m_ObjectHideFlags: 0

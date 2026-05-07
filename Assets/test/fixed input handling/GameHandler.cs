@@ -5,18 +5,32 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour
 {
     public float returnTimer;
+    public float colliderTimer;
+    public float colliderTime;
     float timer = 0;
     // Start is called before the first frame update
-    bool active;
+    bool active = true;
+    bool colliderActive = true;
     GameObject playerIcon;
     void Start()
     {
-        active = true;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!colliderActive)
+        {
+            colliderTime += Time.deltaTime;
+        }
+        if (colliderTime > colliderTimer)
+        {
+            colliderActive = true;
+            colliderTime = 0;
+            transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
+            GetComponentInChildren<CapsuleCollider>().isTrigger = false;
+        }
         if (!active)
         {
             timer += Time.deltaTime;
@@ -32,6 +46,7 @@ public class GameHandler : MonoBehaviour
     {
         active = false;
         this.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+
     }
 
     void Return()
@@ -39,6 +54,9 @@ public class GameHandler : MonoBehaviour
         active=true;
         GameObject.Find("Main Camera").GetComponent<CameraBehavior>().ReturnPlayer(GetComponentInChildren<Transform>());
         this.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
+        colliderActive = false;
+        transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = true;
+        GetComponentInChildren<CapsuleCollider>().isTrigger = true;
 
     }
     public bool GetStatus()

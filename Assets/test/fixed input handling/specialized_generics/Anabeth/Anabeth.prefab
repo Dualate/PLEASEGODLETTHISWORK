@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   returnTimer: 4
+  colliderTimer: 3
 --- !u!1001 &2237100608790914095
 PrefabInstance:
   m_ObjectHideFlags: 0

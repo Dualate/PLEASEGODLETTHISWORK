@@ -16,6 +16,7 @@ public class CameraBehavior : MonoBehaviour
     int activePlayers;
     Transform[] active;
 
+
     public Vector3 respawnOffset;
     void Start()
     { 
@@ -112,6 +113,7 @@ public class CameraBehavior : MonoBehaviour
                 player.parent.gameObject.GetComponent<GameHandler>().Fall();
             }
         }
+        Debug.Log(highest.transform.position);
     }
 
     public void fight()
@@ -140,6 +142,6 @@ public class CameraBehavior : MonoBehaviour
 
     public void ReturnPlayer(Transform player)
     {
-        player.position = highest.position + respawnOffset;
+        player.position = highest.parent.transform.position;
     }
 }

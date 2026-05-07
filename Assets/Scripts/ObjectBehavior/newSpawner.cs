@@ -39,7 +39,8 @@ public class newSpawner : MonoBehaviour
         {
             xMove = 0;
             yMove = 0;
-            Instantiate(finishLine, transform.position + new Vector3(0, 7, 0), Quaternion.identity);
+            Instantiate(finishLine, transform.position + new Vector3(0, 7, 0), transform.rotation);
+            Destroy(this.gameObject);
         }
         if (minDistance <= Vector3.Distance(transform.position, lastPosition))
         {

@@ -50,7 +50,7 @@ public class Spawner : MonoBehaviour
                 {
                     spawning = false;
                     Instantiate(finishLine, transform.position + new Vector3(0, 7, 0), Quaternion.identity);
-                    EndSpawn();
+
                 }
                 else
                 {
@@ -104,8 +104,4 @@ public class Spawner : MonoBehaviour
         InvokeRepeating("SpawnPlatform", .15f, repeatRate);
     }
 
-    void EndSpawn()
-    {
-
-    }
 }

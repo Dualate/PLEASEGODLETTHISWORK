@@ -623,6 +623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 696309581}
   - component: {fileID: 696309580}
+  - component: {fileID: 696309582}
   m_Layer: 0
   m_Name: spawner
   m_TagString: Untagged
@@ -637,7 +638,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696309579}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f11e8847568923c4c990e67d3d63d55d, type: 3}
   m_Name: 
@@ -663,6 +664,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &696309582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696309579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1deed24346e60914bbcf2cfe2b43a4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xMove: 5
+  yMove: 30
+  chunks: 5
+  platform: {fileID: 554192916837868908, guid: c1bbb234101bfa545b80fd91258d30ac, type: 3}
+  finishLine: {fileID: 5319693299969381292, guid: 382fe98301eae4049b32f7712d1d9a21, type: 3}
+  arena: {fileID: 3058798213534914161, guid: c6894ca0b40ddbf4a99422f6b03e040a, type: 3}
 --- !u!1 &829518583
 GameObject:
   m_ObjectHideFlags: 0
@@ -2005,7 +2024,7 @@ MonoBehaviour:
   smoothing: 5
   midpoint: {x: 0, y: 0, z: 0}
   avgDistance: 0
-  respawnOffset: {x: 3, y: 0, z: 0}
+  respawnOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &1984870916
 PrefabInstance:
   m_ObjectHideFlags: 0

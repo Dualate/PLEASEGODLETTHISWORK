@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     GameObject passport;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
-        
+
     }
 
     public void EndGame(int index)

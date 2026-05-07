@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   returnTimer: 4
+  colliderTimer: 3
 --- !u!114 &3789403949190460162
 MonoBehaviour:
   m_ObjectHideFlags: 0
