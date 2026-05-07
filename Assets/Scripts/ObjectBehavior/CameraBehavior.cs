@@ -113,7 +113,7 @@ public class CameraBehavior : MonoBehaviour
                 player.parent.gameObject.GetComponent<GameHandler>().Fall();
             }
         }
-        Debug.Log(highest.transform.position);
+
     }
 
     public void fight()
@@ -142,6 +142,8 @@ public class CameraBehavior : MonoBehaviour
 
     public void ReturnPlayer(Transform player)
     {
-        player.position = highest.parent.transform.position;
+        player.position = highest.position + respawnOffset;
+        Debug.Log("Highest: " + highest.position);
+        Debug.Log("Returning player: " + player.position);
     }
 }
