@@ -382,8 +382,9 @@ public class GenericMelee : MonoBehaviour
     {
         if(isThisAnabeth)
         {
-            if (!collider.gameObject.CompareTag("Ground"))
+            if (!collider.gameObject.CompareTag("Ground") && !collider.gameObject.CompareTag("LightProjectile") && !collider.gameObject.CompareTag("HeavyProjectile"))
             {
+                Debug.Log("Collided with " + collider.gameObject.tag);
                 CounterCheck(collider.transform.parent.gameObject.transform.position);
             }
         }
@@ -392,10 +393,6 @@ public class GenericMelee : MonoBehaviour
             if(iFrameActive)
             {
                 return;
-            }
-            if(isThisAnabeth)
-            {
-                CounterCheck(collider.transform.parent.gameObject.transform.position);
             }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
@@ -420,6 +417,10 @@ public class GenericMelee : MonoBehaviour
             {
                 return;
             }
+            if(isThisAnabeth)
+            {
+                CounterCheck(collider.transform.position);
+            }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
@@ -443,6 +444,10 @@ public class GenericMelee : MonoBehaviour
             if(iFrameActive)
             {
                 return;
+            }
+            if(isThisAnabeth)
+            {
+                CounterCheck(collider.transform.position);
             }
             ParticleSystem hitInstance = Instantiate(hitEffectPrefab, collider.transform.position, Quaternion.identity);
             hitInstance.Play();
