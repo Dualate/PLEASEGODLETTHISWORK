@@ -30,7 +30,6 @@ public class GenericMelee : MonoBehaviour
 
     //isGrounded variables
     public float distToGround = .5f;
-
     public GameObject attackBox;
     public float atkTimer = 0f;
     public bool atkTimerActive = false;
@@ -86,7 +85,7 @@ public class GenericMelee : MonoBehaviour
             Debug.Log("Failed");
         }
         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
-        attackBox = GameObject.Find("attackBox"); //find attackBox
+        //attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.transform.localPosition = positions[1];
         attackBox.SetActive(false); //deactivate attackbox
         rb = GetComponent<Rigidbody>();
