@@ -75,6 +75,9 @@ public class GenericRanged : MonoBehaviour
     Vector3 targetPosition;
     bool grabbing;//this is for jimena
 
+    private CameraShake camShake;
+    private GameObject camShakeManager;
+
     GameObject icon;
     void Start()
     {
@@ -98,6 +101,8 @@ public class GenericRanged : MonoBehaviour
         attackBox.transform.localPosition = positions[1];
         setProjectileOffsetX = projectileOffsetX;
         setProjectileOffsetY = Vector3.zero;
+        camShakeManager = GameObject.Find("CameraShakeManager");
+        camShake = camShakeManager.GetComponent<CameraShake>();
     }
 
     void Awake()
@@ -149,6 +154,7 @@ public class GenericRanged : MonoBehaviour
     {
         icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = damagePercent*100 + "%";
         GroundCheck();
+        FootstoolCheck();
 
         if (transform.position.y < resetPosition.y - 10)
         {
@@ -279,6 +285,29 @@ public class GenericRanged : MonoBehaviour
             {
                 jumpDelay += Time.deltaTime;
             }
+        }
+    }
+    public void FootstoolCheck()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, distToGround + .1f))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(initialJumpVelocity / 75 * Vector3.up, ForceMode.VelocityChange);
+            }
+
+        }
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, distToGround + 3f))
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                Debug.Log("Footstooled");
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(initialJumpVelocity/25 * Vector3.down, ForceMode.VelocityChange);
+            }
+
         }
     }
 
@@ -573,6 +602,7 @@ public class GenericRanged : MonoBehaviour
             }
             damagePercent += .2f;
             Debug.Log("Hit");
+            camShake.CamShake();
             rb.AddForce(damagePercent * (knockback + knockback/2) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LRSpecial"))

@@ -350,16 +350,17 @@ public class GenericMelee : MonoBehaviour
             if (hit.collider.CompareTag("Player"))
             {
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity / 3 * Vector3.up, ForceMode.VelocityChange);
+                rb.AddForce(initialJumpVelocity / 75 * Vector3.up, ForceMode.VelocityChange);
             }
 
         }
-        if (Physics.Raycast(transform.position, Vector3.up, out hit, distToGround + .1f))
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, distToGround + 3f))
         {
             if (hit.collider.CompareTag("Player"))
             {
+                Debug.Log("Footstooled");
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-                rb.AddForce(initialJumpVelocity / 6 * Vector3.down, ForceMode.VelocityChange);
+                rb.AddForce(initialJumpVelocity/25 * Vector3.down, ForceMode.VelocityChange);
             }
 
         }
