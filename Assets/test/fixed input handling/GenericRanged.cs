@@ -75,6 +75,9 @@ public class GenericRanged : MonoBehaviour
     Vector3 targetPosition;
     bool grabbing;//this is for jimena
 
+    private CameraShake camShake;
+    private GameObject camShakeManager;
+
     GameObject icon;
     void Start()
     {
@@ -98,6 +101,8 @@ public class GenericRanged : MonoBehaviour
         attackBox.transform.localPosition = positions[1];
         setProjectileOffsetX = projectileOffsetX;
         setProjectileOffsetY = Vector3.zero;
+        camShakeManager = GameObject.Find("CameraShakeManager");
+        camShake = camShakeManager.GetComponent<CameraShake>();
     }
 
     void Awake()
@@ -597,6 +602,7 @@ public class GenericRanged : MonoBehaviour
             }
             damagePercent += .2f;
             Debug.Log("Hit");
+            camShake.CamShake();
             rb.AddForce(damagePercent * (knockback + knockback/2) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LRSpecial"))
