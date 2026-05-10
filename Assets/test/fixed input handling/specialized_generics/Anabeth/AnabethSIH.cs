@@ -5,6 +5,7 @@ using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 public class AnabethSIH : MonoBehaviour
 {
+    [SerializeField]
     private GameObject specialAtkBox;
     private float specialGaugeTimer = 0f;
     private bool specialGaugeTimerActive = false;
@@ -30,7 +31,7 @@ public class AnabethSIH : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerConfig = GetComponent<NewPlayerInputHandler>().playerConfig;
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
-        specialAtkBox = GameObject.Find("specialAtkBox");
+        //specialAtkBox = GameObject.Find("specialAtkBox");
         specialAtkBox.SetActive(false);
         specialSignals = GetComponentInChildren<GenericMelee>().specialSignals;
         positions = GetComponentInChildren<GenericMelee>().positions;

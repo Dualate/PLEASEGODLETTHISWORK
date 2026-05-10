@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8bad1803f7958c4ea31122881b4992e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  specialAtkBox: {fileID: 1326524100953514286}
   specialGaugeDelay: 10
   counterTimerTotal: 1.5
   counterActive: 0
@@ -185,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   returnTimer: 4
   colliderTimer: 3
+  colliderTime: 0
 --- !u!1001 &2237100608790914095
 PrefabInstance:
   m_ObjectHideFlags: 0

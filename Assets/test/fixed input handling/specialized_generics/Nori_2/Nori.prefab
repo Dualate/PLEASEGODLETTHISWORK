@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5144733100084647371}
   - component: {fileID: 2818059836220283927}
   m_Layer: 0
-  m_Name: specialAtkBox
+  m_Name: specialBox
   m_TagString: HRSpecial
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   returnTimer: 4
   colliderTimer: 3
+  colliderTime: 0
 --- !u!114 &3789403949190460162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a055a9c78de4a2448b0e825e4330f85d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  specialAtkBox: {fileID: 2198944170736889072}
   specialGaugeDelay: 15
   specialAttackActiveTime: 1
   specialKnockback: 0
@@ -202,6 +204,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: attackBox
+      value: 
+      objectReference: {fileID: 7422758590960329859}
     - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
       propertyPath: knockback
       value: 200
@@ -321,3 +327,8 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!1 &7422758590960329859 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 837993308745608756, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+  m_PrefabInstance: {fileID: 7828322563091909303}
+  m_PrefabAsset: {fileID: 0}

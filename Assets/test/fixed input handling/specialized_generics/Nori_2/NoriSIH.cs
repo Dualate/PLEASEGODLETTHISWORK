@@ -6,6 +6,7 @@ public class NoriSIH : MonoBehaviour
 {
     Vector3[] positions;
     bool[] specialSignals;
+    [SerializeField]
     private GameObject specialAtkBox;
 
     private float specialGaugeTimer = 0f;
@@ -24,7 +25,7 @@ public class NoriSIH : MonoBehaviour
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
         specialSignals = GetComponentInChildren<GenericRanged>().specialSignals;
         //positions = GetComponentInChildren<GenericRanged>().positions;
-        specialAtkBox = GameObject.Find("specialAtkBox");
+        //specialAtkBox = GameObject.Find("specialBox");
         specialAtkBox.SetActive(false);
     }
 

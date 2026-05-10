@@ -25,8 +25,9 @@ public class GenericRanged : MonoBehaviour
 
     //isGrounded variables
     public float distToGround = .5f;
-
+    [SerializeField]
     private GameObject attackBox;
+    [SerializeField]
     private GameObject specialAtkBox;
     private float atkTimer = 0f;
     private bool atkTimerActive = false;
@@ -93,7 +94,7 @@ public class GenericRanged : MonoBehaviour
         }
 
         //GameObject.Find("Main Camera").GetComponent<CameraBehavior>().Add(transform);
-        attackBox = GameObject.Find("attackBox"); //find attackBox
+        //attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.SetActive(false); //deactivate attackbox
         //specialAtkBox = GameObject.Find("specialAtkBox");
         //specialAtkBox.SetActive(false);

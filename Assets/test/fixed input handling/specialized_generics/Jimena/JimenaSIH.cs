@@ -5,6 +5,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class JimenaSIH : MonoBehaviour
 {
+    [SerializeField]
     private GameObject specialAtkBox;
     private float specialGaugeTimer = 0f;
     private bool specialGaugeTimerActive = false;
@@ -31,7 +32,7 @@ public class JimenaSIH : MonoBehaviour
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
         specialSignals = GetComponentInChildren<GenericRanged>().specialSignals;
         //positions = GetComponentInChildren<GenericRanged>().positions;
-        specialAtkBox = GameObject.Find("specialAtkBox");
+        //specialAtkBox = GameObject.Find("specialAtkBox");
         specialAtkBox.transform.localPosition = positions[1];
         specialAtkBox.SetActive(false);
     }

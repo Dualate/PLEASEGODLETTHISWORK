@@ -6,6 +6,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class AliciaSIH : MonoBehaviour
 {
+    [SerializeField]
     private GameObject specialAtkBox;
     private float specialGaugeTimer = 0f;
     private bool specialGaugeTimerActive = false;
@@ -23,7 +24,7 @@ public class AliciaSIH : MonoBehaviour
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
         specialSignals = GetComponentInChildren<GenericMelee>().specialSignals;
         positions = GetComponentInChildren<GenericMelee>().positions;
-        specialAtkBox = GameObject.Find("specialBox");
+        //specialAtkBox = GameObject.Find("specialBox");
         specialAtkBox.transform.localPosition = positions[1];
         specialAtkBox.SetActive(false);
 
@@ -75,7 +76,7 @@ public class AliciaSIH : MonoBehaviour
                 specialAtkBox.SetActive(false);
                 specialAttackActiveTimer = 0f;
                 activateSpecial = false;
-                specialGaugeTimerActive = false;
+                //specialGaugeTimerActive = false;
             }
         }
     }

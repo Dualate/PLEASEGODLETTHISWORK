@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a110ddcc6034f4e9dff975433d9825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  specialAtkBox: {fileID: 634924314059321066}
   specialGaugeDelay: 20
   specialAttackActiveTime: 0.7
 --- !u!114 &6116616581782722482
@@ -76,6 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   returnTimer: 4
   colliderTimer: 3
+  colliderTime: 0
 --- !u!1 &634924314059321066
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +193,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 918329244258481150, guid: 934420263d50363448a4e92636c2188d, type: 3}
       propertyPath: m_TagString
-      value: attack
+      value: HMelee
       objectReference: {fileID: 0}
     - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
       propertyPath: jumpDelay
