@@ -18,7 +18,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     int players = 0;
     int sceneIndex;
-
+    int[] activeScenes = { 2, 4, 5, 6 };
     public static PlayerConfigurationManager Instance { get; private set; }
 
     private void Awake()
@@ -39,7 +39,13 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     private void Update()
     {
+        if (!activeScenes.Contains(SceneManager.GetActiveScene().buildIndex))
+        {
+            Destroy(GameObject.Find("SceneReader"));
+            Destroy(this.gameObject);
+            
 
+        }
     }
     public void SetPlayerColor(int index, GameObject animator)
     {
@@ -53,6 +59,16 @@ public class PlayerConfigurationManager : MonoBehaviour
         if (/*playerConfigs.Count == MaxPlayers &&*/playerConfigs.Count != 0 && playerConfigs.All(p => p.IsReady == true))
         {
             SceneManager.LoadScene(sceneIndex);
+        }
+    }
+
+    public void RemovePlayer(int playerIndex)
+    {
+        playerConfigs.RemoveAt(playerIndex);
+        players--;
+        if (playerConfigs.Count == 0)
+        {
+            SceneManager.LoadScene(3);
         }
     }
 

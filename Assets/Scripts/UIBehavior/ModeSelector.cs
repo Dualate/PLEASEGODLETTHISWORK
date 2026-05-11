@@ -18,7 +18,7 @@ public class ModeSelector : MonoBehaviour
         int sceneIndex = int.Parse(phrase.Substring(0, 1));
         int players = int.Parse(phrase.Substring(1, 1));
         GameObject.Find("SceneReader").GetComponent<SceneReader>().LoadData(sceneIndex, players);
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
 
     public void Back()

@@ -36,4 +36,9 @@ public class SceneReader : MonoBehaviour
         return sceneIndex;
     }
 
+    public void KYS()
+    {
+        Destroy(this.gameObject);
+    }
+
 }

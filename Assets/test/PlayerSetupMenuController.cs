@@ -47,4 +47,10 @@ public class PlayerSetupMenuController : MonoBehaviour
         PlayerConfigurationManager.Instance.ReadyPlayer(PlayerIndex);
         readyButton.gameObject.SetActive(false);
     }
+
+    public void RemovePlayer()
+    {
+        PlayerConfigurationManager.Instance.RemovePlayer(PlayerIndex);
+        Destroy(this.gameObject);
+    }
 }
