@@ -46,11 +46,11 @@ public class AliciaSIH : MonoBehaviour
 
         if (specialSignals[0])
         {
-            specialAtkBox.transform.localPosition = positions[0];
+            specialAtkBox.transform.localPosition = positions[1];
         }
         if (specialSignals[1])
         {
-            specialAtkBox.transform.localPosition = positions[1];
+            specialAtkBox.transform.localPosition = positions[0];
         }
 
     }
@@ -92,5 +92,12 @@ public class AliciaSIH : MonoBehaviour
         specialAtkBox.SetActive(true);
         activateSpecial = true;
         specialGaugeTimerActive = true;
+    }
+
+    public void SpecialHit() //This is for when I get individual hitstop working
+    {
+        specialAtkBox.SetActive(false);
+        activateSpecial = false;
+        specialAttackActiveTimer = 0;
     }
 }

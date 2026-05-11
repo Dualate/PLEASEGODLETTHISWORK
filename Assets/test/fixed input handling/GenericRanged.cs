@@ -78,6 +78,8 @@ public class GenericRanged : MonoBehaviour
 
     private CameraShake camShake;
     private GameObject camShakeManager;
+    private GameObject _hitStopManager;
+    private HitStop _hitStop;
 
     GameObject icon;
     void Start()
@@ -104,6 +106,8 @@ public class GenericRanged : MonoBehaviour
         setProjectileOffsetY = Vector3.zero;
         camShakeManager = GameObject.Find("CameraShakeManager");
         camShake = camShakeManager.GetComponent<CameraShake>();
+        _hitStopManager = GameObject.Find("HitStopManager");
+        _hitStop = _hitStopManager.GetComponent<HitStop>();
     }
 
     void Awake()
@@ -444,6 +448,10 @@ public class GenericRanged : MonoBehaviour
             }
             damagePercent += .1f;
             Debug.Log("Hit");
+            if(damagePercent > .99f)
+            {
+                camShake.CamShake();
+            }
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LightProjectile"))
@@ -514,7 +522,7 @@ public class GenericRanged : MonoBehaviour
             }
             damagePercent += .1f;
             Debug.Log("Hit");
-            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * (knockback + knockback/5) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HMelee"))
         {
@@ -537,6 +545,10 @@ public class GenericRanged : MonoBehaviour
             }
             damagePercent += .15f;
             Debug.Log("Hit");
+            if(damagePercent > .99f)
+            {
+                camShake.CamShake();
+            }
             rb.AddForce(damagePercent * (knockback + knockback/3) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HMSpecial"))
@@ -560,6 +572,7 @@ public class GenericRanged : MonoBehaviour
             }
             damagePercent += .25f;
             Debug.Log("Hit");
+            _hitStop.Stop();
             rb.AddForce(damagePercent * (knockback + knockback*3/4) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LMSpecial"))
@@ -579,6 +592,7 @@ public class GenericRanged : MonoBehaviour
             }
             damagePercent += .3f;
             Debug.Log("Hit");
+            camShake.CamShake();
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
             collider.GetComponentInParent<AnabethSIH>().CounterHit();
         }
@@ -616,6 +630,7 @@ public class GenericRanged : MonoBehaviour
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
             damagePercent += .1f;
+            _hitStop.Stop();
             targetPosition = Vector3.Lerp(transform.position, collider.transform.parent.gameObject.transform.position, .75f);
             //collider.GetComponentInParent<JimenaSIH>().GetTargetPosition(transform.position);
             collider.GetComponentInParent<GenericRanged>().JimenaGrab(transform.position);
