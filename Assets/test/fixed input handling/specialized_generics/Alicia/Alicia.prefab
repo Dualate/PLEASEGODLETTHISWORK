@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8709239479552797026}
   - component: {fileID: 2360709463191859766}
   - component: {fileID: 6116616581782722482}
+  - component: {fileID: 4032045163975335226}
   m_Layer: 0
   m_Name: Alicia
   m_TagString: Player
@@ -78,6 +79,58 @@ MonoBehaviour:
   returnTimer: 4
   colliderTimer: 3
   colliderTime: 0
+--- !u!114 &4032045163975335226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348970289003461555}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d13a55bc7e90a5546aa121598a119f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  jumpForce: 125
+  grounded: 0
+  xSpeed: 0
+  ySpeed: 0
+  moveVector: {x: 0, y: 0}
+  initialJumpVelocity: 0
+  doubleJumpVelocity: 0
+  maxJumpHeight: 2.5
+  maxJumpTime: 1.5
+  jumpGravity: 0
+  distToGround: 0.5
+  attackBox: {fileID: 7757468994716079381}
+  atkTimer: 0
+  atkTimerActive: 0
+  knockback: 150
+  atkKnockback: 0
+  damagePercent: 0
+  atkDelayTime: 0.5
+  positions:
+  - {x: -1.06, y: 1.13, z: 0.039}
+  - {x: 1.06, y: 1.13, z: 0.039}
+  - {x: 0, y: 2.75, z: -0.049861252}
+  - {x: 0, y: -0.7558146, z: 0}
+  - {x: 0.7558146, y: 2.75, z: 0}
+  - {x: -0.7558146, y: 2.75, z: 0}
+  - {x: -0.7558146, y: -0.7558146, z: 0}
+  - {x: 0.7558146, y: -0.7558146, z: 0}
+  resetPosition: {x: 0, y: 0, z: 0}
+  secondJump: 0
+  maxJumpDelay: 0.4
+  jumpDelay: 0
+  ready: 0
+  landingEffectPrefab: {fileID: 2553654953159236003, guid: 5cd13d31c2675284c875d4d86e6e7fb6, type: 3}
+  hitEffectPrefab: {fileID: 6395329100671518530, guid: 2596555950a94de489cb57282c949e60, type: 3}
+  specialSignals: 
+  rb: {fileID: 5364892153631517713}
+  iFrameTime: 0.6
+  iFrameActive: 0
+  isThisAnabeth: 0
 --- !u!1 &634924314059321066
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +253,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
       propertyPath: moveSpeed
       value: 10
       objectReference: {fileID: 0}
@@ -318,9 +375,19 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &5364892153631517713 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 3271147815785794298, guid: 934420263d50363448a4e92636c2188d, type: 3}
+  m_PrefabInstance: {fileID: 7428299896581105387}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6142693278176579078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3614602263582779629, guid: 934420263d50363448a4e92636c2188d, type: 3}
+  m_PrefabInstance: {fileID: 7428299896581105387}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7757468994716079381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 918329244258481150, guid: 934420263d50363448a4e92636c2188d, type: 3}
   m_PrefabInstance: {fileID: 7428299896581105387}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &8475985452040760026 stripped

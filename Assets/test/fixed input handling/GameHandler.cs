@@ -28,7 +28,7 @@ public class GameHandler : MonoBehaviour
         {
             colliderActive = true;
             colliderTime = 0;
-            transform.GetChild(0).transform.position += new Vector3(0, 0, -1);
+            transform.position += new Vector3(0, 0, -1);
         }
         if (!active)
         {
@@ -51,7 +51,7 @@ public class GameHandler : MonoBehaviour
     void Return()
     {
         active=true;
-        GameObject.Find("Main Camera").GetComponent<CameraBehavior>().ReturnPlayer(GetComponentInChildren<Transform>());
+        GameObject.Find("Main Camera").GetComponent<CameraBehavior>().ReturnPlayer(transform);
         this.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
         colliderActive = false;
 

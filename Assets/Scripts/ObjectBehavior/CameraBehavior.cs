@@ -142,8 +142,7 @@ public class CameraBehavior : MonoBehaviour
 
     public void ReturnPlayer(Transform player)
     {
-        player.position = highest.position + respawnOffset;
-        Debug.Log("Highest: " + highest.position);
-        Debug.Log("Returning player: " + player.position);
+        player.GetChild(0).position = highest.GetChild(0).position + respawnOffset;
+        //Debug.Log(Vector3.Distance(highest.position, player.position));
     }
 }

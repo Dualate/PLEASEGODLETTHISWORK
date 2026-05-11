@@ -88,7 +88,7 @@ public class GenericMelee : MonoBehaviour
         //attackBox = GameObject.Find("attackBox"); //find attackBox
         attackBox.transform.localPosition = positions[1];
         attackBox.SetActive(false); //deactivate attackbox
-        rb = GetComponent<Rigidbody>();
+        rb = transform.GetComponent<Rigidbody>();
     }
 
     public void SetIndex(int index)
@@ -111,6 +111,8 @@ public class GenericMelee : MonoBehaviour
 
     void Update()
     {
+
+
         GroundCheck();
         FootstoolCheck();
         icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = damagePercent*100 + "%";

@@ -21,6 +21,7 @@ public class AliciaSIH : MonoBehaviour
     void Start()
     {
         playerConfig = GetComponent<NewPlayerInputHandler>().playerConfig;
+        
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
         specialSignals = GetComponentInChildren<GenericMelee>().specialSignals;
         positions = GetComponentInChildren<GenericMelee>().positions;

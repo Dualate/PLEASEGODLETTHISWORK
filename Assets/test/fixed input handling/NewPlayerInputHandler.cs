@@ -25,7 +25,7 @@ public class NewPlayerInputHandler : MonoBehaviour
 
     private void Start()
     {
-
+        //mover = GetComponent<GenericMelee>();
     }
     public int GetIndex()
     {
