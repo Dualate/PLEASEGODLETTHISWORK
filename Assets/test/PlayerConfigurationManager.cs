@@ -66,9 +66,17 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         playerConfigs.RemoveAt(playerIndex);
         players--;
+
         if (playerConfigs.Count == 0)
         {
             SceneManager.LoadScene(3);
+        }
+        else
+        {
+            foreach (var player in playerConfigs)
+            {
+                player.PlayerIndex -= 1;
+            }
         }
     }
 
