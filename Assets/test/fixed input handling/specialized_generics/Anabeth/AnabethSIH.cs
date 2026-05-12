@@ -25,9 +25,6 @@ public class AnabethSIH : MonoBehaviour
     public ParticleSystem hitEffectPrefab;
     Vector3[] positions;
     bool[] specialSignals;
-
-    private GameObject _hitStopManager;
-    private HitStop _hitStop;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,8 +36,6 @@ public class AnabethSIH : MonoBehaviour
         specialSignals = GetComponentInChildren<GenericMelee>().specialSignals;
         positions = GetComponentInChildren<GenericMelee>().positions;
         GetComponentInChildren<GenericMelee>().isThisAnabeth = true;
-        _hitStopManager = GameObject.Find("HitStopManager");
-        _hitStop = _hitStopManager.GetComponent<HitStop>();
     }
 
     private void Input_onActionTriggered(CallbackContext context)
@@ -112,7 +107,6 @@ public class AnabethSIH : MonoBehaviour
             specialAtkBox.transform.localPosition = positions[1];
             Debug.Log("Counter Activate Right");
         }
-        _hitStop.Stop();
         specialAtkBox.SetActive(true);
         activateSpecial = true;
         GetComponentInChildren<GenericMelee>().iFrameActive = true;

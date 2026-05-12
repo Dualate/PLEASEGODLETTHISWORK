@@ -67,16 +67,6 @@ public class GenericMelee : MonoBehaviour
     public bool isThisAnabeth = false;
     GameObject icon;
 
-    private CameraShake camShake;
-    private GameObject camShakeManager;
-    private GameObject _hitStopManager;
-    private HitStop _hitStop;
-    private bool hitStopped;
-    public float hitStopTime = .1f;
-    Vector3 storedVelocity;
-
-
-
     public void Awake()
     {
         SetJumpVariables();
@@ -99,10 +89,6 @@ public class GenericMelee : MonoBehaviour
         attackBox.transform.localPosition = positions[1];
         attackBox.SetActive(false); //deactivate attackbox
         rb = transform.GetComponent<Rigidbody>();
-        camShakeManager = GameObject.Find("CameraShakeManager");
-        camShake = camShakeManager.GetComponent<CameraShake>();
-        _hitStopManager = GameObject.Find("HitStopManager");
-        _hitStop = _hitStopManager.GetComponent<HitStop>();
     }
 
     public void SetIndex(int index)
@@ -425,10 +411,6 @@ public class GenericMelee : MonoBehaviour
             }
             damagePercent += .1f;
             Debug.Log("Hit");
-            if(damagePercent > .99f)
-            {
-                camShake.CamShake();
-            }
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LightProjectile"))
@@ -507,7 +489,7 @@ public class GenericMelee : MonoBehaviour
             }
             damagePercent += .1f;
             Debug.Log("Hit");
-            rb.AddForce(damagePercent * (knockback + knockback/5) * scalar, ForceMode.Impulse);
+            rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HMelee"))
         {
@@ -530,10 +512,6 @@ public class GenericMelee : MonoBehaviour
             }
             damagePercent += .15f;
             Debug.Log("Hit");
-            if(damagePercent > .99f)
-            {
-                camShake.CamShake();
-            }
             rb.AddForce(damagePercent * (knockback + knockback/3) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("HMSpecial"))
@@ -557,11 +535,7 @@ public class GenericMelee : MonoBehaviour
             }
             damagePercent += .25f;
             Debug.Log("Hit");
-            //collider.GetComponentInParent<AliciaSIH>().SpecialHit();
-            _hitStop.Stop();
             rb.AddForce(damagePercent * (knockback + knockback*3/4) * scalar, ForceMode.Impulse);
-            // collider.GetComponentInParent<GenericMelee>().HitStop();
-            // HitStop();
         }
         else if (collider.gameObject.CompareTag("LMSpecial"))
         {
@@ -580,7 +554,6 @@ public class GenericMelee : MonoBehaviour
             }
             damagePercent += .3f;
             Debug.Log("Hit");
-            camShake.CamShake();
             rb.AddForce(damagePercent * knockback * scalar, ForceMode.Impulse);
             collider.GetComponentInParent<AnabethSIH>().CounterHit();
         }
@@ -605,7 +578,6 @@ public class GenericMelee : MonoBehaviour
             }
             damagePercent += .2f;
             Debug.Log("Hit");
-            camShake.CamShake();
             rb.AddForce(damagePercent * (knockback + knockback/2) * scalar, ForceMode.Impulse);
         }
         else if (collider.gameObject.CompareTag("LRSpecial"))
@@ -618,7 +590,6 @@ public class GenericMelee : MonoBehaviour
             hitInstance.Play();
             Destroy(hitInstance.gameObject, hitEffectPrefab.main.duration);
             damagePercent += .1f;
-            _hitStop.Stop();
             targetPosition = Vector3.Lerp(transform.position, collider.transform.parent.gameObject.transform.position, .75f);
             //collider.GetComponentInParent<JimenaSIH>().GetTargetPosition(transform.position);
             collider.GetComponentInParent<GenericRanged>().JimenaGrab(transform.position);
@@ -662,28 +633,5 @@ public class GenericMelee : MonoBehaviour
     public void Pause()
     {
         GameObject.Find("GameManager").GetComponent<GameManager>().Pause();
-    }
-    public void HitStop()//this is for when I get individual hitstop working
-    {
-        if(hitStopped)
-        {
-            return;
-        }
-        hitStopped = true;
-        //animator.speed = 0;
-        storedVelocity = rb.velocity;
-        rb.velocity = Vector3.zero;
-        rb.isKinematic = true;
-        StartCoroutine(HitStopTimer(hitStopTime));
-    }
-    IEnumerator HitStopTimer(float duration)//this is for when I get individual hitstop working
-    {
-        Debug.Log("Hitstopping");
-        
-        yield return new WaitForSecondsRealtime(duration);
-        //animator.speed = 1;
-        rb.isKinematic = false;
-        rb.velocity = storedVelocity;
-        hitStopped = false;
     }
 }
