@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         Destroy(GameObject.Find("PlayerConfigurationManager"));
         //Destroy(GameObject.Find("SceneReader"));
         Time.timeScale = 1f;
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(3);
     }
 
     public void Pause()
