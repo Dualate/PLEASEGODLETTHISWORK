@@ -23,6 +23,7 @@ public class AnabethSIH : MonoBehaviour
     Rigidbody rb;
 
     public ParticleSystem hitEffectPrefab;
+    [SerializeField]
     Vector3[] positions;
     bool[] specialSignals;
     // Start is called before the first frame update
@@ -34,7 +35,7 @@ public class AnabethSIH : MonoBehaviour
         //specialAtkBox = GameObject.Find("specialAtkBox");
         specialAtkBox.SetActive(false);
         specialSignals = GetComponentInChildren<GenericMelee>().specialSignals;
-        positions = GetComponentInChildren<GenericMelee>().positions;
+        //positions = GetComponentInChildren<GenericMelee>().positions;
         GetComponentInChildren<GenericMelee>().isThisAnabeth = true;
     }
 
