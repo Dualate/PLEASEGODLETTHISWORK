@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 public class PlayerSetupMenuController : MonoBehaviour
 {
-    private int PlayerIndex;
+    public int PlayerIndex;
 
     [SerializeField]
     private TextMeshProUGUI titleText;
@@ -31,6 +31,7 @@ public class PlayerSetupMenuController : MonoBehaviour
         {
             inputEnabled = true;
         }
+        titleText.SetText("Player " + (PlayerIndex + 1).ToString());
     }
     public void SetColor(GameObject animator)
     {

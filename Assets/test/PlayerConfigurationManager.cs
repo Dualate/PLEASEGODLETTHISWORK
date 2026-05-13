@@ -75,7 +75,14 @@ public class PlayerConfigurationManager : MonoBehaviour
         {
             foreach (var player in playerConfigs)
             {
-                player.PlayerIndex -= 1;
+                if (player.PlayerIndex > playerIndex)
+                    player.PlayerIndex -= 1;
+            }
+            PlayerSetupMenuController[] temp = GameObject.Find("MainLayout").GetComponentsInChildren<PlayerSetupMenuController>();
+            foreach (var player in temp)
+            {
+                if (player.PlayerIndex > playerIndex)
+                    player.PlayerIndex -= 1;
             }
         }
     }
