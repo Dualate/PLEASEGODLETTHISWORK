@@ -13,7 +13,7 @@ public class GameOverUIBehavior : MonoBehaviour
     }
     public void PlayAgain()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(3);
     }
 
     public void Quit()

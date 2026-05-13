@@ -252,7 +252,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 187145671}
+  m_GameObject: {fileID: 141592297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -595,7 +595,11 @@ MonoBehaviour:
   xMove: 20
   yMove: 30
   chunks: 10
-  platform: {fileID: 554192916837868908, guid: c1bbb234101bfa545b80fd91258d30ac, type: 3}
+  platforms:
+  - {fileID: 554192916837868908, guid: c1bbb234101bfa545b80fd91258d30ac, type: 3}
+  - {fileID: 159112802760188896, guid: 8a8a6b9b3fb8a0949a921351f5226e95, type: 3}
+  - {fileID: 3818288614423954903, guid: f3315ec133788e049965c11e1b52aa29, type: 3}
+  - {fileID: 8450396388041284552, guid: 9b7781f861c37d241903dc34a3c35aae, type: 3}
   finishLine: {fileID: 5319693299969381292, guid: 382fe98301eae4049b32f7712d1d9a21, type: 3}
   arena: {fileID: 3058798213534914161, guid: c6894ca0b40ddbf4a99422f6b03e040a, type: 3}
 --- !u!4 &632234779
@@ -679,7 +683,7 @@ MonoBehaviour:
   xMove: 5
   yMove: 30
   chunks: 5
-  platform: {fileID: 554192916837868908, guid: c1bbb234101bfa545b80fd91258d30ac, type: 3}
+  platforms: []
   finishLine: {fileID: 5319693299969381292, guid: 382fe98301eae4049b32f7712d1d9a21, type: 3}
   arena: {fileID: 3058798213534914161, guid: c6894ca0b40ddbf4a99422f6b03e040a, type: 3}
 --- !u!1 &716059693

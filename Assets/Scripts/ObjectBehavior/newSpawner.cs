@@ -14,7 +14,7 @@ public class newSpawner : MonoBehaviour
 
     Vector3 lastPosition;
     [SerializeField]
-    GameObject platform;
+    GameObject[] platforms;
     [SerializeField]
     GameObject finishLine;
     [SerializeField]
@@ -44,6 +44,8 @@ public class newSpawner : MonoBehaviour
         }
         if (minDistance <= Vector3.Distance(transform.position, lastPosition))
         {
+            int plat = Random.Range(0, platforms.Length);
+            GameObject platform = platforms[plat];
             Instantiate(platform, transform.position, platform.transform.rotation);
             lastPosition = transform.position;
             xDistance = 0;

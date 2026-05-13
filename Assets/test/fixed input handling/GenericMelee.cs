@@ -114,6 +114,9 @@ public class GenericMelee : MonoBehaviour
 
 
         GroundCheck();
+
+        animator.SetBool("grounded", grounded);
+
         FootstoolCheck();
         icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = damagePercent*100 + "%";
         
@@ -241,6 +244,7 @@ public class GenericMelee : MonoBehaviour
         {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
+            animator.SetBool("grounded", false);
             return;
         }
         else if (secondJump && !grounded)
@@ -314,7 +318,7 @@ public class GenericMelee : MonoBehaviour
                 jumpDelay = 0;
                 secondJump = true;
                 resetPosition = transform.position;
-                animator.SetBool("grounded", true);
+
             }
             else if (hit.collider.CompareTag("Player"))
             {
@@ -334,7 +338,8 @@ public class GenericMelee : MonoBehaviour
         else
         {
             grounded = false;
-            animator.SetBool("grounded", false);
+
+
 
             if (jumpDelay < maxJumpDelay && secondJump)
             {
