@@ -17,7 +17,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     private int MaxPlayers = 1;
 
     int players = 0;
-    int sceneIndex;
+    int sceneIndex = 2;
     int[] activeScenes = { 2, 4, 5, 6 };
     public static PlayerConfigurationManager Instance { get; private set; }
 

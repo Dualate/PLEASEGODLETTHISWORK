@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 1326524100953514286}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7558146, y: -0.041999817, z: -0.049861252}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 1.3981, y: 0.98, z: 0.039}
+  m_LocalScale: {x: 0.67625, y: 2.1228297, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3252270445824986306}
@@ -172,6 +172,9 @@ MonoBehaviour:
   damagePercent: 0
   knockback: 0
   hitEffectPrefab: {fileID: 6395329100671518530, guid: 2596555950a94de489cb57282c949e60, type: 3}
+  positions:
+  - {x: -1.3981, y: 0.98, z: 0.039}
+  - {x: 1.3981, y: 0.98, z: 0.039}
 --- !u!114 &3512887179958203633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +221,46 @@ PrefabInstance:
     - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
       propertyPath: maxJumpHeight
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: positions.Array.data[0].x
+      value: -1.6412
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: positions.Array.data[0].y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: positions.Array.data[0].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: positions.Array.data[1].x
+      value: 1.6412
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: positions.Array.data[1].y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: positions.Array.data[1].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: positions.Array.data[2].y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: positions.Array.data[2].z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: positions.Array.data[3].y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: positions.Array.data[3].z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3017291728804629008, guid: 934420263d50363448a4e92636c2188d, type: 3}
       propertyPath: m_Enabled
@@ -278,6 +321,22 @@ PrefabInstance:
     - target: {fileID: 5923504961427369277, guid: 934420263d50363448a4e92636c2188d, type: 3}
       propertyPath: m_Name
       value: GenericMover
+      objectReference: {fileID: 0}
+    - target: {fileID: 6347701259180959203, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.04586
+      objectReference: {fileID: 0}
+    - target: {fileID: 6347701259180959203, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6347701259180959203, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6347701259180959203, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.049861252
       objectReference: {fileID: 0}
     - target: {fileID: 7992554834849722782, guid: 934420263d50363448a4e92636c2188d, type: 3}
       propertyPath: m_IsTrigger

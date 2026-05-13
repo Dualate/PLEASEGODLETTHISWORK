@@ -16,6 +16,7 @@ public class AliciaSIH : MonoBehaviour
     private bool activateSpecial = false;
     PlayerConfiguration playerConfig;
     bool[] specialSignals;
+    [SerializeField]
     Vector3[] positions;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class AliciaSIH : MonoBehaviour
         
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
         specialSignals = GetComponentInChildren<GenericMelee>().specialSignals;
-        positions = GetComponentInChildren<GenericMelee>().positions;
+        //positions = GetComponentInChildren<GenericMelee>().positions;
         //specialAtkBox = GameObject.Find("specialBox");
         specialAtkBox.transform.localPosition = positions[1];
         specialAtkBox.SetActive(false);
@@ -46,10 +47,12 @@ public class AliciaSIH : MonoBehaviour
 
         if (specialSignals[0])
         {
+            Debug.Log("Special signal 0");
             specialAtkBox.transform.localPosition = positions[0];
         }
         if (specialSignals[1])
         {
+            Debug.Log("Special signal 0");
             specialAtkBox.transform.localPosition = positions[1];
         }
 
