@@ -152,6 +152,7 @@ public class GenericRanged : MonoBehaviour
 
         animator.SetBool("grounded", grounded);
         animator.SetFloat("airSpeedY", rb.velocity.y);
+        animator.SetFloat("yDir", moveVector.y);
         if (moveVector.x == 0)
         {
             animator.SetBool("walking", false);
