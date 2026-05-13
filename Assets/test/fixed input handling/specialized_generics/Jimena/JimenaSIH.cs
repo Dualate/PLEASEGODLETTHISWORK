@@ -87,11 +87,12 @@ public class JimenaSIH : MonoBehaviour
 
     public void SpecialAttack()
     {
-        animator.SetTrigger("special");
+
         if (specialGaugeTimerActive)
         {
             return;
         }
+        animator.SetTrigger("special");
         specialAtkBox.SetActive(true);
         activateSpecial = true;
         specialGaugeTimerActive = true;
