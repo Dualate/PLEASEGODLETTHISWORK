@@ -130,14 +130,7 @@ public class GenericRanged : MonoBehaviour
     {
 
         this.moveVector = moveVector;
-        if (moveVector.x == 0)
-        {
-            animator.SetBool("walking", false);
-        }
-        else
-        {
-            animator.SetBool("walking", true);
-        }
+
 
         if (moveVector.x > 0)
         {
@@ -157,6 +150,16 @@ public class GenericRanged : MonoBehaviour
         GroundCheck();
         FootstoolCheck();
 
+        animator.SetBool("grounded", grounded);
+        animator.SetFloat("airSpeedY", rb.velocity.y);
+        if (moveVector.x == 0)
+        {
+            animator.SetBool("walking", false);
+        }
+        else
+        {
+            animator.SetBool("walking", true);
+        }
         if (transform.position.y < resetPosition.y - 10)
         {
             transform.position = resetPosition;
@@ -324,6 +327,7 @@ public class GenericRanged : MonoBehaviour
         }
         else if (secondJump && !grounded)
         {
+            animator.SetTrigger("jump");
             if (jumpDelay >= maxJumpDelay)
             {
                 // if (rb.velocity.y < 0)
@@ -347,6 +351,15 @@ public class GenericRanged : MonoBehaviour
                 landingInstance.Play();
                 Destroy(landingInstance.gameObject, landingEffectPrefab.main.duration);
             }
+        }
+    }
+
+    void OnCollisionExit(Collision collider)
+    {
+        if (collider.gameObject.CompareTag("Ground"))
+        {
+            grounded = false;
+            animator.SetBool("grounded", grounded);
         }
     }
 

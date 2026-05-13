@@ -21,7 +21,8 @@ public class JimenaSIH : MonoBehaviour
     //variables for special grab movement
     bool grabbing;
     Vector3 newTargetPos;
-    Rigidbody rb; 
+    Rigidbody rb;
+    Animator animator;
 
     PlayerConfiguration playerConfig;
     // Start is called before the first frame update
@@ -35,6 +36,7 @@ public class JimenaSIH : MonoBehaviour
         //specialAtkBox = GameObject.Find("specialAtkBox");
         specialAtkBox.transform.localPosition = positions[1];
         specialAtkBox.SetActive(false);
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Input_onActionTriggered(CallbackContext obj)
@@ -85,6 +87,7 @@ public class JimenaSIH : MonoBehaviour
 
     public void SpecialAttack()
     {
+        animator.SetTrigger("special");
         if (specialGaugeTimerActive)
         {
             return;
