@@ -25,7 +25,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.Log("Trying to create another instance of a singleton");
+
         }
         else
         {
@@ -47,7 +47,7 @@ public class PlayerConfigurationManager : MonoBehaviour
 
         }
     }
-    public void SetPlayerColor(int index, GameObject animator)
+    public void SetAnimator(int index, GameObject animator)
     {
         playerConfigs[index].animator = animator;
     }
@@ -56,7 +56,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void ReadyPlayer(int index)
     {
         playerConfigs[index].IsReady = true;
-        if (/*playerConfigs.Count == MaxPlayers &&*/playerConfigs.Count != 0 && playerConfigs.All(p => p.IsReady == true))
+        if (playerConfigs.Count != 0 && playerConfigs.All(p => p.IsReady == true))
         {
             SceneManager.LoadScene(sceneIndex);
         }
