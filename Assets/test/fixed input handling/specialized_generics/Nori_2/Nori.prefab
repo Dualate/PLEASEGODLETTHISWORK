@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specialAtkBox: {fileID: 2198944170736889072}
-  specialGaugeDelay: 15
+  specialGaugeDelay: 2
   specialAttackActiveTime: 1
   specialKnockback: 0
 --- !u!1001 &7828322563091909303

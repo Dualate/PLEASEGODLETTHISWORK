@@ -18,6 +18,7 @@ public class NoriSIH : MonoBehaviour
     public float specialKnockback;
     PlayerConfiguration playerConfig;
 
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class NoriSIH : MonoBehaviour
         //positions = GetComponentInChildren<GenericRanged>().positions;
         //specialAtkBox = GameObject.Find("specialBox");
         specialAtkBox.SetActive(false);
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Input_onActionTriggered(CallbackContext obj)
@@ -78,6 +80,7 @@ public class NoriSIH : MonoBehaviour
         {
             return;
         }
+        animator.SetTrigger("special");
         Debug.Log("Firing special");
         specialAtkBox.SetActive(true);
         activateSpecial = true;
