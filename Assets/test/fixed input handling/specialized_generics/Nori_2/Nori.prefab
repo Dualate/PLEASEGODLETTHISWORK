@@ -228,6 +228,30 @@ PrefabInstance:
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 2057495842931445320, guid: f2ebe4952275817418be631e0d40fa18, type: 3}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: positions.Array.data[0].x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: positions.Array.data[0].y
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: positions.Array.data[1].x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4535359318177812177, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: positions.Array.data[1].y
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5407987461147873735, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5407987461147873735, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6
+      objectReference: {fileID: 0}
     - target: {fileID: 6767547735775402935, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
       propertyPath: m_IsTrigger
       value: 1

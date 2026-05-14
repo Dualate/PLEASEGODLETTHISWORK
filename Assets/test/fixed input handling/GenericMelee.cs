@@ -299,7 +299,7 @@ public class GenericMelee : MonoBehaviour
                 attackBox.SetActive(false);
                 atkTimerActive = false;
                 atkTimer = 0f;
-                attackBox.transform.localPosition = positions[0]; //reset position of attacks
+                //attackBox.transform.localPosition = positions[0]; //reset position of attacks
             }
         }
 
