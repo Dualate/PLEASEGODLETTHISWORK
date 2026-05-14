@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class Speaker : MonoBehaviour
@@ -22,7 +23,7 @@ public class Speaker : MonoBehaviour
     [SerializeField]
     AudioClip[] noriLines;
 
-
+    AudioClip currentClip;
     public Dictionary<string, AudioClip[]> test = new Dictionary<string, AudioClip[]>();
 
 
@@ -37,13 +38,19 @@ public class Speaker : MonoBehaviour
         test.Add(characters[1], anabethLines);
         test.Add(characters[2], jimenaLines);
         test.Add(characters[3], noriLines);
+        currentClip = songClips[1];
+        source.clip = currentClip;
+        source.Play();
         DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (SceneManager.GetActiveScene().name == "SampleScene")
+        {
+            source.Pla
+        }
     }
 
 
