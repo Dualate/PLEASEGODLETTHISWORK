@@ -639,4 +639,10 @@ public class GenericMelee : MonoBehaviour
     {
         GameObject.Find("GameManager").GetComponent<GameManager>().Pause();
     }
+
+    public IEnumerator DelayAttack()
+    {
+        attackBox.SetActive(true);
+        yield return null;
+    }
 }
