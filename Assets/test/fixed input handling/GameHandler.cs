@@ -12,9 +12,13 @@ public class GameHandler : MonoBehaviour
     bool active = true;
     bool colliderActive = true;
     GameObject playerIcon;
+
+    AudioSource source;
+    [SerializeField]
+    AudioClip[] voiceLines;
     void Start()
     {
-
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -65,5 +69,10 @@ public class GameHandler : MonoBehaviour
     public void InitializeUI(GameObject icon)
     {
 
+    }
+
+    public void PlayVoiceLine(int index)
+    {
+        source.PlayOneShot(voiceLines[index]);
     }
 }

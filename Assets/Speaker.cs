@@ -24,11 +24,16 @@ public class Speaker : MonoBehaviour
     AudioClip[] noriLines;
 
     AudioClip currentClip;
+
+    bool startingFlag = false;
     public Dictionary<string, AudioClip[]> test = new Dictionary<string, AudioClip[]>();
 
 
     string[] characters = new string[4] { "alicia", "anabeth", "jimena", "nori" };
-    
+    private void Awake()
+    {
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -47,9 +52,17 @@ public class Speaker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (startingFlag)
+        {
+            if (SceneManager.GetActiveScene().name == "StartScreen")
+                Destroy(this.gameObject);
+        }
+        if (SceneManager.GetActiveScene().name != "StartScreen")
+            startingFlag = true;
         if (SceneManager.GetActiveScene().name == "SampleScene")
         {
-            //source.Pla
+            currentClip = songClips[0];
+            source.Play();
         }
     }
 

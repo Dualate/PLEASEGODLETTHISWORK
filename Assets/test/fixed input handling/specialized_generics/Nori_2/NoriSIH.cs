@@ -39,7 +39,7 @@ public class NoriSIH : MonoBehaviour
     {
         if (obj.action.name == "Special")
         {
-            Debug.Log("Special input");
+            GetComponent<GameHandler>().PlayVoiceLine(1);
             SpecialAttack();
         }
     }

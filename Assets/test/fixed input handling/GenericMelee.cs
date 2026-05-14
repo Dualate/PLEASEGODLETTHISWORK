@@ -248,7 +248,6 @@ public class GenericMelee : MonoBehaviour
         if (grounded)
         {
             animator.SetTrigger("jump");
-            Debug.Log("should be firing");
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
             return;

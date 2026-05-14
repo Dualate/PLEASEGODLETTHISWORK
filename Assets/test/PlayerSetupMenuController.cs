@@ -19,6 +19,14 @@ public class PlayerSetupMenuController : MonoBehaviour
     private float ignoreInputTime = 1.5f;
     private bool inputEnabled;
 
+    AudioSource source;
+    [SerializeField]
+    AudioClip[] clips;
+    private void Start()
+    {
+        source = GetComponent<AudioSource>();
+
+    }
     public void SetPlayerIndex(int pi)
     {
         PlayerIndex = pi;
@@ -35,8 +43,27 @@ public class PlayerSetupMenuController : MonoBehaviour
     }
     public void SetColor(GameObject animator)
     {
+        int voice = -1;
         //if (!inputEnabled) { return; }
         PlayerConfigurationManager.Instance.SetAnimator(PlayerIndex, animator);
+        switch (animator.name) {
+            case "alicia_animator":
+                voice = 0;
+                break;
+            case "anabeth_animator":
+                voice = 1;
+                break;
+            case "jimena_animator":
+                voice = 2;
+                break;
+            case "nori_animator":
+                voice = 3;
+                break;
+        
+        
+        }
+
+        source.PlayOneShot(clips[voice]);
         readyPanel.SetActive(true);
         readyButton.Select();
         menuPanel.SetActive(false);
@@ -55,3 +82,4 @@ public class PlayerSetupMenuController : MonoBehaviour
         Destroy(this.gameObject);
     }
 }
+

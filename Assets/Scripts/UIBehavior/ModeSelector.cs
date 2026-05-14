@@ -23,6 +23,7 @@ public class ModeSelector : MonoBehaviour
 
     public void Back()
     {
+        Destroy(GameObject.Find("SceneReader"));
         SceneManager.LoadScene(1);
     }
 }

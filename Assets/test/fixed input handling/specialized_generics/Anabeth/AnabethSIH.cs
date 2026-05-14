@@ -106,6 +106,7 @@ public class AnabethSIH : MonoBehaviour
 
     public void ActivateCounter(int position)
     {
+        GetComponent<GameHandler>().PlayVoiceLine(1);
         animator.SetTrigger("special");
         if(position == 0)
         {
@@ -122,7 +123,6 @@ public class AnabethSIH : MonoBehaviour
         GetComponentInChildren<GenericMelee>().iFrameActive = true;
         counterActive = false;
         counterTimer = 0;
-        Debug.Log("Special is active");
     }
 
     public void CounterHit()

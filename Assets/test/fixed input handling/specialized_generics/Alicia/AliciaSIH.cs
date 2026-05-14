@@ -42,7 +42,6 @@ public class AliciaSIH : MonoBehaviour
     {
         if (context.action.name == "Special")
         {
-            Debug.Log("It works!");
             SpecialAttack();
         }
     }
@@ -53,12 +52,10 @@ public class AliciaSIH : MonoBehaviour
         specialGauge.value = specialGaugeTimer / specialGaugeDelay;
         if (specialSignals[0])
         {
-            Debug.Log("Special signal 0");
             specialAtkBox.transform.localPosition = positions[0];
         }
         if (specialSignals[1])
         {
-            Debug.Log("Special signal 0");
             specialAtkBox.transform.localPosition = positions[1];
         }
 
@@ -97,6 +94,8 @@ public class AliciaSIH : MonoBehaviour
         {
             return;
         }
+        GetComponent<GameHandler>().PlayVoiceLine(1);
+
         animator.SetTrigger("special");
         specialAtkBox.SetActive(true);
         activateSpecial = true;
