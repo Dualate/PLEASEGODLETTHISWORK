@@ -23,10 +23,8 @@ public class Speaker : MonoBehaviour
     AudioClip[] noriLines;
 
 
-    Dictionary<string, AudioClip[]> test = new Dictionary<string, AudioClip[]>();
+    public Dictionary<string, AudioClip[]> test = new Dictionary<string, AudioClip[]>();
 
-    [SerializeField]
-    List<Dictionary<string, AudioClip>> voiceLines = new List<Dictionary<string, AudioClip>>();
 
     string[] characters = new string[4] { "alicia", "anabeth", "jimena", "nori" };
     
@@ -34,11 +32,12 @@ public class Speaker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        source = GetComponent<AudioSource>();
         test.Add(characters[0], aliciaLines);
         test.Add(characters[1], anabethLines);
         test.Add(characters[2], jimenaLines);
         test.Add(characters[3], noriLines);
-
+        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
@@ -47,15 +46,5 @@ public class Speaker : MonoBehaviour
 
     }
 
-    public class characterClip {
-        string clipType;
-        AudioClip clip;
-        public characterClip(string type, AudioClip clip)
-        {
-            clipType = type;
-            this.clip = clip;
-        }
-
-    }
 
 }
