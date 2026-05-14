@@ -223,6 +223,10 @@ PrefabInstance:
       value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
+      propertyPath: hitEffectPrefab
+      value: 
+      objectReference: {fileID: 3096509414002419217, guid: a5f00199e887cba4b9f415d8e21e6d4c, type: 3}
+    - target: {fileID: 1348301122930805809, guid: 934420263d50363448a4e92636c2188d, type: 3}
       propertyPath: positions.Array.data[0].x
       value: -1.3554
       objectReference: {fileID: 0}
