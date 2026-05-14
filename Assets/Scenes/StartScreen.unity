@@ -431,7 +431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songClips:
   - {fileID: 8300000, guid: 03eb8bc7986ad384293d5c82bd6544b2, type: 3}
-  - {fileID: 8300000, guid: 6083bf7f7fdc5ec49b34f49c5a0e7d8e, type: 3}
+  - {fileID: 8300000, guid: 42f052aa7d1d542e68f3fadb9bf7990f, type: 3}
   anabethLines:
   - {fileID: 8300000, guid: e734afef8f0373843b4bcab445d7f921, type: 3}
   - {fileID: 8300000, guid: 90a44570c9ef4a24984983e8a282a2f7, type: 3}
