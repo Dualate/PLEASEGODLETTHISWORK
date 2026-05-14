@@ -9,6 +9,8 @@ using UnityEngine.InputSystem.Users;
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
+
+
     [SerializeField]
     GameObject joinText;
     private List<PlayerConfiguration> playerConfigs;
@@ -125,7 +127,6 @@ public class PlayerConfiguration
     public PlayerInput Input { get; set; }
     public int PlayerIndex { get; set; }
     public bool IsReady { get; set; }
-    public Material PlayerMaterial { get; set; }
 
     public GameObject animator;
 
