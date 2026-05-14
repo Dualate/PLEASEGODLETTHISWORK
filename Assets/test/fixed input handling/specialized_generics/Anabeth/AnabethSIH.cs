@@ -29,6 +29,7 @@ public class AnabethSIH : MonoBehaviour
     bool[] specialSignals;
 
     Slider specialGauge;
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +41,7 @@ public class AnabethSIH : MonoBehaviour
         specialSignals = GetComponentInChildren<GenericMelee>().specialSignals;
         //positions = GetComponentInChildren<GenericMelee>().positions;
         GetComponentInChildren<GenericMelee>().isThisAnabeth = true;
+        animator=GetComponentInChildren<Animator>();
     }
 
     private void Input_onActionTriggered(CallbackContext context)
@@ -89,6 +91,7 @@ public class AnabethSIH : MonoBehaviour
         {
             return;
         }
+        animator.SetTrigger("special");
         counterActive = true;
         specialGaugeTimerActive = true;
         specialGaugeTimer = 0f;

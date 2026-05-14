@@ -81,7 +81,11 @@ public class InitializeLevel : MonoBehaviour
             camera.Add(player.transform);
 
         }
+    }
 
+    public void Respawn(Transform player)
+    {
+        player.transform.position = playerSpawns[Random.Range(0, playerSpawns.Length)].position;
     }
 
 }
