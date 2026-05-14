@@ -99,6 +99,14 @@ public class GenericMelee : MonoBehaviour
     public void UpdateMoveVector(Vector2 moveVector)
     {
         this.moveVector = moveVector;
+        if (moveVector.x > 0)
+        {
+            sprite.flipX = false;
+        }
+        else if (moveVector.x < 0)
+        {
+            sprite.flipX = true;
+        }
     }
 
     void SetJumpVariables()
@@ -110,36 +118,39 @@ public class GenericMelee : MonoBehaviour
     }
 
     void Update()
-    {
-
-
+    { 
         GroundCheck();
+        FootstoolCheck();
+
 
         animator.SetBool("grounded", grounded);
+        animator.SetFloat("airSpeedY", rb.velocity.y);
+        animator.SetFloat("yDir", moveVector.y);
 
-        FootstoolCheck();
+        if (moveVector.x == 0)
+        {
+            animator.SetBool("walking", false);
+        }
+        else
+        {
+            animator.SetBool("walking", true);
+        }
+
         icon.transform.Find("DamagePercent").GetComponent<TextMeshProUGUI>().text = damagePercent*100 + "%";
         
-        if (moveVector.x > 0)
-        {
-            sprite.flipX = false;
-        }
-        else if (moveVector.x < 0)
-        {
-            sprite.flipX = true;
-        }
-        if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
+
+        if (moveVector.x > 0.3f && Mathf.Abs(moveVector.y) < 0.3f)
         {
 
             if (atkTimerActive == false)
             {
-                attackBox.transform.localPosition = positions[0];
+                attackBox.transform.localPosition = positions[1];
                 specialSignals[1] = true;
                 specialSignals[0] = false;
             }
 
         }
-        else if (moveVector.x < -0.5f && Mathf.Abs(moveVector.y) < 0.5f)
+        else if (moveVector.x < -0.3f && Mathf.Abs(moveVector.y) < 0.3f)
         {
             sprite.flipX = true;
 
@@ -147,7 +158,7 @@ public class GenericMelee : MonoBehaviour
             {
                 specialSignals[0] = true;
                 specialSignals[1] = false;
-                attackBox.transform.localPosition = positions[1];
+                attackBox.transform.localPosition = positions[0];
             }
         }
         //xSpeed += moveVector.x * moveSpeed * Time.deltaTime;
@@ -196,38 +207,32 @@ public class GenericMelee : MonoBehaviour
         {
             return;
         }
-        if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y > 0.5f) //up
+        if (Mathf.Abs(moveVector.x) < 0.3f && moveVector.y > 0.3f) //up
         {
-            animator.SetBool("posY", true);
             attackBox.transform.localPosition = positions[2];
         }
-        else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.5f) //down
+        else if (Mathf.Abs(moveVector.x) < 0.3f && moveVector.y < -0.3f) //down
         {
-            animator.SetBool("posY", false);
 
             attackBox.transform.localPosition = positions[3];
         }
-        else if (moveVector.x > 0.5f && moveVector.y > 0.5f) //top right
+        else if (moveVector.x > 0.3f && moveVector.y > 0.3f) //top right
         {
-            animator.SetBool("posY", true);
 
             attackBox.transform.localPosition = positions[4];
         }
-        else if (moveVector.x < -0.5f && moveVector.y > 0.5f) //top left
+        else if (moveVector.x < -0.3f && moveVector.y > 0.3f) //top left
         {
-            animator.SetBool("posY", true);
 
             attackBox.transform.localPosition = positions[5];
         }
-        else if (moveVector.x < -0.5f && moveVector.y < -0.5f) //bottom left
+        else if (moveVector.x < -0.3f && moveVector.y < -0.3f) //bottom left
         {
-            animator.SetBool("posY", false);
 
             attackBox.transform.localPosition = positions[6];
         }
-        else if (moveVector.x > 0.5f && moveVector.y < -0.5f) //bottom right
+        else if (moveVector.x > 0.3f && moveVector.y < -0.3f) //bottom right
         {
-            animator.SetBool("posY", false);
 
             attackBox.transform.localPosition = positions[7];
         }
@@ -242,9 +247,10 @@ public class GenericMelee : MonoBehaviour
     {
         if (grounded)
         {
+            animator.SetTrigger("jump");
+            Debug.Log("should be firing");
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
-            animator.SetBool("grounded", false);
             return;
         }
         else if (secondJump && !grounded)
@@ -255,22 +261,20 @@ public class GenericMelee : MonoBehaviour
                 // {
                 //     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 // }
+                animator.SetTrigger("jump");
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 rb.AddForce(doubleJumpVelocity * Vector3.up, ForceMode.Impulse);
                 secondJump = false;
             }
         }
     }
+
+    /*
     private void LateUpdate()
     {
         GroundCheck();
 
-        if (transform.position.y < resetPosition.y - 10)
-        {
-            transform.position = resetPosition;
-            rb.velocity = Vector3.zero;
-            damagePercent = 0f;
-        }
+
         if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
         {
             if (atkTimerActive == false)
@@ -305,7 +309,7 @@ public class GenericMelee : MonoBehaviour
 
 
     }
-
+    */
     void GroundCheck()
     {
         RaycastHit hit;
@@ -318,6 +322,7 @@ public class GenericMelee : MonoBehaviour
                 jumpDelay = 0;
                 secondJump = true;
                 resetPosition = transform.position;
+                animator.SetBool("grounded", grounded);
 
             }
             else if (hit.collider.CompareTag("Player"))
@@ -339,8 +344,7 @@ public class GenericMelee : MonoBehaviour
         {
             grounded = false;
 
-
-
+            animator.SetBool("grounded", grounded);
             if (jumpDelay < maxJumpDelay && secondJump)
             {
                 jumpDelay += Time.deltaTime;
@@ -382,6 +386,15 @@ public class GenericMelee : MonoBehaviour
                 landingInstance.Play();
                 Destroy(landingInstance.gameObject, landingEffectPrefab.main.duration);
             }
+        }
+    }
+
+    void OnCollisionExit()
+    {
+        if (GetComponent<Collider>().gameObject.CompareTag("Ground"))
+        {
+            grounded = false;
+            animator.SetBool("grounded", grounded);
         }
     }
 

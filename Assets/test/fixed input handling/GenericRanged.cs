@@ -135,10 +135,12 @@ public class GenericRanged : MonoBehaviour
         if (moveVector.x > 0)
         {
             sprite.flipX = false;
+
         }
         else if (moveVector.x < 0)
         {
             sprite.flipX = true;
+
         }
 
     }
@@ -161,13 +163,8 @@ public class GenericRanged : MonoBehaviour
         {
             animator.SetBool("walking", true);
         }
-        if (transform.position.y < resetPosition.y - 10)
-        {
-            transform.position = resetPosition;
-            rb.velocity = Vector3.zero;
-            damagePercent = 0f;
-        }
-        if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
+
+        if (moveVector.x > 0.3f && Mathf.Abs(moveVector.y) < 0.3f)
         {
             if (atkTimerActive == false)
             {
@@ -180,7 +177,7 @@ public class GenericRanged : MonoBehaviour
             }
 
         }
-        else if (moveVector.x < -0.5f && Mathf.Abs(moveVector.y) < 0.5f)
+        else if (moveVector.x < -0.3f && Mathf.Abs(moveVector.y) < 0.3f)
         {
             if (atkTimerActive == false)
             {
@@ -263,7 +260,7 @@ public class GenericRanged : MonoBehaviour
                 jumpDelay = 0;
                 secondJump = true;
                 resetPosition = transform.position;
-                animator.SetBool("grounded", true);
+                animator.SetBool("grounded", grounded);
 
             }
             else if (hit.collider.CompareTag("Player"))
@@ -321,20 +318,20 @@ public class GenericRanged : MonoBehaviour
         if (grounded)
         {
             animator.SetTrigger("jump");
-            Debug.Log("jump");
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
             return;
         }
         else if (secondJump && !grounded)
         {
-            animator.SetTrigger("jump");
+            
             if (jumpDelay >= maxJumpDelay)
             {
                 // if (rb.velocity.y < 0)
                 // {
                 //     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 // }
+                animator.SetTrigger("jump");
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 rb.AddForce(doubleJumpVelocity * Vector3.up, ForceMode.Impulse);
                 secondJump = false;
@@ -371,49 +368,43 @@ public class GenericRanged : MonoBehaviour
         {
             return;
         }
-        if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y > 0.5f) //up
+        if (Mathf.Abs(moveVector.x) < 0.3f && moveVector.y > 0.3f) //up
         {
-            animator.SetBool("posY", true);
 
             attackBox.transform.localPosition = positions[2];
             setProjectileOffsetX = Vector3.zero;
             setProjectileOffsetY = projectileOffsetY;
         }
-        else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.5f) //down
+        else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.3f) //down
         {
-            animator.SetBool("posY", false);
 
             attackBox.transform.localPosition = positions[3];
             setProjectileOffsetX = Vector3.zero;
             setProjectileOffsetY = -projectileOffsetY;
         }
-        else if (moveVector.x > 0.5f && moveVector.y > 0.5f) //top right
+        else if (moveVector.x > 0.3f && moveVector.y > 0.3f) //top right
         {
-            animator.SetBool("posY", true);
 
             attackBox.transform.localPosition = positions[4];
             setProjectileOffsetX = projectileOffsetX;
             setProjectileOffsetY = projectileOffsetY;
         }
-        else if (moveVector.x < -0.5f && moveVector.y > 0.5f) //top left
+        else if (moveVector.x < -0.3f && moveVector.y > 0.3f) //top left
         {
-            animator.SetBool("posY", true);
 
             attackBox.transform.localPosition = positions[5];
             setProjectileOffsetX = -projectileOffsetX;
             setProjectileOffsetY = projectileOffsetY;
         }
-        else if (moveVector.x < -0.5f && moveVector.y < -0.5f) //bottom left
+        else if (moveVector.x < -0.3f && moveVector.y < -0.3f) //bottom left
         {
-            animator.SetBool("posY", false);
 
             attackBox.transform.localPosition = positions[6];
             setProjectileOffsetX = -projectileOffsetX;
             setProjectileOffsetY = -projectileOffsetY;
         }
-        else if (moveVector.x > 0.5f && moveVector.y < -0.5f) //bottom right
+        else if (moveVector.x > 0.3f && moveVector.y < -0.3f) //bottom right
         {
-            animator.SetBool("posY", false);
 
             attackBox.transform.localPosition = positions[7];
             setProjectileOffsetX = projectileOffsetX;
@@ -423,16 +414,6 @@ public class GenericRanged : MonoBehaviour
         attackBox.SetActive(true);
         atkTimerActive = true;
         FireProjectile();
-    }
-    public void SpecialAttack()
-    {
-        if (specialGaugeTimerActive)
-        {
-            return;
-        }
-        specialAtkBox.SetActive(true);
-        activateSpecial = true;
-        specialGaugeTimerActive = true;
     }
 
     void OnTriggerEnter(Collider collider)

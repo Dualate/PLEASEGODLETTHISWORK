@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
 public class AliciaSIH : MonoBehaviour
@@ -18,6 +19,9 @@ public class AliciaSIH : MonoBehaviour
     bool[] specialSignals;
     [SerializeField]
     Vector3[] positions;
+    Animator animator;
+    Slider specialGauge;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +33,8 @@ public class AliciaSIH : MonoBehaviour
         //specialAtkBox = GameObject.Find("specialBox");
         specialAtkBox.transform.localPosition = positions[1];
         specialAtkBox.SetActive(false);
+        animator = GetComponentInChildren<Animator>();
+        specialGaugeTimer = specialGaugeDelay;
 
     }
 
@@ -44,7 +50,7 @@ public class AliciaSIH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        specialGauge.value = specialGaugeTimer / specialGaugeDelay;
         if (specialSignals[0])
         {
             Debug.Log("Special signal 0");
@@ -68,7 +74,7 @@ public class AliciaSIH : MonoBehaviour
             if (specialGaugeTimer >= specialGaugeDelay)
             {
                 specialGaugeTimerActive = false;
-                specialGaugeTimer = 0f;
+
             }
         }
 
@@ -87,13 +93,19 @@ public class AliciaSIH : MonoBehaviour
 
     public void SpecialAttack()
     {
-
         if (specialGaugeTimerActive)
         {
             return;
         }
+        animator.SetTrigger("special");
         specialAtkBox.SetActive(true);
         activateSpecial = true;
         specialGaugeTimerActive = true;
+        specialGaugeTimer = 0;
+    }
+
+    public void ConnectGauge(Slider gauge)
+    {
+        specialGauge = gauge;
     }
 }
