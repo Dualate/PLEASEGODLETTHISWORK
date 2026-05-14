@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InitializeLevel : MonoBehaviour
 {
@@ -52,18 +53,20 @@ public class InitializeLevel : MonoBehaviour
             var player = Instantiate(playerModel, playerSpawns[i].position, playerSpawns[i].rotation);
             var animator = Instantiate(playerConfigs[i].animator, player.transform.position + new Vector3(0, 1.15f, -1f), transform.rotation, player.transform.GetChild(0).GetComponent<Transform>());
             animator.GetComponentInChildren<TextMeshProUGUI>().text = '#' + (playerConfigs[i].PlayerIndex +1 ).ToString();
+            icon = Instantiate(playerIcon, iconSpots[i]) as GameObject;
             switch (playerModel.name)
             {
                 case "Alicia":
+                    player.GetComponent<AliciaSIH>().ConnectGauge(icon.transform.Find("specialFill").GetComponent<Slider>());
+                    player.GetComponent<NewPlayerInputHandler>().InitializePlayer(playerConfigs[i], icon);
 
+                    break;
                 case "Anabeth":
-                    icon = Instantiate(playerIcon, iconSpots[i]);
                     player.GetComponent<NewPlayerInputHandler>().InitializePlayer(playerConfigs[i], icon);
                     break;
 
                 case "Nori":
                 case "Jimena":
-                    icon = Instantiate(playerIcon, iconSpots[i]);
                     player.GetComponent<RangedPlayerInputHandler>().InitializePlayer(playerConfigs[i], icon);
                     break;
 

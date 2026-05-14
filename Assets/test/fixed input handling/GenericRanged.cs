@@ -161,12 +161,7 @@ public class GenericRanged : MonoBehaviour
         {
             animator.SetBool("walking", true);
         }
-        if (transform.position.y < resetPosition.y - 10)
-        {
-            transform.position = resetPosition;
-            rb.velocity = Vector3.zero;
-            damagePercent = 0f;
-        }
+
         if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
         {
             if (atkTimerActive == false)
@@ -263,7 +258,7 @@ public class GenericRanged : MonoBehaviour
                 jumpDelay = 0;
                 secondJump = true;
                 resetPosition = transform.position;
-                animator.SetBool("grounded", true);
+                animator.SetBool("grounded", grounded);
 
             }
             else if (hit.collider.CompareTag("Player"))
@@ -321,20 +316,20 @@ public class GenericRanged : MonoBehaviour
         if (grounded)
         {
             animator.SetTrigger("jump");
-            Debug.Log("jump");
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             rb.AddForce(initialJumpVelocity * Vector3.up, ForceMode.Impulse);
             return;
         }
         else if (secondJump && !grounded)
         {
-            animator.SetTrigger("jump");
+            
             if (jumpDelay >= maxJumpDelay)
             {
                 // if (rb.velocity.y < 0)
                 // {
                 //     rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 // }
+                animator.SetTrigger("jump");
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 rb.AddForce(doubleJumpVelocity * Vector3.up, ForceMode.Impulse);
                 secondJump = false;
@@ -373,7 +368,6 @@ public class GenericRanged : MonoBehaviour
         }
         if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y > 0.5f) //up
         {
-            animator.SetBool("posY", true);
 
             attackBox.transform.localPosition = positions[2];
             setProjectileOffsetX = Vector3.zero;
@@ -381,7 +375,6 @@ public class GenericRanged : MonoBehaviour
         }
         else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.5f) //down
         {
-            animator.SetBool("posY", false);
 
             attackBox.transform.localPosition = positions[3];
             setProjectileOffsetX = Vector3.zero;
@@ -389,7 +382,6 @@ public class GenericRanged : MonoBehaviour
         }
         else if (moveVector.x > 0.5f && moveVector.y > 0.5f) //top right
         {
-            animator.SetBool("posY", true);
 
             attackBox.transform.localPosition = positions[4];
             setProjectileOffsetX = projectileOffsetX;
@@ -397,7 +389,6 @@ public class GenericRanged : MonoBehaviour
         }
         else if (moveVector.x < -0.5f && moveVector.y > 0.5f) //top left
         {
-            animator.SetBool("posY", true);
 
             attackBox.transform.localPosition = positions[5];
             setProjectileOffsetX = -projectileOffsetX;
@@ -405,7 +396,6 @@ public class GenericRanged : MonoBehaviour
         }
         else if (moveVector.x < -0.5f && moveVector.y < -0.5f) //bottom left
         {
-            animator.SetBool("posY", false);
 
             attackBox.transform.localPosition = positions[6];
             setProjectileOffsetX = -projectileOffsetX;
@@ -413,7 +403,6 @@ public class GenericRanged : MonoBehaviour
         }
         else if (moveVector.x > 0.5f && moveVector.y < -0.5f) //bottom right
         {
-            animator.SetBool("posY", false);
 
             attackBox.transform.localPosition = positions[7];
             setProjectileOffsetX = projectileOffsetX;
@@ -423,16 +412,6 @@ public class GenericRanged : MonoBehaviour
         attackBox.SetActive(true);
         atkTimerActive = true;
         FireProjectile();
-    }
-    public void SpecialAttack()
-    {
-        if (specialGaugeTimerActive)
-        {
-            return;
-        }
-        specialAtkBox.SetActive(true);
-        activateSpecial = true;
-        specialGaugeTimerActive = true;
     }
 
     void OnTriggerEnter(Collider collider)
