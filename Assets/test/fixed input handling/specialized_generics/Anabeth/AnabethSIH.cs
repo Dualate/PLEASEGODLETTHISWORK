@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 public class AnabethSIH : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class AnabethSIH : MonoBehaviour
     [SerializeField]
     Vector3[] positions;
     bool[] specialSignals;
+
+    Slider specialGauge;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +53,7 @@ public class AnabethSIH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        specialGauge.value = specialGaugeTimer / specialGaugeDelay;
         UpdateValues();
         if (specialGaugeTimerActive == true)
         {
@@ -57,7 +61,6 @@ public class AnabethSIH : MonoBehaviour
             if (specialGaugeTimer >= specialGaugeDelay)
             {
                 specialGaugeTimerActive = false;
-                specialGaugeTimer = 0f;
             }
         }
         if (activateSpecial)
@@ -88,6 +91,8 @@ public class AnabethSIH : MonoBehaviour
         }
         counterActive = true;
         specialGaugeTimerActive = true;
+        specialGaugeTimer = 0f;
+
     }
 
     public void UpdateValues()
@@ -115,6 +120,7 @@ public class AnabethSIH : MonoBehaviour
         counterTimer = 0;
         Debug.Log("Special is active");
     }
+
     public void CounterHit()
     {
         specialAtkBox.SetActive(false);
@@ -122,5 +128,10 @@ public class AnabethSIH : MonoBehaviour
         counterTimer = 0;
         activateSpecial = false;
         specialAttackActiveTimer = 0;
+    }
+
+    public void ConnectGauge(Slider gauge)
+    {
+        specialGauge = gauge;
     }
 }

@@ -62,11 +62,17 @@ public class InitializeLevel : MonoBehaviour
 
                     break;
                 case "Anabeth":
+                    player.GetComponent<AnabethSIH>().ConnectGauge(icon.transform.Find("specialFill").GetComponent<Slider>());
                     player.GetComponent<NewPlayerInputHandler>().InitializePlayer(playerConfigs[i], icon);
                     break;
 
                 case "Nori":
+                    player.GetComponent<NoriSIH>().ConnectGauge(icon.transform.Find("specialFill").GetComponent<Slider>());
+                    player.GetComponent<RangedPlayerInputHandler>().InitializePlayer(playerConfigs[i], icon);
+                    break;
                 case "Jimena":
+                    player.GetComponent<JimenaSIH>().ConnectGauge(icon.transform.Find("specialFill").GetComponent<Slider>());
+
                     player.GetComponent<RangedPlayerInputHandler>().InitializePlayer(playerConfigs[i], icon);
                     break;
 

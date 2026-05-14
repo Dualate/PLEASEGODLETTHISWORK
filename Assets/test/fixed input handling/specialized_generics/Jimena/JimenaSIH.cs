@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
 public class JimenaSIH : MonoBehaviour
@@ -23,6 +24,8 @@ public class JimenaSIH : MonoBehaviour
     Vector3 newTargetPos;
     Rigidbody rb;
     Animator animator;
+    Slider specialGauge;
+
 
     PlayerConfiguration playerConfig;
     // Start is called before the first frame update
@@ -51,6 +54,8 @@ public class JimenaSIH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        specialGauge.value = specialGaugeTimer / specialGaugeDelay;
         if (specialSignals[0])
         {
             specialAtkBox.transform.rotation = Quaternion.Euler(0,180,0);
@@ -70,7 +75,6 @@ public class JimenaSIH : MonoBehaviour
             if (specialGaugeTimer >= specialGaugeDelay)
             {
                 specialGaugeTimerActive = false;
-                specialGaugeTimer = 0f;
             }
         }
         if (activateSpecial)
@@ -96,5 +100,11 @@ public class JimenaSIH : MonoBehaviour
         specialAtkBox.SetActive(true);
         activateSpecial = true;
         specialGaugeTimerActive = true;
+        specialGaugeTimer = 0;
+    }
+
+    public void ConnectGauge(Slider gauge)
+    {
+        specialGauge = gauge;
     }
 }
