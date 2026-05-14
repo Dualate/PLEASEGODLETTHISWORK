@@ -135,10 +135,12 @@ public class GenericRanged : MonoBehaviour
         if (moveVector.x > 0)
         {
             sprite.flipX = false;
+
         }
         else if (moveVector.x < 0)
         {
             sprite.flipX = true;
+
         }
 
     }
@@ -162,7 +164,7 @@ public class GenericRanged : MonoBehaviour
             animator.SetBool("walking", true);
         }
 
-        if (moveVector.x > 0.5f && Mathf.Abs(moveVector.y) < 0.5f)
+        if (moveVector.x > 0.3f && Mathf.Abs(moveVector.y) < 0.3f)
         {
             if (atkTimerActive == false)
             {
@@ -175,7 +177,7 @@ public class GenericRanged : MonoBehaviour
             }
 
         }
-        else if (moveVector.x < -0.5f && Mathf.Abs(moveVector.y) < 0.5f)
+        else if (moveVector.x < -0.3f && Mathf.Abs(moveVector.y) < 0.3f)
         {
             if (atkTimerActive == false)
             {
@@ -366,42 +368,42 @@ public class GenericRanged : MonoBehaviour
         {
             return;
         }
-        if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y > 0.5f) //up
+        if (Mathf.Abs(moveVector.x) < 0.3f && moveVector.y > 0.3f) //up
         {
 
             attackBox.transform.localPosition = positions[2];
             setProjectileOffsetX = Vector3.zero;
             setProjectileOffsetY = projectileOffsetY;
         }
-        else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.5f) //down
+        else if (Mathf.Abs(moveVector.x) < 0.35f && moveVector.y < -0.3f) //down
         {
 
             attackBox.transform.localPosition = positions[3];
             setProjectileOffsetX = Vector3.zero;
             setProjectileOffsetY = -projectileOffsetY;
         }
-        else if (moveVector.x > 0.5f && moveVector.y > 0.5f) //top right
+        else if (moveVector.x > 0.3f && moveVector.y > 0.3f) //top right
         {
 
             attackBox.transform.localPosition = positions[4];
             setProjectileOffsetX = projectileOffsetX;
             setProjectileOffsetY = projectileOffsetY;
         }
-        else if (moveVector.x < -0.5f && moveVector.y > 0.5f) //top left
+        else if (moveVector.x < -0.3f && moveVector.y > 0.3f) //top left
         {
 
             attackBox.transform.localPosition = positions[5];
             setProjectileOffsetX = -projectileOffsetX;
             setProjectileOffsetY = projectileOffsetY;
         }
-        else if (moveVector.x < -0.5f && moveVector.y < -0.5f) //bottom left
+        else if (moveVector.x < -0.3f && moveVector.y < -0.3f) //bottom left
         {
 
             attackBox.transform.localPosition = positions[6];
             setProjectileOffsetX = -projectileOffsetX;
             setProjectileOffsetY = -projectileOffsetY;
         }
-        else if (moveVector.x > 0.5f && moveVector.y < -0.5f) //bottom right
+        else if (moveVector.x > 0.3f && moveVector.y < -0.3f) //bottom right
         {
 
             attackBox.transform.localPosition = positions[7];
