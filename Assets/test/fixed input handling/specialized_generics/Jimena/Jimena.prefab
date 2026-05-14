@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582750790619691829}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -242,6 +242,10 @@ PrefabInstance:
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 2057495842931445320, guid: f66655efc2fdd3c4cb91297ce254a27e, type: 3}
+    - target: {fileID: 6659996645915008906, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6767547735775402935, guid: 58dcb66f9a85e5d4caa90c29535d925b, type: 3}
       propertyPath: m_IsTrigger
       value: 1

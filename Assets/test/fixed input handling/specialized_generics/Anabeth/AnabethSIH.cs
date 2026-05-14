@@ -91,7 +91,7 @@ public class AnabethSIH : MonoBehaviour
         {
             return;
         }
-        animator.SetTrigger("special");
+        
         counterActive = true;
         specialGaugeTimerActive = true;
         specialGaugeTimer = 0f;
@@ -106,6 +106,7 @@ public class AnabethSIH : MonoBehaviour
 
     public void ActivateCounter(int position)
     {
+        animator.SetTrigger("special");
         if(position == 0)
         {
             specialAtkBox.transform.localPosition = positions[0];
