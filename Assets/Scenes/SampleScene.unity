@@ -594,7 +594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xMove: 20
   yMove: 30
-  chunks: 10
+  chunks: 30
   platforms:
   - {fileID: 554192916837868908, guid: c1bbb234101bfa545b80fd91258d30ac, type: 3}
   - {fileID: 159112802760188896, guid: 8a8a6b9b3fb8a0949a921351f5226e95, type: 3}
