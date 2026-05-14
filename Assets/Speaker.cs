@@ -30,14 +30,17 @@ public class Speaker : MonoBehaviour
 
 
     string[] characters = new string[4] { "alicia", "anabeth", "jimena", "nori" };
-    private void Awake()
-    {
 
-    }
-
+    Dictionary<string, AudioClip> playlist = new Dictionary<string, AudioClip>();
     // Start is called before the first frame update
     void Start()
     {
+        playlist.Add("SampleScene", songClips[0]);
+        playlist.Add("StartScreen", songClips[1]);
+        playlist.Add("ModeSelector", songClips[1]);
+        playlist.Add("PlayQuit", songClips[1]);
+        playlist.Add("inputPermanenceTest", songClips[1]);
+        playlist.Add("GameOver", songClips[1]);
         source = GetComponent<AudioSource>();
         test.Add(characters[0], aliciaLines);
         test.Add(characters[1], anabethLines);
@@ -59,9 +62,9 @@ public class Speaker : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name != "StartScreen")
             startingFlag = true;
-        if (SceneManager.GetActiveScene().name == "SampleScene")
-        {
-            currentClip = songClips[0];
+        if (playlist[SceneManager.GetActiveScene().name] != source.clip){
+            source.Stop();
+            source.clip = playlist[SceneManager.GetActiveScene().name];
             source.Play();
         }
     }
