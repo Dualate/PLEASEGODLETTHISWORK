@@ -49,7 +49,7 @@ public class Speaker : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "SampleScene")
         {
-            source.Pla
+            //source.Pla
         }
     }
 
